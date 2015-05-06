@@ -92,3 +92,10 @@ GeometricProgression(3).print_progression(10) # base 3
 print('Fibonacci progression:')
 FibonacciProgression().print_progression(10) # default start value
 FibonacciProgression(4,5).print_progression(10) # with start value 4 and 5
+
+# test SequenceIterator
+from classes.SequenceIterator import *
+li = [1,1,2,3,4,6,8,4,5,6]
+s = SequenceIterator(li)
+for i in range(len(li)):
+    print(next(s))

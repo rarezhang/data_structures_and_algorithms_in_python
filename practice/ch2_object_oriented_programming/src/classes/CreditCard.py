@@ -39,6 +39,8 @@ class CreditCard:
         """charges to the crdit card
         True if charge was processed
         False if charge was denied"""
+        if not isinstance(price,(int,float)):
+            raise TypeError('price must be a number (int or float).')
         if price + self._balance>self._limit:
             return False
         else:

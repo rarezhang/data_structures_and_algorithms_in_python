@@ -1,0 +1,264 @@
+"""
+chapter 5. array-based sequences
+"""
+
+# P215
+# explore the relationship between a list's length and its underlying size in python
+import sys
+data = []
+n = 2
+for k in range(n):
+    a = len(data)
+    b = sys.getsizeof(data)
+    print('Length: {0:3d}; Size in bytes: {1:4d}'.format(a, b))
+    data.append(None)
+
+# P218
+import ctypes  # proves low-level arrays
+
+class DynamicArray:
+    """
+    a dynamic array class akin to a simplified python list
+    """
+    def __init__(self):
+        """
+        create an empty array
+        :return:
+        """
+        self._n = 0  # count actural elements
+        self._capacity = 1  # default array capacity
+        self._A = self._make_arry(self._capacity)  # low-level array
+
+    def __len__(self):
+        """
+        return # of elements stored in the array
+        :return:
+        """
+        return self._n
+
+    def __getitem__(self, k):
+        """
+        return element at index k
+        :param k: index k
+        :return:
+        """
+        if not 0 <= k < self._n:
+            raise IndexError('Invalid Index')
+        return self._A[k]   # retrieve from array
+
+    def append(self, obj):
+        """
+        add object to end of the array
+        :param obj:
+        :return:
+        """
+        if self._n == self._capacity:  # not enough room
+            self._resize(2*self._capacity)  # double capacity
+        self.A[self._n] = obj
+        self._n += 1
+
+    def _resize(self, c):  # nonpublic utity
+        """
+        resize internal array to capacity c
+        :param c:
+        :return:
+        """
+        B = self._make_array(c)  # new (bigger) array
+        for k in range(self._n):  # for each existing value
+            B[k] = self._A[k]
+        self._A = B  # use the bigger array
+        self._capacity = c
+
+    def _make_array(self, c):    # nonpublic utitity
+        """
+        return new array with capacity c
+        :param c:
+        :return:
+        """
+        return (c * ctypes.py_object)()  # see ctypes documentation
+
+# P223
+# measuring the amortized cost of append for python's list class
+from time import time  # import  time function from time module
+def compute_average(n):
+    """
+    perform n appends to an empty list and return average time elapsed
+    :param n:
+    :return:
+    """
+    data = []
+    start = time()  # record the start time
+    for k in range(n):
+        data.append(None)
+    end = time()  # record the end time
+    return (end-start)/n  # compute average per operation
+
+# P229
+# list comprehension
+n = 5
+squares = [k*k for k in range(1,n+1)]
+print(squares)
+
+# P232
+class GameEntry:
+    """
+    represents one entry of a list of high scores
+    """
+    def __init__(self,name,score):
+        """
+        constructor
+        :param name:
+        :param score:
+        :return:
+        """
+        self._name = name
+        self._score = score
+
+    def get_name(self):
+        return self._name
+
+    def get_score(self):
+        return self._score
+
+    def __str__(self):
+        return '({0}, {1})'.format(self._name, self._score)   # e.g.,(Bob, 98)
+
+
+# P234
+class Scoreboard:
+    """
+    fixed-length sequence of high scores in nondecreasing order
+    """
+    def __init__(self, capacity=10):
+        """
+        initialize scoreboard with given maximum capacity. all entries are initially None
+        :param capacity:
+        :return:
+        """
+        self._board = [None]*capacity  # reserve space for future scores
+        self._n = 0  # number of actural entries
+
+    def __getitem__(self, k):
+        """
+        return entry at index k
+        :param k:
+        :return:
+        """
+        return self._board[k]
+
+    def __str__(self):
+        """
+        return string representation of the high score list
+        :return:
+        """
+        return '\n'.join(str(self._board[j]) for j in range(self._n))
+
+    def add(self, entry):
+        """
+        consider adding entry to high scores
+        :param entry:
+        :return:
+        """
+        score = entry.get_score()
+        # does new entry qualify as a high score
+        # answer is yes if board not full or score is higher than last entry
+        good = self._n < len(self._board) or score > self._board[-1].get_score()
+
+        if good:
+            if self._n < len(self._board):  # no score drops from list
+                self._n += 1  # so overall number increases
+            # shift lower scores rightward to make roo for new entry
+            j = self._n -1
+            while j > 0 and self._board[j-1].get_score() < score:
+                self._board[j] = self._board[j-1]  # shift entry from j-1 to j
+                j -= 1  # add decrement j
+            self._board[j] = entry  # when done, add new entry
+
+
+# P237
+def insertion_sort(A):
+    """
+    sort list of comparable elements into non-decreasing order
+    :param A: numerical list
+    :return:
+    """
+    for k in range(1,len(A)):  # from 1 to n-1
+        cur = A[k]  # current element to be inserted
+        j = k  # find correct index j for current
+        while j > 0 and A[j-1] > cur:  # element A[j-1] must be after current
+            A[j] = A[j-1]
+            j -= 1
+        A[j] = cur  # cur is now in the right place
+
+
+
+# P 240
+# Caesar cipher
+class CaesarCipher:
+    """
+    class for doing encryption and decryption using a Caesar cipher
+    """
+    def __init__(self, shift):
+        """
+        construct Caesar cipher using given integer shift for rotation
+        :param shift:
+        :return:
+        """
+        encoder = [None] * 26  # temp array for encryption
+        decoder = [None] * 26  # temp array for decryption
+        for k in range(26):
+            encoder[k] = chr((k+shift)%26 + ord('A'))
+            decoder[k] = chr((k-shift)%26 + ord('A'))
+        self._forward = "".join(encoder)  # will store as string
+        self._backward = "".join(decoder)  # since fixed
+
+    def encrypt(self, message):
+        """
+        return string representing encrypted message
+        :param message:
+        :return:
+        """
+        return self._transform(message, self._forward)
+
+    def decrypt(self, secret):
+        """
+        return decrypted message given encrypted secret
+        :param secret:
+        :return:
+        """
+        return self._transform(secret, self._backward)
+
+    def _transform(self, original, code):
+        """
+        utility to perform transformation based on given code string
+        :param orginal:
+        :param code:
+        :return:
+        """
+        msg = list(original)
+        for k in range(len(msg)):
+            if msg[k].isupper():
+                j = ord(msg[k]) - ord('A')  # index form 0 to 25
+                msg[k] = code[j]
+        return ''.join(msg)
+
+cipher = CaesarCipher(3)  # class CaesarCipher, shift=3
+message = "THE EAGLE IS IN PLAY; MEET AT JOE S."  # original message
+coded = cipher.encrypt(message)
+print('secret: ', coded)
+answer = cipher.decrypt(coded)
+print('answer: ', answer)
+
+
+# P243
+# create a two dimensional list
+column = 3
+row = 3
+data = ([0]*column)*row  # can only get 1 dimension list with column*row elements
+print(data)
+data = [[0]*column]*row  # all row entries of the list know as data are references to the same instance of a list of column zero
+data[2][0] = 100  # e.g., will get [[100, 0, 0], [100, 0, 0], [100, 0, 0]]
+print(data)
+data = [[0] * column for j in range(row)]
+data[2][0] = 100  # will get [[0, 0, 0], [0, 0, 0], [100, 0, 0]]
+print(data)

@@ -1,5 +1,7 @@
 __author__ = 'wlz'
 
+import os
+
 
 #P172 factorial
 def factorial(n):
@@ -7,7 +9,6 @@ def factorial(n):
     implementation of a factorial function
     :param n: input integer
     :return:
-
     >>> factorial(0)
     1
     >>> factorial(5)
@@ -31,6 +32,7 @@ def draw_line(tick_length,tick_label=''):
     if tick_label:
         line += ' '+tick_label
     print(line)
+
 
 def draw_interval(center_length):
     """
@@ -83,6 +85,7 @@ def binary_search(data, target, low, high):
             # recur on the portion right of the middle
             return binary_search(data, target, mid+1, high)
 
+
 # P201
 def binary_search_iterative(data, target):
     """
@@ -105,13 +108,13 @@ def binary_search_iterative(data, target):
 
 
 # P181 computing the total disk usage for all files and directories
+
 def disk_usage(path):
     """
     return the number of bytes used by a file/folder and any descendants
     :param path:
     :return:
     """
-    import os
     total = os.path.getsize(path)   # get direct usage
     if os.path.isdir(path):  # if this is a directory
         for filename in os.listdir(path):  # for each child
@@ -190,6 +193,7 @@ def power2(x, n):
             result *= x
         return result
 
+
 # p196
 def binary_sum(S, start, stop):
     """
@@ -209,20 +213,28 @@ def binary_sum(S, start, stop):
 
 
 if __name__ == "__main__":
+
     import doctest
     # factorial
+    print("factorial")
     doctest.testmod(verbose=True)
+
     # draw ruler
+    print("draw ruler")
     draw_ruler(2, 4)
     # binary search
+    print("binary search")
     data = [2,4,5,7,8,9,12,14,17,19,22,25,27,28,33,37]
     low, high = 0, len(data)
     target = 22
-    binary_search(data, target, low, high)
+    bs = binary_search(data, target, low, high)
+    print(bs)
     # disk usage
-    path = "C:\\Users\\wlz\\projects\\data_structures_and_algorithms_in_python\\sourceCode\\ch02"
+    print("disk usage ")
+    path = "..\\..\\..\\sourceCode\\ch02"
     disk_usage(path)
     # linear sum
+    print("linear search")
     S = range(10)
     print(linear_sum(S, 5))
 

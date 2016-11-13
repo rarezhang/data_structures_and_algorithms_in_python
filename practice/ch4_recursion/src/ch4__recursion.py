@@ -1,6 +1,7 @@
 __author__ = 'wlz'
 
-import os
+import os, sys
+#import doctest
 
 
 #P172 factorial
@@ -9,11 +10,14 @@ def factorial(n):
     implementation of a factorial function
     :param n: input integer
     :return:
+
+    """
+    '''
     >>> factorial(0)
     1
     >>> factorial(5)
     120
-    """
+    '''
     if n == 0:
         return 1
     else:
@@ -124,6 +128,20 @@ def disk_usage(path):
     return total  # return the grand total
 
 
+# P189 efficient fibonacci --> return two values
+def good_fibonacci(n):
+    """
+    return pair of fibonacci numbers F(n) and F(n-1)
+    :param n:
+    :return:
+    """
+    if n <= 1:
+        return (n, 0)
+    else:
+        (fa, fb) = good_fibonacci(n-1)
+        return (fa+fb, fa)
+
+
 # P192 linear recursion to calculate sum
 def linear_sum(S, n):
     """
@@ -214,10 +232,10 @@ def binary_sum(S, start, stop):
 
 if __name__ == "__main__":
 
-    import doctest
+
     # factorial
-    print("factorial")
-    doctest.testmod(verbose=True)
+    #print("factorial")
+    #doctest.testmod(verbose=True)
 
     # draw ruler
     print("draw ruler")
@@ -237,6 +255,14 @@ if __name__ == "__main__":
     print("linear search")
     S = range(10)
     print(linear_sum(S, 5))
+    # print recursion limit
+    old = sys.getrecursionlimit()
+    print("old recursion limit is: {}".format(old))
+    sys.setrecursionlimit(50000)
+    print("new recursion limit is: {}".format(sys.getrecursionlimit()))
+
+
+
 
 
 

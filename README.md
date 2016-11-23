@@ -32,8 +32,9 @@ P 206
 P 208 - 209
 - each cell of an array must use the __same number of bytes__  
 - referential arrays: at the lowest level, what is stored is a consecutive sequence of __memory addresses__ at which the elements of the sequence reside  ->  although the relative size of the individual elements may vary, the number of bits used to store the memory address of each element is fixed  
+-- disadvantage: inefficiencies  
 
-### copy
+### copy  
 - shallow copy: new list, it references the same elements as in the first list
 - deep copy: new list with new elements 
 ```
@@ -42,4 +43,14 @@ copy.copy()  # shallow copy
 copy.deepcopy()  # deep copy  
 ```
 
-
+### string array  
+- compact array  
+-- e.g., string: an array of characters (not an array of references) -> compact array  
+-- advantages: computing performance; memory usage; stored consecutively in memory
+```
+import array
+# https://docs.python.org/3/library/array.html
+# array_name = array(typecode, [Initializers])
+# type code: allows the interpreter to determine precisely how many bits are needed per element of the array
+primes = array.array('i', [2, 3, 5, 7, 11, 13, 17, 19])
+```

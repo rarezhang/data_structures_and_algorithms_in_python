@@ -4,13 +4,20 @@ import os, sys
 #import doctest
 
 
-# P172 factorial
+#P172 factorial
 def factorial(n):
     """
     implementation of a factorial function
     :param n: input integer
     :return:
+
     """
+    '''
+    >>> factorial(0)
+    1
+    >>> factorial(5)
+    120
+    '''
     if n == 0:
         return 1
     else:
@@ -149,7 +156,6 @@ def linear_sum(S, n):
         return linear_sum(S, n-1) + S[n-1]
 
 
-# P193
 # reversing a sequence with recursion
 def reverse(S, start, stop):
     """
@@ -163,7 +169,6 @@ def reverse(S, start, stop):
         S[start], S[stop-1] = S[stop-1], S[start]  # swap first and last
         reverse(S, start+1, stop-1)  # recur on rest
 
-
 # P201
 def revers_interative(S):
     """
@@ -176,13 +181,10 @@ def revers_interative(S):
         S[start], S[stop-1] = S[stop-1], S[start]  # swap first and last
         start, stop = start+1, stop-1  # narrow the range
 
-
-# P194
 # recursive algorithms for computing power
 def power1(x, n):
     """
     compute the value x**n for integer n
-    O(n)
     :param x:
     :param n:
     :return:
@@ -192,12 +194,10 @@ def power1(x, n):
     else:
         return x*power1(x, n-1)
 
-
 # p195
 def power2(x, n):
     """
     compute the value x**n for integer n
-    O(log n)
     :param x:
     :param n:
     :return:
@@ -207,7 +207,7 @@ def power2(x, n):
     else:
         partial = power2(x, n//2)  # rely on truncated division
         result = partial * partial  # even
-        if n % 2 == 1:  # odd, include extra factor of x
+        if n%2 == 1:  # odd, include extra factor of x
             result *= x
         return result
 
@@ -230,38 +230,36 @@ def binary_sum(S, start, stop):
         return binary_sum(S, start, mid) + binary_sum(S, mid, stop)
 
 
-# main
+if __name__ == "__main__":
 
-# factorial
-# print("factorial")
-# doctest.testmod(verbose=True)
 
-# draw ruler
-print("draw ruler")
-draw_ruler(2, 4)
-# binary search
-print("binary search")
-data = [2,4,5,7,8,9,12,14,17,19,22,25,27,28,33,37]
-low, high = 0, len(data)
-target = 22
-bs = binary_search(data, target, low, high)
-print(bs)
-# disk usage
-print("disk usage ")
-path = "..\\..\\..\\sourceCode\\ch02"
-disk_usage(path)
-# linear sum
-print("linear search")
-S = range(10)
-print(linear_sum(S, 5))
-# print recursion limit
-old = sys.getrecursionlimit()
-print("old recursion limit is: {}".format(old))
-sys.setrecursionlimit(50000)
-print("new recursion limit is: {}".format(sys.getrecursionlimit()))
-# binary sum
-print("binary sum")
-print(binary_sum(data, 0, len(data)))
+    # factorial
+    #print("factorial")
+    #doctest.testmod(verbose=True)
+
+    # draw ruler
+    print("draw ruler")
+    draw_ruler(2, 4)
+    # binary search
+    print("binary search")
+    data = [2,4,5,7,8,9,12,14,17,19,22,25,27,28,33,37]
+    low, high = 0, len(data)
+    target = 22
+    bs = binary_search(data, target, low, high)
+    print(bs)
+    # disk usage
+    print("disk usage ")
+    path = "..\\..\\..\\sourceCode\\ch02"
+    disk_usage(path)
+    # linear sum
+    print("linear search")
+    S = range(10)
+    print(linear_sum(S, 5))
+    # print recursion limit
+    old = sys.getrecursionlimit()
+    print("old recursion limit is: {}".format(old))
+    sys.setrecursionlimit(50000)
+    print("new recursion limit is: {}".format(sys.getrecursionlimit()))
 
 
 

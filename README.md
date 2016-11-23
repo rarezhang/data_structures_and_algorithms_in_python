@@ -11,6 +11,14 @@ P 199
 3. __parameterization__: public use -> cleaner interface; nopublic function -> having the desired recursive parameters
 
 ## why recursion  
-P 200
-1. avoid complex case analyses and nested loops
-2. more readable algorithm descriptions
+P 200  
+advantage:  
+1. avoid complex case analyses and nested loops  
+2. more readable algorithm descriptions  
+disadvantage:  
+1. keep track of nested call (memory issue)  
+2. stack data structure: convert a recursive algorithm into a nonrecursive algorithm (memory: storing only minimal information)  
+
+## tail recursion  == linear recursion  
+- any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion  
+- any tail recursion can be reimplemented nonrecursively by enclosing the body in a loop for repetition, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values  

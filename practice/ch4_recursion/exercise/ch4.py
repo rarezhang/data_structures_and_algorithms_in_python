@@ -20,6 +20,8 @@ def maximum(S):
 # R-4.6
 def harmonic(n):
     """
+    harmonic number: the sum of the reciprocals of the first n natural numbers
+    e.g., 1 + 1/2 + 1/3 + 1/4 ......
     a recursive function for computing the nth harmonic number
     :param n:
     :return:
@@ -33,7 +35,9 @@ def harmonic(n):
 def str_to_int(string, accumulator):
     """
     recursive function for converting a string of digits into the integer it represents
-    :param s: pyhon string
+    e.g., '13531' --> 13,531
+    :param string: pyhon 
+    :param accumlator: 
     :return:
     """
     if not string:
@@ -164,7 +168,7 @@ def string_reverse(s):
     if len(s) == 0:
         return s
     else:
-        return string_reverse(s[1:])+s[0]
+        return string_reverse(s[1:]) + s[0]
 
 
 # C-4.17
@@ -290,7 +294,7 @@ def power_nonrecursive(x, n):
 ################################################################
 ################################################################
 # main
-'''
+
 # R-4.1
 S = [1, 9]
 print(maximum(S))
@@ -301,6 +305,8 @@ print(harmonic(3))
 s = "13531"
 i = str_to_int(s, 0)
 print(i, type(i))
+
+
 # C-4.9
 s = [1,5,9]
 print(minimum_maximum(s))
@@ -322,6 +328,7 @@ hanoi(n, source, helper, target)
 s = [0,1,2]
 subs = subset(s)
 print(subs)
+
 
 # C-4.16
 s = "pots&pans"
@@ -352,7 +359,7 @@ print(s, rs)
 s = [1,3,5]
 k = 9
 print(sum_to_k(s, k))
-'''
+
 # C-4.22
 x = 2
 n = 1

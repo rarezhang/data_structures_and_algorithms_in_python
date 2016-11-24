@@ -36,7 +36,8 @@ P 208 - 209
 - referential arrays: at the lowest level, what is stored is a consecutive sequence of __memory addresses__ at which the elements of the sequence reside  ->  although the relative size of the individual elements may vary, the number of bits used to store the memory address of each element is fixed  
 -- disadvantage: inefficiencies  
 
-### copy  
+### copy
+P 210  
 - shallow copy: new list, it references the same elements as in the first list
 - deep copy: new list with new elements 
 ```
@@ -45,11 +46,11 @@ copy.copy()  # shallow copy
 copy.deepcopy()  # deep copy  
 ```
 
-### string array  
-- compact array  
+### compact array 
+P 212  
 -- advantages: computing performance; memory usage; stored consecutively in memory
 ```
-import array
+import array  
 # https://docs.python.org/3/library/array.html
 # array_name = array(typecode, [Initializers])
 # type code: allows the interpreter to determine precisely how many bits are needed per element of the array

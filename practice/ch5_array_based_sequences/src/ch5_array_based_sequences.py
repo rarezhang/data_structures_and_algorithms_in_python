@@ -2,20 +2,25 @@
 chapter 5. array-based sequences
 """
 
+
+import sys
+import ctypes  # proves low-level arrays
+from time import time  # import  time function from time module
+
 # P215
 # explore the relationship between a list's length and its underlying size in python
-import sys
 data = []
-n = 2
+n = 26
 for k in range(n):
     a = len(data)
+    # getsizeof() only includes the size for representing its primary structure
+    # does not account for memory used by the objects that are elements fo the list
     b = sys.getsizeof(data)
     print('Length: {0:3d}; Size in bytes: {1:4d}'.format(a, b))
-    data.append(None)
+    data.append(None)  # list is a referential structure
+
 
 # P218
-import ctypes  # proves low-level arrays
-
 class DynamicArray:
     """
     a dynamic array class akin to a simplified python list
@@ -77,9 +82,9 @@ class DynamicArray:
         """
         return (c * ctypes.py_object)()  # see ctypes documentation
 
+
 # P223
 # measuring the amortized cost of append for python's list class
-from time import time  # import  time function from time module
 def compute_average(n):
     """
     perform n appends to an empty list and return average time elapsed
@@ -93,11 +98,15 @@ def compute_average(n):
     end = time()  # record the end time
     return (end-start)/n  # compute average per operation
 
+for num in range(100, 10000, 1000):
+    print('compute average, n: {0}  average per operation: {1}'.format(num, compute_average(num)))
+
 # P229
 # list comprehension
 n = 5
 squares = [k*k for k in range(1,n+1)]
 print(squares)
+
 
 # P232
 class GameEntry:
@@ -189,7 +198,6 @@ def insertion_sort(A):
             A[j] = A[j-1]
             j -= 1
         A[j] = cur  # cur is now in the right place
-
 
 
 # P 240

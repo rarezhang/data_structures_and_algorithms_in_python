@@ -26,8 +26,10 @@ P 200
 
 
 ### Python sequence types  
-P 206  
-- list; tuple; str  
+P 206  P 214 P 224
+- list: dynamic array, allows to add elements to the list, with no apparent limit on the overall capacity of the list  
+- tuple: immutable, more memory efficient than lists  
+- str: an array of characters (not an array of references) -> compact array  
 (based on low-level sequence -> array)  
 P 208 - 209
 - each cell of an array must use the __same number of bytes__  
@@ -45,7 +47,6 @@ copy.deepcopy()  # deep copy
 
 ### string array  
 - compact array  
--- e.g., string: an array of characters (not an array of references) -> compact array  
 -- advantages: computing performance; memory usage; stored consecutively in memory
 ```
 import array

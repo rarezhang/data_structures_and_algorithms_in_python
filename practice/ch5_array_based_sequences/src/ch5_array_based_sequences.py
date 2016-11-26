@@ -32,7 +32,7 @@ class DynamicArray:
         """
         self._n = 0  # count actural elements
         self._capacity = 1  # default array capacity
-        self._A = self._make_arry(self._capacity)  # low-level array
+        self._A = self._make_array(self._capacity)  # low-level array
 
     def __len__(self):
         """
@@ -59,7 +59,7 @@ class DynamicArray:
         """
         if self._n == self._capacity:  # not enough room
             self._resize(2*self._capacity)  # double capacity
-        self.A[self._n] = obj
+        self._A[self._n] = obj
         self._n += 1
 
     def _resize(self, c):  # nonpublic utity
@@ -74,6 +74,38 @@ class DynamicArray:
         self._A = B  # use the bigger array
         self._capacity = c
 
+    def insert(self, k, value):
+        """
+        insert value at index k
+        shifting subsequent values rightward
+        assume 0<= k <= n
+        :param k:
+        :param value:
+        :return:
+        """
+        if self._n == self._capacity:
+            self._resize(2 * self._capacity)
+        for j in range(self._n, k, -1):
+            self._A[j] = self._A[j-1]
+        self._A[k] = value
+        self._n += 1
+
+    def remove(self, value):
+        """
+        remove first occurrence of value (or raise ValueError)
+        do not consider shrinking the dynamic array in this version
+        :param value:
+        :return:
+        """
+        for k in range(self._n):
+            if self._A[k] == value:
+                for j in range(k, self._n -1):
+                    self._A[j] = self._A[j+1]
+                self._A[self._n - 1] = None  # garbage collection
+                self._n -= 1
+                return   # exit immediately if find one
+        raise ValueError('vale not found')  # only reached if no match
+
     def _make_array(self, c):    # nonpublic utitity
         """
         return new array with capacity c
@@ -81,6 +113,16 @@ class DynamicArray:
         :return:
         """
         return (c * ctypes.py_object)()  # see ctypes documentation
+
+dynamic_array = DynamicArray()
+print("create dynamic array object", dynamic_array, dynamic_array._n, dynamic_array._capacity)
+dynamic_array.append(4)
+print("append a new element", dynamic_array, dynamic_array._n, dynamic_array._capacity)
+dynamic_array.insert(0, 489)
+print("insert a new element at index:0", dynamic_array, dynamic_array._n, dynamic_array._capacity)
+
+sys.exit(0)
+
 
 
 # P223
@@ -104,7 +146,7 @@ for num in range(100, 10000, 1000):
 # P229
 # list comprehension
 n = 5
-squares = [k*k for k in range(1,n+1)]
+squares = [k*k for k in range(1, n+1)]
 print(squares)
 
 

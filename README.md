@@ -56,3 +56,11 @@ import array
 # type code: allows the interpreter to determine precisely how many bits are needed per element of the array
 primes = array.array('i', [2, 3, 5, 7, 11, 13, 17, 19])
 ```
+
+### efficiency of string 
+__strings are immutable__
+the series of concatenations take O(n^2) time
+```
+letters += c
+```
+

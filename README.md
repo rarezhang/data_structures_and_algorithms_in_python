@@ -61,6 +61,6 @@ primes = array.array('i', [2, 3, 5, 7, 11, 13, 17, 19])
 __strings are immutable__
 the series of concatenations take O(n^2) time
 ```
-letters += c
+letters += c  # do not use this
 ```
 

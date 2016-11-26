@@ -121,9 +121,6 @@ print("append a new element", dynamic_array, dynamic_array._n, dynamic_array._ca
 dynamic_array.insert(0, 489)
 print("insert a new element at index:0", dynamic_array, dynamic_array._n, dynamic_array._capacity)
 
-sys.exit(0)
-
-
 
 # P223
 # measuring the amortized cost of append for python's list class
@@ -175,6 +172,13 @@ class GameEntry:
         return '({0}, {1})'.format(self._name, self._score)   # e.g.,(Bob, 98)
 
 
+print("test GameEntry class")
+kate = GameEntry('Cate Zhang', 100)
+print("get name", kate.get_name())
+print("get score", kate.get_score())
+print("__str__ method", kate)   # (Cate Zhang, 100)
+
+
 # P234
 class Scoreboard:
     """
@@ -187,7 +191,7 @@ class Scoreboard:
         :return:
         """
         self._board = [None]*capacity  # reserve space for future scores
-        self._n = 0  # number of actural entries
+        self._n = 0  # number of actual entries
 
     def __getitem__(self, k):
         """
@@ -219,7 +223,7 @@ class Scoreboard:
             if self._n < len(self._board):  # no score drops from list
                 self._n += 1  # so overall number increases
             # shift lower scores rightward to make roo for new entry
-            j = self._n -1
+            j = self._n - 1
             while j > 0 and self._board[j-1].get_score() < score:
                 self._board[j] = self._board[j-1]  # shift entry from j-1 to j
                 j -= 1  # add decrement j

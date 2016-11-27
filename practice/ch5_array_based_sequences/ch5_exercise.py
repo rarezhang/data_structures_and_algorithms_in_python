@@ -1,8 +1,9 @@
 """
 exercises
 """
+import sys
 import ctypes
-
+import random
 # R-5.4
 # Our DynamicArray class, as given in Code Fragment 5.3, does not support
 # use of negative indices with getitem . Update that method to better
@@ -13,6 +14,13 @@ import ctypes
 # of the insert method, so that, in the case of a resize, the elements are
 # shifted into their final position during that operation, thereby avoiding the
 # subsequent shifting
+
+# C-5.16
+# Implement a pop method for the DynamicArray class, given in Code Fragment
+# 5.3, that removes the last element of the array, and that shrinks the
+# capacity, N, of the array by half any time the number of elements in the
+# array goes below N / 4.
+
 
 class DynamicArray:
     """
@@ -61,6 +69,7 @@ class DynamicArray:
 
     def _resize(self, c):  # nonpublic utity
         """
+        # C-5.16
         resize internal array to capacity c
         :param c:
         :return:
@@ -109,7 +118,37 @@ class DynamicArray:
                 return   # exit immediately if find one
         raise ValueError('vale not found')  # only reached if no match
 
-    def _make_array(self, c):    # nonpublic utitity
+    def remove_all(self, value):
+        """
+        # C-5.25
+        removes all occurrences of value from the given list
+        :param value:
+        :return:
+        """
+        B = self._make_array(self._capacity)
+        count = 0
+        for k in range(self._n):
+            if self._A[k] != value:
+                B[count] = self._A[k]
+                count += 1
+        self._A = B
+        self._n = count
+
+    def pop(self):
+        """
+        # C-5.16
+        removes the last element of the array
+        shrinks the capacity of the array
+        :return: last element of the array
+        """
+        p = self._A[self._n - 1]  # the last element of the array
+        self._A[self._n - 1] = None  # garbage collection
+        self._n -= 1
+        if 0 < self._n < self._capacity * 0.25:
+            self._resize(int(0.5 * self._capacity))  # shrink capacity
+        return p
+
+    def _make_array(self, c):    # nonpublic utility
         """
         return new array with capacity c
         :param c:
@@ -124,15 +163,25 @@ print("append a new element", dynamic_array, dynamic_array._n, dynamic_array._ca
 dynamic_array.insert(0, 489)
 dynamic_array.insert(0, 21)
 dynamic_array.insert(1, 25)
+dynamic_array.insert(1, 23)
+dynamic_array.insert(1, 23)
 print("insert a new element at index:0", dynamic_array, dynamic_array._n, dynamic_array._capacity)
 print("test positive indices:", dynamic_array[0], dynamic_array[1])
 print("test negative indices:", dynamic_array[-1], dynamic_array[-2])
+print("remove all occurrences of value", dynamic_array.remove_all(23))
+# [21,25,489,4]
+
+print("pop out last item:", dynamic_array.pop())
+print("pop out last item:", dynamic_array.pop())
+print("pop out last item:", dynamic_array.pop())
+print("pop out last item:", dynamic_array.pop())
+
 
 # R-5.7
 # Let A be an array of size n ≥ 2 containing integers from 1 to n − 1, inclusive,
 # with exactly one repeated. Describe a fast algorithm for finding the
 # integer in A that is repeated.
-def find_repeat(A):
+def find_1_repeat(A):
     """
 
     :param A: an array of size n>=2
@@ -145,7 +194,7 @@ def find_repeat(A):
     return sum_A - sum_real
 
 ay = [1,2,3,2]
-print('the integer that is repeated: {}'.format(find_repeat(ay)))
+print('the integer that is repeated: {}'.format(find_1_repeat(ay)))
 
 # R-5.10
 # Caesar cipher
@@ -196,3 +245,91 @@ def sum_list_comprehension(A):
 
 print('the sum of A: {}'.format(sum_list_comprehension(A)))
 
+# C-5.14
+# takes a Python list and rearranges it so that every possible ordering is equally likely
+A = [1,2,3,4,5]
+print(A)
+random.shuffle(A)  # shuffle from random module, return None
+print(A)
+
+
+# you own version of shuffle:
+# Consider randomly shuffling the deck one card at a time
+def random_shuffle(A):
+    """
+
+    :param A: python list
+    :return: shuffled A
+    """
+    len_A = len(A)
+    for i in range(len_A):
+        j = random.randrange(len_A)
+        A[i], A[j] = A[j], A[i]
+    return A
+
+random_shuffle(A)
+print(A)
+
+
+# C-5.26
+#  Let B be an array of size n ≥ 6 containing integers from 1 to n − 5, inclusive,
+#  with exactly five repeated. Describe a good algorithm for finding the
+#  five integers in B that are repeated
+#  hints:  It might help to sort B.
+def find_n_repeat(B):
+    """
+
+    :param B: python list, n>=6, with exactly five repeated
+    :return:
+    """
+    B = sorted(B)
+    for i in range(len(B)-1):
+        if B[i] == B[i+1]:
+            return B[i]
+
+B = [1,1,1,1,1,1]
+print('find n repeat:', find_n_repeat(B))
+B = [2,2,2,2,2,2,1,3]
+print('find n repeat:', find_n_repeat(B))
+
+
+# C-5.27
+# Given a Python list L of n positive integers, each represented with k =
+#  ceiling(log n) + 1 bits, describe an O ( n ) -time method for finding a k-bit integer
+# not in L.
+
+
+# C-5.29
+# natural join
+def natural_join(A, B):
+    """
+
+    :param A: table A (x, y)
+    :param B: table B (y, z)
+    :return: (x, y, z)
+    """
+    C = list()
+    for a in A:
+        for b in B:
+            if a[1] == b[0]:
+                C.append((a[0], a[1], b[1]))
+    return C
+
+table_A = [('wenli', '001'), ('alex', '002'), ('cate', '003')]
+table_B = [('001', 'A'), ('002', 'B'), ('003', 'D')]
+print(natural_join(table_A, table_B))
+# Be sure to allow for the case where every pair (x , y) in A and
+# every pair (y , z) in B have the same y value.
+table_A = [('wenli', '001'), ('alex', '001'), ('cate', '001')]
+table_B = [('001', 'A'), ('001', 'B'), ('001', 'D')]
+print(natural_join(table_A, table_B))
+
+
+# C-5.31
+def sum_recursion(A):
+    """
+
+    :param A: python list of lists
+    :return:
+    """
+    pass

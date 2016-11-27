@@ -164,3 +164,35 @@ class CaesarCipher:
 
 cc_test = CaesarCipher(1)
 print(cc_test._forward, cc_test._backward)
+
+# R-5.11
+def sum_standard_control(A):
+    """
+
+    :param A: python list of lists
+    :return:
+    """
+    n = len(A)
+    sum_A = 0
+    for a in A:
+        if len(a) != n:
+            raise ValueError('should be n x n list')
+        for aa in a:
+            sum_A += aa
+    return sum_A
+
+A = [[1,2,3],[4,5,6],[7,8,0]]
+print('the sum of A: {}'.format(sum_standard_control(A)))
+
+
+# R-5.12
+def sum_list_comprehension(A):
+    """
+
+    :param A: python list of lists
+    :return:
+    """
+    return sum([sum(a) for a in A])
+
+print('the sum of A: {}'.format(sum_list_comprehension(A)))
+

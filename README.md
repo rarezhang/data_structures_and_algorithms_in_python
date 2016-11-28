@@ -63,10 +63,17 @@ import array
 primes = array.array('i', [2, 3, 5, 7, 11, 13, 17, 19])
 ```
 
-### efficiency of string 
-__strings are immutable__
-the series of concatenations take O(n^2) time
+### efficiency of string  
+__strings are immutable__  
+the series of concatenations take O(n^2) time  
 ```
 letters += c  # do not use this
 ```
+
+### stacks  
+P 251  
+- a collection of objects  
+- LIFO: last in first out  
+- user may insert objects into a stack at any time, but only access the most recently inserted object that remains  
+- fundamental operations: push & pop  
 

@@ -3,11 +3,7 @@ Array Stack
 Last in first out
 """
 
-class Empty(Exception):
-    """
-    error attempting to access an element from an empty container
-    """
-    pass
+from Empty import *
 
 
 class ArrayStack():

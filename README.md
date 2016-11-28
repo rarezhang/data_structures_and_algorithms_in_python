@@ -77,3 +77,9 @@ P 251
 - user may insert objects into a stack at any time, but only access the most recently inserted object that remains  
 - fundamental operations: push & pop  
 
+### queues
+P 261
+- a collection of objects
+- FIFO: first in first out
+- elements can be inserted at any time, but only the element that has been in the queue the longest can be next removed
+- fundamental operations: enqueue & dequeue

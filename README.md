@@ -83,3 +83,18 @@ P 261
 - FIFO: first in first out
 - elements can be inserted at any time, but only the element that has been in the queue the longest can be next removed
 - fundamental operations: enqueue & dequeue
+
+### double ended queues (deque)
+P 269
+- supports insertion and deletion at both the front and the back of the queue
+- fundamental operations: add_first, add_last, delete_first & delete_last
+```
+# e.g.,
+from collections import deque
+# list-like container with fast appends and pops on either end
+# https://docs.python.org/3/library/collections.html#collections.deque
+d = deque('a')
+d.append('b')
+d.appendleft('c')
+d.extend('de')  # extend the left side
+```

@@ -2,7 +2,8 @@
 Exercises
 """
 from ArrayStack import *
-
+from ArrayQueue import *
+from collections import deque
 
 def init_stack(S, n):
     """
@@ -110,3 +111,106 @@ test = 'a b c d e'.split()  # ['a', 'b', 'c', 'd', 'e']
 reverse_test = reverse_list(test)
 print(reverse_test)
 
+
+# R-6.7
+# First in first out
+q = ArrayQueue()
+q.enqueue(5)  # [5]
+q.enqueue(3)  # [5,3]
+q.dequeue()  # [3]
+q.enqueue(2)  # [3,2]
+q.enqueue(8)  # [3,2,8]
+q.dequeue()  # [2,8]
+q.dequeue()  # [8]
+q.enqueue(9)  # [8,9]
+q.enqueue(1)  # [8,9,1]
+q.dequeue()  # [9,1]
+q.enqueue(7)  # [9,1,7]
+q.enqueue(6)  # [9,1,7,6]
+q.dequeue()  # [1,7,6]
+q.dequeue()  # [7,6]
+q.enqueue(4)  # [7,6,4]
+q.dequeue()  # [6,4]
+q.dequeue()  # [4]
+print(q._data)  # [None, None, None, None, None, None, None, None, 4, None]
+
+
+# R-6.11
+
+class QueueDQ:
+    """
+    queue ADT based on collections.deque
+    first in first out
+    """
+    DEFAULT_CAPACITY = None  # Maximum size of a deque or None if unbounded.
+
+    def __init__(self):
+        """
+        empty queue
+        """
+        self._data = deque(maxlen=QueueDQ.DEFAULT_CAPACITY)
+
+
+    def __len__(self):
+        """
+
+        :return:
+        """
+        return len(self._data)
+
+    def is_empty(self):
+        """
+        return True if it is empty
+        :return: True | False
+        """
+        return len(self._data) == 0
+
+    def first(self):
+        """
+        return the front element (do not remove)
+        :return:
+        """
+        if self.is_empty():
+            raise Empty('queue is empty')
+        return self._data[0]
+
+    def enqueue(self, element):
+        """
+        add an element to the back of queue
+        :return:
+        """
+        self._data.append(element)
+
+    def dequeue(self):
+        """
+        remove and return the first elemtn of the queue
+        :return:
+        """
+        if self.is_empty():
+            raise Empty('queue is empty')
+        return self._data.popleft()
+
+q_dq = QueueDQ()
+q_dq.enqueue(1);q_dq.enqueue(2);q_dq.enqueue(3)
+print(q_dq.first())
+print(q_dq._data)
+q_dq.dequeue()
+print(q_dq.first())
+print(q_dq._data)
+
+
+# R-6.12
+# d = deque()
+# d.add ﬁrst(4)
+# d.add last(8)
+# add last(9)
+# add ﬁrst(5)
+# back()
+# delete ﬁrst()
+# delete last()
+# add last(7)
+# ﬁrst()
+# last()
+# add last(6)
+# delete ﬁrst()
+# delete ﬁrst()

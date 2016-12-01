@@ -238,6 +238,7 @@ d.add_last(q.dequeue())
 d.add_last(d.delete_first())
 d.add_last(d.delete_first())
 d.add_last(d.delete_first())
+print(d._data)
 # results in D storing the elements in the order
 # ( 1 , 2 , 3 , 5 , 4 , 6 , 7 , 8 ) .
 

@@ -3,6 +3,7 @@ Exercises
 """
 from ArrayStack import *
 from ArrayQueue import *
+from ArrayDeque import *
 from collections import deque
 
 def init_stack(S, n):
@@ -200,17 +201,61 @@ print(q_dq._data)
 
 
 # R-6.12
-# d = deque()
-# d.add ﬁrst(4)
-# d.add last(8)
-# add last(9)
-# add ﬁrst(5)
-# back()
-# delete ﬁrst()
-# delete last()
-# add last(7)
-# ﬁrst()
-# last()
-# add last(6)
-# delete ﬁrst()
-# delete ﬁrst()
+d = ArrayDeque()
+d.add_first(4)  # [4]
+d.add_last(8)  # [4,8]
+d.add_last(9)  # [4,8,9]
+d.add_first(5)  # [5,4,8,9]
+d.delete_first()  # [4,8,9]
+d.delete_last()  # [4,8]
+d.add_last(7)  # [4,8,7]
+d.first()  # 4
+d.last()  # 7
+d.add_last(6)  # [4,8,7,6]
+d.delete_first()  # [8,7,6]
+d.delete_first()  # [7,6]
+print(d._data)
+
+# R-6.13
+print("R-6.13:")
+d = ArrayDeque()
+for i in range(1,9):
+    d.add_last(i)
+# deque([1,2,3,4,5,6,7,8])
+q = ArrayQueue()  # initial empty queue
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+print(d._data)  # d [4, 5, 6, 7, 8, 1, 2, 3]
+q.enqueue(d.delete_first())
+q.enqueue(d.delete_first())
+print(q._data)  # q [4, 5]
+print(d._data)  # d [6, 7, 8, 1, 2, 3]
+d.add_first(q.dequeue())  # d [4, 6, 7, 8, 1, 2, 3]
+d.add_last(q.dequeue())  # d [4, 6, 7, 8, 1, 2, 3, 5]
+q.enqueue(d.delete_first())
+d.add_last(q.dequeue())
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+# results in D storing the elements in the order
+# ( 1 , 2 , 3 , 5 , 4 , 6 , 7 , 8 ) .
+
+# R-6.14
+print("R-6.14:")
+d = ArrayDeque()
+for i in range(1,9):
+    d.add_last(i)
+# deque([1,2,3,4,5,6,7,8])
+s = ArrayStack()  # initial empty queue
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+s.push(d.delete_first())
+s.push(d.delete_first())
+d.add_last(s.pop())
+d.add_last(s.pop())
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+d.add_last(d.delete_first())
+print(d._data)

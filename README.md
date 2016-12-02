@@ -30,6 +30,11 @@ P 200
 - any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion  
 - any tail recursion can be reimplemented nonrecursively by enclosing the body in a loop for repetition, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values  
 
+### recursion tips
+replace a recursive algorithm by an iterative algorithm by pushing the parameters that would normally be passed to the recursive function onto a stack.  
+In fact, you are replacing the program stack by one of your own.  
+
+
 
 ### Python sequence types  
 P 206  P 214 P 224

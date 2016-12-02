@@ -279,3 +279,71 @@ s = ArrayStack(maxlen=2)
 s.push(2)
 s.push(3)
 print(s._data)
+
+# C-6.17
+
+# C-6.18
+# Show how to use the transfer function, described in Exercise R-6.3, and
+# two temporary stacks, to replace the contents of a given stack S with those
+# same elements, but in reversed order.
+s1 = ArrayStack()
+s2 = ArrayStack()
+S = ArrayStack()
+init_stack(S, 3)  # S = [0,1,2]
+s1 = transfer(S, s1)  # s1 = [2, 1, 0]
+s2 = transfer(s1, s2)
+S = transfer(s2, S)
+print(S._data)  # S = [2, 1, 0]
+
+# C-6.19
+#  After finding what’s between the < and > characters, the tag is
+#  only the part before the first space (if any).
+def is_matched_html(raw):
+    """
+    return True if all HTML tags are properly match
+    False otherwise
+    :param raw:
+    :return:
+    """
+    S = ArrayStack()
+    # string.find -> return index if found and -1 otherwise
+    j = raw.find('<')  # find first '<' character if any
+    while j != -1:
+        k = raw.find('>', j+1)  # find next '>' character
+        if k == -1:
+            return False  # invalid tag
+        tag = raw[j+1:k]  # strip away <>
+        tag = tag.split()[0]  # the tag is only the part before the first space (if any)
+        print(tag)
+        if not tag.startswith('/'):  # this is opening tag
+            S.push(tag)
+        else:   # this is closing tag
+            if S.is_empty():
+                return False  # nothing to match with
+            if tag[1:] != S.pop():
+                return False  # mismatched delimiter
+        j = raw.find('<', k+1)  # find next '<' character if any
+    return S.is_empty()  # if all opening tags matched
+
+
+raw_html = '''
+<body>
+<center>
+<h1> The Little Boat </h1>
+</center>
+<p attribute1="value1" attribute2="value2"> The storm tossed the little
+boat like a cheap sneaker in an
+old washing machine. The three
+drunken fishermen were used to
+such treatment, of course, but
+not the tree salesman, who even as
+a stowaway now felt that he
+had overpaid for the voyage. </p>
+<ol>
+<li> Will the salesman die? </li>
+<li> What color is the boat? </li>
+<li> And what about Naomi? </li>
+</ol>
+</body>
+'''
+print('matched html:', is_matched_html(raw_html))

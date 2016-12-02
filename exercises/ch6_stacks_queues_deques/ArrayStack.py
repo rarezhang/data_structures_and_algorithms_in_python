@@ -3,24 +3,25 @@ Array Stack
 Last in first out
 """
 
-from Empty import *
+from Excep import *
+
 
 
 class ArrayStack():
     """
     LIFO Stack implementation using a Python list as underlying storage
     """
-    def __init__(self):
+    def __init__(self, maxlen=None):
         """
         create an empty stack
+        :param maxlen: stack’s capacity is limited to maxlen elements (defaults to None)
         """
-
-        # empty list and expands as needed
-        self._data = []   # nonpublic list instance
-
-        # it is more efficient in practice to construct a list with initial
-        # length n than it is to start with an empty list and append n items
-
+        self.maxlen = maxlen
+        if maxlen == None:
+            # empty list and expands as needed
+            self._data = []   # nonpublic list instance
+        else:
+            self._data = [None] * self.maxlen
 
     def __len__(self):
         """
@@ -42,6 +43,8 @@ class ArrayStack():
         :param element:
         :return:
         """
+        if len(self._data) == self.maxlen:
+            raise Full('Stack is full')
         self._data.append(element)  # new item stored at end of list
 
     def top(self):

@@ -5,6 +5,7 @@ from ArrayStack import *
 from ArrayQueue import *
 from ArrayDeque import *
 from collections import deque
+from random import randrange
 
 def init_stack(S, n):
     """
@@ -260,3 +261,15 @@ d.add_last(d.delete_first())
 d.add_last(d.delete_first())
 d.add_last(d.delete_first())
 print(d._data)
+
+
+# C-6.15
+s = ArrayStack()
+s.push(randrange(10))
+s.push(randrange(10))
+s.push(randrange(10))
+print("Alice's three integers:", s._data)
+x = s.pop()
+if x < s.top():
+    x = s.pop()
+print("the largest of Alice's three integers with probability 2/3: {}".format(x))

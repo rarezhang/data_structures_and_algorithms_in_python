@@ -3,7 +3,7 @@ Array Queue
 First in first out
 """
 
-from Empty import *
+from Excep import *
 
 class ArrayQueue:
     """

@@ -16,26 +16,23 @@ class ArrayStack():
         create an empty stack
         :param maxlen: stack’s capacity is limited to maxlen elements (defaults to None)
         """
-        self.maxlen = maxlen
-        if maxlen == None:
-            # empty list and expands as needed
-            self._data = []   # nonpublic list instance
-        else:
-            self._data = [None] * self.maxlen
+        self._maxlen = maxlen
+        self._size = 0
+        self._data = []
 
     def __len__(self):
         """
 
         :return: then number of elements in the stack
         """
-        return len(self._data)
+        return self._size
 
     def is_empty(self):
         """
         return true if the stack is empty
         :return: True | False
         """
-        return len(self._data) == 0
+        return self._size == 0
 
     def push(self, element):
         """
@@ -43,9 +40,10 @@ class ArrayStack():
         :param element:
         :return:
         """
-        if len(self._data) == self.maxlen:
+        if self._size == self._maxlen:
             raise Full('Stack is full')
         self._data.append(element)  # new item stored at end of list
+        self._size += 1
 
     def top(self):
         """
@@ -65,4 +63,5 @@ class ArrayStack():
         """
         if self.is_empty():
             raise Empty('Stack is empty')
+        self._size -= 1
         return self._data.pop()  # return and remove last item form list

@@ -273,3 +273,9 @@ x = s.pop()
 if x < s.top():
     x = s.pop()
 print("the largest of Alice's three integers with probability 2/3: {}".format(x))
+
+# C-6.16
+s = ArrayStack(maxlen=2)
+s.push(2)
+s.push(3)
+print(s._data)

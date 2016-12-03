@@ -6,6 +6,7 @@ from ArrayQueue import *
 from ArrayDeque import *
 from collections import deque
 from random import randrange
+import itertools
 
 def init_stack(S, n):
     """
@@ -347,3 +348,58 @@ had overpaid for the voyage. </p>
 </body>
 '''
 print('matched html:', is_matched_html(raw_html))
+
+# C-6.20
+# Describe a non-recursive algorithm for enumerating all permutations of the
+# numbers { 1 , 2 ,... , n } using an explicit stack.
+num = [1,2,3]
+
+p1 = itertools.permutations(num)
+print(list(p1))
+
+
+def permutations_recursive(num):
+    """
+    public method
+    :param num: python list
+    :return:
+    """
+
+    if num == [] or len(num) == 1:
+        return num
+    elif len(num) == 2:
+        return (num[0], num[1]), (num[1], num[0])
+    else:
+        return [(n,) + l for l in permutations_recursive(num[1:]) for n in num]
+
+print(permutations_recursive(num))
+
+
+def permutations_nonrecursive(num):
+    """
+    Use a stack to reduce the problem to that of enumerating all
+    permutations of the numbers {1,2,...,n− 1}.
+
+     replace a recursive algorithm by an iterative algorithm by pushing the parameters
+     that would normally be passed to the recursive function onto a stack.
+     In fact, you are replacing the program stack by one of your own.
+
+    :param num: python list
+    :return:
+    """
+    S = ArrayStack()
+    for n in num:
+        S.push(n)
+
+    result = [(S.pop(),)]
+
+    while len(S) != 0:
+        c = (S.pop(),)
+        new_result = []
+        for w in result:
+            for i in range(len(w) + 1):
+                new_result.append(w[:i] + c + w[i:])
+        result = new_result
+    return result
+
+print(permutations_nonrecursive(num))

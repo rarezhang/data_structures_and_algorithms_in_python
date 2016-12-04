@@ -365,12 +365,15 @@ def permutations_recursive(num):
     :return:
     """
 
-    if num == [] or len(num) == 1:
-        return num
-    elif len(num) == 2:
-        return (num[0], num[1]), (num[1], num[0])
-    else:
-        return [(n,) + l for l in permutations_recursive(num[1:]) for n in num]
+    if len(num) == 1:
+        return (num,)
+    result = []
+    for n in num:
+        remaining = [x for x in num if x!=n]
+        perms = permutations_recursive(remaining)
+        for p in perms:
+            result.append((n,) + tuple(p))
+    return result
 
 print(permutations_recursive(num))
 

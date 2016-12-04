@@ -406,3 +406,143 @@ def permutations_nonrecursive(num):
     return result
 
 print(permutations_nonrecursive(num))
+
+
+# C-6.21
+# Show how to use a stack S and a queue Q to generate all possible subsets
+# of an n-element set T non-recursively.
+num = [1,2,3]
+result = []
+for n in range(1, len(num)+1):
+    result.extend(list(itertools.combinations(num, n)))
+print(result)
+
+
+def subsets_recursive(num):
+    """
+
+    :param num:
+    :return:
+    """
+    if len(num) == 0:
+        return ()
+
+    result = []
+    subs = subsets_recursive(num[1:])
+    result += subs
+    result.append((num[0],))
+    for s in subs:
+        result.append(s + (num[0],))
+    return result
+
+print(subsets_recursive(num))
+
+
+# C-6.22
+# Postfix notation
+from operator import add, sub, mul, truediv
+op = {'+': add, '-': sub, '*': mul, '/': truediv}
+op_str = op.keys()
+def post_fix(expression):
+    """
+
+    :param expression:
+    :return:
+    """
+    S = ArrayStack()
+
+    expression = expression.split()
+    try:
+        for e in expression:
+            if not e in op_str:
+                S.push(int(e))
+            else: # operator
+                oper = op[e]
+                b = S.pop()
+                a = S.pop()
+                S.push(oper(a,b))
+        return S.pop()
+    except Exception as e:
+        print(e)
+        print('Check expression --> if it is a valid postfix expression ')
+
+exp = '5 2 + 8 3 - * 4 /'
+# exp = '8 3 -'
+print(post_fix(exp))
+
+
+# C-6.23
+# use R as temporary storage, as long as you never
+# pop its original contents.
+# original -> R=[1,2,3],S=[4,5],T=[6,7,8,9]
+# goal -> R=[1,2,3], S=[6,7,8,9,4,5]
+R,S,T = ArrayStack(), ArrayStack(), ArrayStack()
+# initialize R, S and T
+for i in range(1,10):
+    if i < 4:
+        R.push(i)
+    elif i < 6:
+        S.push(i)
+    else:
+        T.push(i)
+print(R._data)
+print(S._data)
+print(T._data)
+len_S = len(S); len_T = len(T)
+for i in range(len_S):
+    R.push(S.pop())
+for i in range(len_T):
+    R.push(T.pop())
+for i in range(len_T+len_S):
+    S.push(R.pop())
+
+print(R._data)
+print(S._data)
+print(T._data)
+
+
+# C-6.27
+S = ArrayStack()
+S = init_stack(S, 5)  # initialize stack 0-5
+
+# Think of how you might use Q
+# to process the elements of S twice.
+def find_element(S, x):
+    """
+    scan S to see if it contains a certain element x
+    your algorithm must return the elements back to S
+    in their original order
+    :param S:
+    :param x:
+    :return:
+    """
+    Q = ArrayQueue()
+    len_S = len(S)
+    flag = False
+    for i in range(len_S):
+        y = S.pop()
+        Q.enqueue(y)
+        if x == y:
+            flag = True
+    for i in range(len_S):
+        S.push(Q.dequeue())
+
+    for i in range(len_S):
+        Q.enqueue(S.pop())
+    for i in range(len_S):
+        S.push(Q.dequeue())
+    return flag
+print('initial S: {}'.format(S._data))
+print(S._data, find_element(S, 3))
+
+
+# C-6.31
+mazie, daisy, crazy, lazy = 2, 4, 10, 20
+trip = []
+trip.append(max(mazie, daisy))  # go: 4
+trip.append(mazie)  # back: 2
+trip.append(max(crazy, lazy))  # go: 20
+trip.append(daisy)  # back: 4
+trip.append(max(mazie, daisy))  # go: 4
+print('all cows across the bridge in {} minutes'.format(sum(trip)))
+

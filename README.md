@@ -2,7 +2,7 @@
 
 https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/1118290275  
 
-## My solutions to exercises in ```Data Structures and Algorithms in Python```   
+#### My solutions to exercises in ```Data Structures and Algorithms in Python```   
 [click here](https://github.com/rarezhang/data_structures_and_algorithms_in_python/tree/master/exercises)  
 
 

@@ -428,14 +428,49 @@ def subsets_recursive(num):
         return ()
 
     result = []
-    subs = subsets_recursive(num[1:])
+    subs = subsets_recursive(num[0:-1])
     result += subs
-    result.append((num[0],))
+    result.append((num[-1],))
     for s in subs:
-        result.append(s + (num[0],))
+        result.append(s + (num[-1],))
     return result
 
 print(subsets_recursive(num))
+
+# Use the stack to store the elements yet to be used to generate
+# subsets and use the queue to store the subsets generated so far.
+def subsets_nonrecursive(num):
+    """
+     use a stack S and a queue Q to generate all possible subsets
+     of an n-element set T non-recursively.
+    :param num:
+    :return:
+    """
+    def copy_Q(Q, list_data):
+        for l in list_data:
+            Q.enqueue(l)
+
+    result = []
+
+    S = ArrayStack()
+    for i in num:
+        S.push(i)
+
+    Q = ArrayQueue()
+
+    for _ in range(len(S)):
+        x = S.pop()
+        sub = (x,)
+        result.append(sub)
+        if Q.is_empty():
+            copy_Q(Q, result)  # copy result to Q
+            continue
+        else:
+            for _ in range(len(Q)):
+                q = Q.dequeue()
+                result.append(q + sub)
+            copy_Q(Q, result)  # copy result to Q
+    return result
 
 
 # C-6.22

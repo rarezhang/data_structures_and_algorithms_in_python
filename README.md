@@ -101,3 +101,24 @@ d.append('b')
 d.appendleft('c')
 d.extend('de')  # extend the left side
 ```
+
+### linked list
+P 278  
+- an alternative to array based sequence  
+- keep elemens in a certain order; a node is allocated for each elment  
+- node(element, neighboring nodes)  
+- advantage  (avoid disadvatage of array)  
+    -- The length of a dynamic array might be longer than the actual number of elements that it stores  
+    -- Amortized bounds for operations may be unacceptable in real-time systems  
+    -- Insertions and deletions at interior positions of an array are expensive  
+- disadvantage  
+    -- Elements of a linked list cannot be efﬁciently accessed by a numeric index k  
+    
+    
+### singly linked lists  
+P 279  P 280
+- a collection of nodes that collectively from a linear sequence  
+- no predetermined fixed size  
+- node(element, next)  
+- must keep a reference to the ```head``` of the list  
+- traversing (link hopping / pointer hopping): starting at the head and moving from one node to another by follwing each nodes's next reference  

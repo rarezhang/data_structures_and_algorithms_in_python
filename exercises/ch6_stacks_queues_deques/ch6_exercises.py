@@ -6,7 +6,7 @@ from ArrayQueue import *
 from ArrayDeque import *
 from collections import deque
 from random import randrange
-import itertools
+import itertools, sys
 
 def init_stack(S, n):
     """
@@ -279,6 +279,7 @@ print("the largest of Alice's three integers with probability 2/3: {}".format(x)
 s = ArrayStack(maxlen=2)
 s.push(2)
 s.push(3)
+# s.push(3)  # Excep.Full: Stack is full
 print(s._data)
 
 # C-6.17
@@ -570,6 +571,18 @@ def find_element(S, x):
 print('initial S: {}'.format(S._data))
 print(S._data, find_element(S, 3))
 
+
+# C-6.28
+q = ArrayQueue(maxlen=2)
+q.enqueue(1)
+q.enqueue(2)
+# q.enqueue(3)  # Excep.Full: Queue is full
+print(q._data)
+
+# C-6.29
+# rotate queue
+q.rotate()
+print(q._data)
 
 # C-6.31
 mazie, daisy, crazy, lazy = 2, 4, 10, 20

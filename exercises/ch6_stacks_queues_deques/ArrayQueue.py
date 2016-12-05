@@ -12,13 +12,14 @@ class ArrayQueue:
     """
     DEFAULT_CAPACITY = 10  # moderate capacity for all new queues
 
-    def __init__(self):
+    def __init__(self, maxlen=None):
         """
         create an empty queue
         """
         self._data = [None] * ArrayQueue.DEFAULT_CAPACITY
         self._size = 0
         self._front = 0
+        self._maxlen = maxlen
 
     def __len__(self):
         """
@@ -65,11 +66,26 @@ class ArrayQueue:
         :param element:
         :return:
         """
+        if self._size == self._maxlen:
+            raise Full('Queue is full')
         if self._size == len(self._data):
             self._resize(2 * len(self._data))  # double the array size
         avail = (self._front + self._size) % len(self._data)  # next opening P266
         self._data[avail] = element
         self._size += 1
+
+    def rotate(self):
+        """
+        identical to: Q.enqueue(Q.dequeue())
+        :return:
+        """
+        # self.enqueue(self.dequeue())
+        first_element = self._data[self._front]
+        self._data[self._front] = None  # help garbage collection
+        self._front = (self._front + 1) % len(self._data)
+
+        avail = (self._front + self._size - 1) % len(self._data)
+        self._data[avail] = first_element
 
     def _resize(self, c):  # assume capacity >= len(self)
         """

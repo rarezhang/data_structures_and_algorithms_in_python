@@ -122,3 +122,8 @@ P 279  P 280
 - node(element, next)  
 - must keep a reference to the ```head``` of the list  
 - traversing (link hopping / pointer hopping): starting at the head and moving from one node to another by follwing each nodes's next reference  
+
+
+### circularly linked lists
+- have the tail of the list use its next reference to point back to the head of the list  
+- has no beginning or end; must maintain a cufrrent node  

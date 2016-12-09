@@ -125,5 +125,19 @@ P 279  P 280
 
 
 ### circularly linked lists
+P 288  
 - have the tail of the list use its next reference to point back to the head of the list  
 - has no beginning or end; must maintain a cufrrent node  
+
+
+### doubly linked list
+- each node keeps an explicit reference to the node before it and a reference to the node after it  
+- allow a greater variety of O(1) time update operations (including insertions and deletions at arbitrary positions within the list)  
+- dummy nodes (sentinels): header node; trailer node  
+    -- advantage of using sentinels:  
+       eliminate the special case  
+       simplifies the logic of operations  
+       the header and trailer nodes never change  
+       treat all insretions in a unified manner  
+    
+

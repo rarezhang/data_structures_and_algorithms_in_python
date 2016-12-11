@@ -93,4 +93,4 @@ class CircularQueue:
         if self._size > 0:
             self._tail = self._tail._next   # old head becomes new tail
 
-            
+

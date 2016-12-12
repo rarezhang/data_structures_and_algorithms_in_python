@@ -140,4 +140,10 @@ P 288
        the header and trailer nodes never change  
        treat all insretions in a unified manner  
     
+### Python special attribute: __slots__
+- allows you to explicityly state in your code which attributes you expect your object instance to have, with the expected results:
+    -- __faster__ attribute access  
+    -- potential __space savings__ in memory  
+- read more: http://stackoverflow.com/questions/472000/usage-of-slots  
+
 

@@ -1,5 +1,4 @@
 from DoublyLinkedBase import _DoublyLinkedBase
-from Excep import Empty
 
 
 class PositionalList(_DoublyLinkedBase):
@@ -116,6 +115,17 @@ class PositionalList(_DoublyLinkedBase):
         while cursor is not None:
             yield cursor.element()
             cursor = self.after(cursor)
+
+    def __str__(self):
+        """
+        print out the PositionalList
+        :return:
+        """
+        s = '{ '
+        for i in self:
+            s += str(i) + ' '
+        s += '}'
+        return s
 
     # ------------------------------- mutators -------------------------------
     # override inherited version to return Position, rather than Node

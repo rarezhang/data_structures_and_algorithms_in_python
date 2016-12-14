@@ -1,3 +1,4 @@
+
 class _DoublyLinkedBase:
     """
     a base class providing a doubly linked list representation
@@ -68,7 +69,7 @@ class _DoublyLinkedBase:
         """
         predecessor = node._prev
         successor = node._next
-        predecessor.next = successor
+        predecessor._next = successor
         successor._prev = predecessor
         self._size -= 1
         element = node._element  # record deleted element

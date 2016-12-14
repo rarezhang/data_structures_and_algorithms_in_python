@@ -145,6 +145,7 @@ class FavoritesList:
             walk = self._data.after(walk)
 
 
+# P 313
 class FavoritesListMTF(FavoritesList):
     """
     List of elements ordered with move-to-front heuristic

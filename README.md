@@ -105,15 +105,29 @@ d.extend('de')  # extend the left side
 ### linked list
 P 278  
 - an alternative to array based sequence  
-- keep elemens in a certain order; a node is allocated for each elment  
+- keep elements in a certain order; a node is allocated for each elment  
 - node(element, neighboring nodes)  
 - advantage  (avoid disadvatage of array)  
     -- The length of a dynamic array might be longer than the actual number of elements that it stores  
     -- Amortized bounds for operations may be unacceptable in real-time systems  
     -- Insertions and deletions at interior positions of an array are expensive  
 - disadvantage  
-    -- Elements of a linked list cannot be efﬁciently accessed by a numeric index k  
+    -- elements of a linked list cannot be efﬁciently accessed by a numeric index k  
     
+### link-based v.s. array-based sequences  
+P 314  
+- advantages of array-based sequence  
+    -- O(1) time access to an element based on an integer index  
+    -- operations with equivalent asymptotic bounds typically run a constant factor more efﬁciently with an array-based structure versus a linked   
+    -- array-based representations typically use proportionally less memory than linked structures  
+- advantages of link-based sequence  
+    -- provide worst-case time bounds for operations  
+    -- support O(1) time insertions and deletions at arbitrary positions (most siginificant advantage)  
+- disadvantages of array-based sequence  
+    -- insert or pop with index k uses O(n-k+1)  
+- disadvantages of link-based sequence  
+    -- locating the kth element requires O(k) time traverse the list from the beginning <or O(n-k) if traversing backward from the end of a doubly linked list  
+    -- with linked lists, memory must be devoted not only to store a reference to each contained object, but also explicit references that link the nodes  
     
 ### singly linked lists  
 P 279  P 280

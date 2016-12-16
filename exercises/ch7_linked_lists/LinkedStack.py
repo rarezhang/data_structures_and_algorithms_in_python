@@ -1,48 +1,12 @@
 from Excep import *
+from SinglyLinkedBase import _SinglyLinkedBase
 
 
-class LinkedStack:
+class LinkedStack(_SinglyLinkedBase):
     """
     LIFO (last in first out) Stack
     implementation using a singly linked list for storage
     """
-
-    class _Node:
-        """
-        nested _Node class
-        light weight, non public class for storing a singly linked node
-        """
-        __slots__ = '_element', '_next'  # streamline memory usage
-
-        def __init__(self, element, next):
-            """
-            initialize node's fields
-            :param element:
-            :param next:
-            """
-            self._element = element  # reference to user's element
-            self._next = next  # reference to next node
-
-    def __init__(self):
-        """
-        create an empty stack
-        """
-        self._head = None  # reference to the head node
-        self._size = 0  # number of stack elements
-
-    def __len__(self):
-        """
-        return the number of elements in the stack
-        :return:
-        """
-        return self._size
-
-    def is_empty(self):
-        """
-        return True if the stack is empty
-        :return:
-        """
-        return self._size == 0
 
     def push(self, element):
         """

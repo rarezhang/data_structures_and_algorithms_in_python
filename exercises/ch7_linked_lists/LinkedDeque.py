@@ -1,6 +1,7 @@
 from DoublyLinkedBase import _DoublyLinkedBase
 from Excep import Empty
 
+
 class LinkedDeque(_DoublyLinkedBase):
     """
     double-ended queue implementation based on a doubly linked list

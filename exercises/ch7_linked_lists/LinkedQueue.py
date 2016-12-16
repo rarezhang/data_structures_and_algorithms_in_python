@@ -1,51 +1,14 @@
 from Excep import *
+from SinglyLinkedBase import _SinglyLinkedBase
 
 
-class LinkedQueue:
+class LinkedQueue(_SinglyLinkedBase):
     """
     FIFO (first in first out)
     queue implementation using a singly linked list for storage
 
     enqueue elements at the back and dequeue them from the front
     """
-
-    class _Node:
-        """
-        nested _Node class
-        light weight, non public class for storing a singly linked node
-        """
-        __slots__ = '_element', '_next'  # streamline memory usage
-
-        def __init__(self, element, next):
-            """
-            initialize node's fields
-            :param element:
-            :param next:
-            """
-            self._element = element  # reference to user's element
-            self._next = next  # reference to next node
-
-    def __init__(self):
-        """
-        create an empty queue
-        """
-        self._head = None
-        self._tail = None
-        self._size = 0  # number of queue elements
-
-    def __len__(self):
-        """
-        return the number of elements in the queue
-        :return:
-        """
-        return self._size
-
-    def is_empty(self):
-        """
-        return True if the queue is empty
-        :return:
-        """
-        return self._size == 0
 
     # enqueue elements at the back and dequeue them from the front
     def first(self):

@@ -1,5 +1,5 @@
 """
-Exercises
+ch6 Exercises
 """
 from ArrayStack import *
 from ArrayQueue import *

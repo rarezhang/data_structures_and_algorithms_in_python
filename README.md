@@ -8,42 +8,11 @@ https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/11182902
 
 # Reading notes  
 
-### designing recursive algorithms  
-P 199  
-1. __test for base cases__: at least one; every recursive calls will eventually reach a base case; handling of each base case should not use recursion  
-2. __recur__: if not a base case, perform one or more recursive calls; makes progress towards a base case  
-3. __parameterization__: public use -> cleaner interface; nopublic function -> having the desired recursive parameters
-
-### why recursion  
-P 200  
-advantage:  
-1. avoid complex case analyses and nested loops  
-2. more readable algorithm descriptions  
-disadvantage:  
-1. keep track of nested call (memory issue)  
-2. stack data structure: convert a recursive algorithm into a nonrecursive algorithm (memory: storing only minimal information)  
-
-### tail recursion  == linear recursion  
-P 200  
-- any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion  
-- any tail recursion can be reimplemented nonrecursively by enclosing the body in a loop for repetition, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values  
-
-### recursion tips
-replace a recursive algorithm by an iterative algorithm by pushing the parameters that would normally be passed to the recursive function onto a stack.  
-In fact, you are replacing the program stack by one of your own.  
-
-
-
-### Python sequence types  
-P 206  P 214 P 224
-- list: dynamic array, allows to add elements to the list, with no apparent limit on the overall capacity of the list  
-- tuple: immutable, more memory efficient than lists  
-- str: an array of characters (not an array of references) -> compact array  
-(based on low-level sequence -> array)  
-P 208 - 209
-- each cell of an array must use the __same number of bytes__  
-- referential arrays: at the lowest level, what is stored is a consecutive sequence of __memory addresses__ at which the elements of the sequence reside  ->  although the relative size of the individual elements may vary, the number of bits used to store the memory address of each element is fixed  
--- disadvantage: inefficiencies  
+### Python special attribute: __slots__
+- allows you to explicityly state in your code which attributes you expect your object instance to have, with the expected results:
+    -- __faster__ attribute access  
+    -- potential __space savings__ in memory  
+- read more: http://stackoverflow.com/questions/472000/usage-of-slots  
 
 ### copy
 P 210  
@@ -73,6 +42,43 @@ the series of concatenations take O(n^2) time
 letters += c  # do not use this
 ```
 
+### designing recursive algorithms  
+P 199  
+1. __test for base cases__: at least one; every recursive calls will eventually reach a base case; handling of each base case should not use recursion  
+2. __recur__: if not a base case, perform one or more recursive calls; makes progress towards a base case  
+3. __parameterization__: public use -> cleaner interface; nopublic function -> having the desired recursive parameters
+
+### why recursion  
+P 200  
+advantage:  
+1. avoid complex case analyses and nested loops  
+2. more readable algorithm descriptions  
+disadvantage:  
+1. keep track of nested call (memory issue)  
+2. stack data structure: convert a recursive algorithm into a nonrecursive algorithm (memory: storing only minimal information)  
+
+### tail recursion  == linear recursion  
+P 200  
+- any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion  
+- any tail recursion can be reimplemented nonrecursively by enclosing the body in a loop for repetition, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values  
+
+### recursion tips
+replace a recursive algorithm by an iterative algorithm by pushing the parameters that would normally be passed to the recursive function onto a stack.  
+In fact, you are replacing the program stack by one of your own.  
+
+
+### Python sequence types  
+P 206  P 214 P 224
+- list: dynamic array, allows to add elements to the list, with no apparent limit on the overall capacity of the list  
+- tuple: immutable, more memory efficient than lists  
+- str: an array of characters (not an array of references) -> compact array  
+(based on low-level sequence -> array)  
+P 208 - 209
+- each cell of an array must use the __same number of bytes__  
+- referential arrays: at the lowest level, what is stored is a consecutive sequence of __memory addresses__ at which the elements of the sequence reside  ->  although the relative size of the individual elements may vary, the number of bits used to store the memory address of each element is fixed  
+-- disadvantage: inefficiencies  
+
+
 ### stacks  
 P 251  
 - a collection of objects  
@@ -80,12 +86,14 @@ P 251
 - user may insert objects into a stack at any time, but only access the most recently inserted object that remains  
 - fundamental operations: push & pop  
 
+
 ### queues
 P 261
 - a collection of objects
 - FIFO: first in first out
 - elements can be inserted at any time, but only the element that has been in the queue the longest can be next removed
 - fundamental operations: enqueue & dequeue
+
 
 ### double ended queues (deque)
 P 269
@@ -114,6 +122,7 @@ P 278
 - disadvantage  
     -- elements of a linked list cannot be efﬁciently accessed by a numeric index k  
     
+    
 ### link-based v.s. array-based sequences  
 P 314  
 - advantages of array-based sequence  
@@ -128,6 +137,7 @@ P 314
 - disadvantages of link-based sequence  
     -- locating the kth element requires O(k) time traverse the list from the beginning <or O(n-k) if traversing backward from the end of a doubly linked list  
     -- with linked lists, memory must be devoted not only to store a reference to each contained object, but also explicit references that link the nodes  
+    
     
 ### singly linked lists  
 P 279  P 280
@@ -145,6 +155,7 @@ P 288
 
 
 ### doubly linked list
+P 292  
 - each node keeps an explicit reference to the node before it and a reference to the node after it  
 - allow a greater variety of O(1) time update operations (including insertions and deletions at arbitrary positions within the list)  
 - dummy nodes (sentinels): header node; trailer node  
@@ -154,10 +165,6 @@ P 288
        the header and trailer nodes never change  
        treat all insretions in a unified manner  
     
-### Python special attribute: __slots__
-- allows you to explicityly state in your code which attributes you expect your object instance to have, with the expected results:
-    -- __faster__ attribute access  
-    -- potential __space savings__ in memory  
-- read more: http://stackoverflow.com/questions/472000/usage-of-slots  
+
 
 

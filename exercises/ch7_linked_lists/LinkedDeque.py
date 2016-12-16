@@ -11,8 +11,6 @@ class LinkedDeque(_DoublyLinkedBase):
     # def __init__(self): pass
     # def __len__(self): pass
     # def is_empty(self): pass
-    # do not provide explicit __init__ __len__ and is_empty method
-    # as the inherited version of the methods suffices to initialize a new instance
 
     def first(self):
         """

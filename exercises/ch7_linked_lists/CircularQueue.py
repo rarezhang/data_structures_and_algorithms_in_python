@@ -1,25 +1,11 @@
 from Excep import *
+from SinglyLinkedBase import _SinglyLinkedBase
 
 
-class CircularQueue:
+class CircularQueue(_SinglyLinkedBase):
     """
     Queue implementation using circularly linked list for storage
     """
-    class _Node:
-        """
-        nested _Node class
-        light weight, non public class for storing a singly linked node
-        """
-        __slots__ = '_element', '_next'  # streamline memory usage
-
-        def __init__(self, element, next):
-            """
-            initialize node's fields
-            :param element:
-            :param next:
-            """
-            self._element = element  # reference to user's element
-            self._next = next  # reference to next node
 
     def __init__(self):
         """
@@ -27,20 +13,6 @@ class CircularQueue:
         """
         self._tail = None  # will represent tail of queue
         self._size = 0  # number of queue elements
-
-    def __len__(self):
-        """
-        return the number of elements in the queue
-        :return:
-        """
-        return self._size
-
-    def is_empty(self):
-        """
-        return True if the queue is empty
-        :return:
-        """
-        return self._size == 0
 
     def first(self):
         """
@@ -93,4 +65,13 @@ class CircularQueue:
         if self._size > 0:
             self._tail = self._tail._next   # old head becomes new tail
 
-
+    def __iter__(self):
+        """
+        generate a forward iteration of the element is the stack
+        :return:
+        """
+        cursor = self._tail._next  # head node
+        while cursor is not self._tail:
+            yield cursor._element
+            cursor = cursor._next
+        yield cursor._element  # tail node

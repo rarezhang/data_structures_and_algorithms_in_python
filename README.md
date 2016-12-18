@@ -68,15 +68,15 @@ In fact, you are replacing the program stack by one of your own.
 
 
 ### Python sequence types  
-P 206  P 214 P 224
+P 206  P 214 P 224  
 - list: dynamic array, allows to add elements to the list, with no apparent limit on the overall capacity of the list  
 - tuple: immutable, more memory efficient than lists  
 - str: an array of characters (not an array of references) -> compact array  
 (based on low-level sequence -> array)  
-P 208 - 209
+P 208 - 209  
 - each cell of an array must use the __same number of bytes__  
 - referential arrays: at the lowest level, what is stored is a consecutive sequence of __memory addresses__ at which the elements of the sequence reside  ->  although the relative size of the individual elements may vary, the number of bits used to store the memory address of each element is fixed  
--- disadvantage: inefficiencies  
+- disadvantage: inefficiencies  
 
 
 ### stacks  
@@ -180,9 +180,9 @@ p 322
     * a set of nodes  
     * nodes storing elements  
     * nodes have a parent-child relationship  
-           + if__T__ is nonempty, it has root that has no parent  
+           + if __T__ is nonempty, it has root that has no parent  
            + each node __v__ of __T__ different from the root has a unique parent node __w__  
-           + every node with parent __w__ is a child of__w__  
+           + every node with parent __w__ is a child of __w__  
            + two nodes that are children of the same parent are siblings  
            + __v__ is external if __v__ has no children (known as leaves)  
            + __v__ is internal if it has one or more children  

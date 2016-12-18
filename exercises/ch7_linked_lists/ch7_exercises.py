@@ -256,3 +256,84 @@ pp.add_first(1)
 # if PositionalList is empty, raise TypeError('position must be proper Position type')
 pp.add_before(pp.first(), 2)
 print(pp)
+
+
+# R-7.11
+# Implement a function, with calling syntax max(L), that returns the maximum
+# element from a PositionalList instance L containing comparable
+# elements.
+def max_PositionalList(L):
+    """
+    return the maximum element from a PositionalList
+    :param L:
+    :return:
+    """
+    if not L.is_empty():
+        cursor = L.first()  # return the first position in the list
+        max_element = cursor.element()
+        while cursor is not None:
+            if cursor.element() > max_element:   # element() return the element stored at this position
+                max_element = cursor.element()
+            cursor = L.after(cursor)  # return position after cursor
+        return max_element
+
+
+pp = PositionalList()
+print(pp, "max:", max_PositionalList(pp))  # empty list
+for _ in range(10):
+    pp.add_first(random.randint(0, 100))
+print(pp, "max:", max_PositionalList(pp))
+
+
+# R-7.12
+# Redo the previously problem with max as a method of the PositionalList
+# class, so that calling syntax L.max() is supported.
+pp = PositionalList()
+print(pp, "max:", pp.max())  # empty list
+for _ in range(10):
+    pp.add_first(random.randint(0, 100))
+print(pp, "max:", pp.max())
+
+# recursion version
+pp = PositionalList()
+print(pp, "max:", pp.max_recursion())  # empty list
+for _ in range(5):
+    pp.add_first(random.randint(0, 100))
+print(pp, "max:", pp.max_recursion().element())
+
+
+# R-7.13
+# Update the PositionalList class to support an additional method ﬁnd(e),
+# which returns the position of the (first occurrence of) element e in the list
+# (or None if not found).
+e = 3
+pp = PositionalList()
+print(pp, "find {}:".format(e), pp.find(e))  # empty list
+for _ in range(10):
+    pp.add_first(random.randint(0, 5))
+result = pp.find(e)
+print(pp, "find {}:".format(e), result, result.element()) if result is not None else print(pp, "find {}:".format(e), result)
+
+
+# R-7.14
+# Repeat the previous process using recursion. Your method should not
+# contain any loops. How much space does your method use in addition to
+e = 3
+pp = PositionalList()
+print(pp, "find {}:".format(e), pp.find_recursion(e))  # empty list
+for _ in range(10):
+    pp.add_first(random.randint(0, 5))
+result = pp.find_recursion(e)
+print(pp, "find {}:".format(e), result, result.element()) if result is not None else print(pp, "find {}:".format(e), result)
+
+
+# R-7.15
+# Provide support for a reversed method of the PositionalList class that
+# is similar to the given iter , but that iterates the elements in reversed
+# order.
+pp = PositionalList()
+for _ in range(10):
+    pp.add_first(random.randint(0, 100))
+print(pp)
+rp = reversed(pp)
+for i in rp: print(i, end=" ")

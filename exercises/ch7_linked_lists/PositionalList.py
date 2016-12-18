@@ -116,7 +116,15 @@ class PositionalList(_DoublyLinkedBase):
             yield cursor.element()
             cursor = self.after(cursor)
 
-
+    def __reversed__(self):
+        """
+        generate a backward iteration of the elements of the list
+        :return:
+        """
+        cursor = self.last()
+        while cursor is not None:
+            yield cursor.element()
+            cursor = self.before(cursor)
 
     # ------------------------------- mutators -------------------------------
     # override inherited version to return Position, rather than Node
@@ -188,6 +196,79 @@ class PositionalList(_DoublyLinkedBase):
         old_value = original._elment  # temporarily store old element
         original._element = element  # replace with new element
         return old_value  # return the old element value
+
+    def max(self):
+        """
+        return the maximum element
+        :return:
+        """
+        if not self.is_empty():
+            max_element = self.first().element()
+            for i in self:
+                if i > max_element:
+                    max_element = i
+            return max_element
+
+    def _max_recursion(self, node, max_element):
+        """
+
+        :param node:
+        :return:
+        """
+        if node is None:
+            return max_element
+        else:
+            if node.element() < max_element.element():
+                return self._max_recursion(self.after(node), max_element)
+            else:
+                return self._max_recursion(self.after(node), node)
+
+    def max_recursion(self):
+        """
+        returns the position of the (first occurrence of) element e in the list
+        (or None if not found)
+        :param element:
+        :return:
+        """
+        if not self.is_empty():
+            max_e = self.first()  # return the position
+            return self._max_recursion(max_e, max_e)
+
+    def find(self, element):
+        """
+        returns the position of the (first occurrence of) element e in the list
+        (or None if not found)
+        :param element:
+        :return:
+        """
+        cursor = self.first()
+        while cursor is not None:
+            if cursor.element() == element:
+                return cursor
+            cursor = self.after(cursor)
+
+    def _find_recursion(self, node, element):
+        """
+
+        :param node:
+        :return:
+        """
+        if node is None:
+            return node
+        elif node.element() == element:
+            return node
+        else:
+            return self._find_recursion(self.after(node), element)
+
+    def find_recursion(self, element):
+        """
+        returns the position of the (first occurrence of) element e in the list
+        :param element:
+        :return:
+        """
+        if not self.is_empty():
+            head = self.first()
+            return self._find_recursion(head, element)
 
 
 

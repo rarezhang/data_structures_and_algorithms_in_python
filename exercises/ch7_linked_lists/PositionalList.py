@@ -155,6 +155,18 @@ class PositionalList(_DoublyLinkedBase):
         """
         return self._insert_between(element, self._trailer._prev, self._trailer)
 
+    def add_last2(self, element):
+        """
+        using only methods in the set {is_empty, first, last,
+        prev, next, add after, and add first} .
+        :param element:
+        :return:
+        """
+        if self.is_empty():
+            return self.add_first(element)
+        else:
+            return self.add_after(self.last(), element)
+
     def add_before(self, position, element):
         """
         insert element into list before Position and return new Position
@@ -164,6 +176,19 @@ class PositionalList(_DoublyLinkedBase):
         """
         original = self._validate(position)  # return position._node
         return self._insert_between(element, original._prev, original)  # return self._make_position(node)
+
+    def add_before2(self, position, element):
+        """
+        using only methods in the set {is_empty, first, last,
+        prev, next, add after, and add first} .
+        :param position:
+        :param element:
+        :return:
+        """
+        if self.is_empty() or self.before(position) is None:
+            return self.add_first(element)
+        else:
+            return self.add_after(self.before(position), element)
 
     def add_after(self, position, element):
         """
@@ -196,6 +221,28 @@ class PositionalList(_DoublyLinkedBase):
         old_value = original._elment  # temporarily store old element
         original._element = element  # replace with new element
         return old_value  # return the old element value
+
+    def move_to_front(self, position):
+        """
+        move an element of a list at position p to become the first element of the list
+        :param position:
+        :return:
+        """
+        if self.first()._node is not position._node:  # if self.first() is position -> do nothing
+            original_first = self.first()._node
+            node = position._node
+            predecessor = self.before(position)._node
+            if self.after(position) is None:  # the last node
+                successor = self._trailer
+            else:
+                successor = self.after(position)._node
+            predecessor._next = successor
+            successor._prev = predecessor
+
+            original_first._prev = node
+            node._next = original_first
+            self._header._next = node
+            node._prev = self._header
 
     def max(self):
         """

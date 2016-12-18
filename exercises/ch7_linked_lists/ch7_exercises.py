@@ -337,3 +337,52 @@ for _ in range(10):
 print(pp)
 rp = reversed(pp)
 for i in rp: print(i, end=" ")
+print()
+
+
+# R-7.16
+# Describe an implementation of the PositionalList methods add last and
+# add before realized by using only methods in the set {is empty, first, last,
+# prev, next, add after, and add first} .
+pp = PositionalList()
+pp.add_last2(500)
+for _ in range(5):
+    pp.add_first(random.randint(0, 3))
+pp.add_last(1000); print(pp)
+pp.add_last2(2000); print(pp)
+pp.add_before(pp.first(), 3000); print(pp)
+pp.add_before2(pp.first(), 4000); print(pp)
+pp.add_before2(pp.last(), 5000); print(pp)
+
+
+# R-7.17
+# move an element of a list at position p to become the first
+# element of the list, while keeping the relative order of the remaining elements
+# unchanged.
+# Augment the PositionalList
+# class to support a new method, move to front(p), that accomplishes this
+# goal more directly, by relinking the existing node.
+pp = PositionalList()
+for i in range(5):
+    pp.add_first(i)
+print(pp)
+pp.move_to_front(pp.first()); print(pp)  # move first item
+pp.move_to_front(pp.last()); print(pp)  # move last item
+pp.move_to_front(pp.after(pp.first())); print(pp)  # move second item
+
+
+# R-7.18
+# Given the set of element { a , b , c , d , e , f } stored in a list, show the final state
+# of the list, assuming we use the move-to-front heuristic and access the elements
+# according to the following sequence: ( a , b , c , d , e , f , a , c , f , b , d , e ) .
+s = 'abcdef'
+pp = PositionalList()
+for i in s:
+    pp.add_last(i)
+print(pp)  # {{ a b c d e f }}
+# access sequence ( a , b , c , d , e , f , a , c , f , b , d , e )
+seq = 'abcdefacfbde'
+for i in seq:
+    pp.move_to_front(pp.find(i))
+    print("access: {}, list: {}".format(i, pp))
+    

@@ -173,7 +173,7 @@ class FavoritesListMTF(FavoritesList):
 
         # making a copy of the original list
         temp = PositionalList()
-        for item in self._data:  # positional lists supoort iteration
+        for item in self._data:  # positional lists support iteration
             temp.add_last(item)
 
         # repeatedly find, report and remove element with largest count

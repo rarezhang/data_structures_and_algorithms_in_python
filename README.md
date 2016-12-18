@@ -10,8 +10,8 @@ https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/11182902
 
 ### Python special attribute: __slots__
 - allows you to explicityly state in your code which attributes you expect your object instance to have, with the expected results:
-    -- __faster__ attribute access  
-    -- potential __space savings__ in memory  
+    * __faster__ attribute access  
+    * potential __space savings__ in memory  
 - read more: http://stackoverflow.com/questions/472000/usage-of-slots  
 
 ### copy
@@ -116,27 +116,27 @@ P 278
 - keep elements in a certain order; a node is allocated for each elment  
 - node(element, neighboring nodes)  
 - advantage  (avoid disadvatage of array)  
-    -- The length of a dynamic array might be longer than the actual number of elements that it stores  
-    -- Amortized bounds for operations may be unacceptable in real-time systems  
-    -- Insertions and deletions at interior positions of an array are expensive  
+    * The length of a dynamic array might be longer than the actual number of elements that it stores  
+    * Amortized bounds for operations may be unacceptable in real-time systems  
+    * Insertions and deletions at interior positions of an array are expensive  
 - disadvantage  
-    -- elements of a linked list cannot be efﬁciently accessed by a numeric index k  
+    * elements of a linked list cannot be efﬁciently accessed by a numeric index k  
     
     
 ### link-based v.s. array-based sequences  
 P 314  
 - advantages of array-based sequence  
-    -- O(1) time access to an element based on an integer index  
-    -- operations with equivalent asymptotic bounds typically run a constant factor more efﬁciently with an array-based structure versus a linked   
-    -- array-based representations typically use proportionally less memory than linked structures  
+    * O(1) time access to an element based on an integer index  
+    * operations with equivalent asymptotic bounds typically run a constant factor more efﬁciently with an array-based structure versus a linked   
+    * array-based representations typically use proportionally less memory than linked structures  
 - advantages of link-based sequence  
-    -- provide worst-case time bounds for operations  
-    -- support O(1) time insertions and deletions at arbitrary positions (most siginificant advantage)  
+    * provide worst-case time bounds for operations  
+    * support O(1) time insertions and deletions at arbitrary positions (most siginificant advantage)  
 - disadvantages of array-based sequence  
-    -- insert or pop with index k uses O(n-k+1)  
+    * insert or pop with index k uses O(n-k+1)  
 - disadvantages of link-based sequence  
-    -- locating the kth element requires O(k) time traverse the list from the beginning <or O(n-k) if traversing backward from the end of a doubly linked list  
-    -- with linked lists, memory must be devoted not only to store a reference to each contained object, but also explicit references that link the nodes  
+    * locating the kth element requires O(k) time traverse the list from the beginning <or O(n-k) if traversing backward from the end of a doubly linked list  
+    * with linked lists, memory must be devoted not only to store a reference to each contained object, but also explicit references that link the nodes  
     
     
 ### singly linked lists  
@@ -159,7 +159,7 @@ P 292
 - each node keeps an explicit reference to the node before it and a reference to the node after it  
 - allow a greater variety of O(1) time update operations (including insertions and deletions at arbitrary positions within the list)  
 - dummy nodes (sentinels): header node; trailer node  
-    -- advantage of using sentinels:  
+    * advantage of using sentinels:  
        eliminate the special case  
        simplifies the logic of operations  
        the header and trailer nodes never change  
@@ -169,38 +169,38 @@ P 292
 ### general trees
 p 322  
 - nonlinear data structures: much faster than using linear data structures  
-    -- relationship in a tree: hierarchical  
-    -- parent, child, ancestor, descendant  
-    -- top element: root  
-    -- each element (except top element):  
-        ...- one parent  
-        ...- zero or more children elements  
+    * relationship in a tree: hierarchical  
+    * parent, child, ancestor, descendant  
+    * top element: root  
+    * each element (except top element):  
+           + one parent  
+           + zero or more children elements  
 - provide nature organization for data  
 - tree __T__ definition:  
-    -- a set of nodes  
-    -- nodes storing elements  
-    -- nodes have a parent-child relationship  
-        ...- if__T__ is nonempty, it has root that has no parent  
-        ...- each node __v__ of __T__ different from the root has a unique parent node __w__  
-        ...- every node with parent __w__ is a child of__w__  
-        ...- two nodes that are children of the same parent are siblings  
-        ...- __v__ is external if __v__ has no children (known as leaves)  
-        ...- __v__ is internal if it has one or more children  
-        ...- node __u__ is an ancestor of a node __v__ if __u = v__ or __u__ is an ancestor of the parent of __v__  
-        ...- node __v__ is a descendant of a node __u__ if __u__ is an ancestor of __v__  
-    -- edges and paths  
-        ...- an edge of tree __T__ is a pair of nodes ( u , v ) such that __u__ is the parent of __v__, or vice versa  
-        ...- a path of __T__ is a sequence of nodes such that any two consecutive nodes in the sequence form an edge  
-    -- ordered trees  
+    * a set of nodes  
+    * nodes storing elements  
+    * nodes have a parent-child relationship  
+           + if__T__ is nonempty, it has root that has no parent  
+           + each node __v__ of __T__ different from the root has a unique parent node __w__  
+           + every node with parent __w__ is a child of__w__  
+           + two nodes that are children of the same parent are siblings  
+           + __v__ is external if __v__ has no children (known as leaves)  
+           + __v__ is internal if it has one or more children  
+           + node __u__ is an ancestor of a node __v__ if __u = v__ or __u__ is an ancestor of the parent of __v__  
+           + node __v__ is a descendant of a node __u__ if __u__ is an ancestor of __v__  
+    * edges and paths  
+           + an edge of tree __T__ is a pair of nodes ( u , v ) such that __u__ is the parent of __v__, or vice versa  
+           + a path of __T__ is a sequence of nodes such that any two consecutive nodes in the sequence form an edge  
+    * ordered trees  
         there is a meaningful linear order among the children of each node  (e.g., arranging siblings left to right, according to their order)  
-    -- depth of a postion (p): the number of ancestors of p, excluding p itself  
-        ...- if p is root, depth = 0  
-        ...- o.w. depth of p = 1 + depth of p's parent  
-    -- height of a position (p): 
-        ...- if p is leaf, height = 0  
-        ...- o.w. depth of p = 1 + max(heights of p's children)  
-        ...- height(T) == height(root)  
-        ...- height(T) == max(depth(leaf))  
+    * depth of a postion (p): the number of ancestors of p, excluding p itself  
+           + if p is root, depth = 0  
+           + o.w. depth of p = 1 + depth of p's parent  
+    * height of a position (p): 
+           + if p is leaf, height = 0  
+           + o.w. depth of p = 1 + max(heights of p's children)  
+           + height(T) == height(root)  
+           + height(T) == max(depth(leaf))  
         
     
 

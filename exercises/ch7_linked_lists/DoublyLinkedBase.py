@@ -45,7 +45,7 @@ class _DoublyLinkedBase:
         return True if list is empty
         :return:
         """
-        return self._size
+        return self._size == 0
 
     def _insert_between(self, element, predecessor, successor):
         """
@@ -75,3 +75,24 @@ class _DoublyLinkedBase:
         element = node._element  # record deleted element
         node._prev = node._next = node._element = None  # deprecate node
         return element
+
+    def __iter__(self):
+        """
+        generate a forward iteration of the element in the doubly linked list
+        :return:
+        """
+        cursor = self._header._next
+        while cursor is not self._trailer:
+            yield cursor._element
+            cursor = cursor._next
+
+    def __str__(self):
+        """
+        print out the doubly linked list
+        :return:
+        """
+        s = '{{ '
+        for i in self:
+            s += str(i) + ' '
+        s += '}}'
+        return s

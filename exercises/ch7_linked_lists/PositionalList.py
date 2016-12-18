@@ -116,16 +116,7 @@ class PositionalList(_DoublyLinkedBase):
             yield cursor.element()
             cursor = self.after(cursor)
 
-    def __str__(self):
-        """
-        print out the PositionalList
-        :return:
-        """
-        s = '{ '
-        for i in self:
-            s += str(i) + ' '
-        s += '}'
-        return s
+
 
     # ------------------------------- mutators -------------------------------
     # override inherited version to return Position, rather than Node

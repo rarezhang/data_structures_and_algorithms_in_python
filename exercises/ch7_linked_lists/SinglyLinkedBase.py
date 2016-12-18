@@ -59,7 +59,7 @@ class _SinglyLinkedBase:
 
     def __str__(self):
         """
-        print out the Linked Queue
+        print out the singl
         :return:
         """
         s = '{ '

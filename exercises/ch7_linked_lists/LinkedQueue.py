@@ -49,3 +49,16 @@ class LinkedQueue(_SinglyLinkedBase):
             self._tail._next = newest
         self._tail = newest  # update reference to tail node
         self._size += 1
+
+    def rotate(self):
+        """
+        rotate front element to the back of the queue
+        :return:
+        """
+        if not self.is_empty():
+            head = self._head
+            self._head = head._next  # new head node
+            head._next = None
+            self._tail._next = head  # new tail node
+            self._tail = head
+

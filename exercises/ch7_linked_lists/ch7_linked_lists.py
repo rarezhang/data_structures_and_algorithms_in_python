@@ -144,6 +144,24 @@ class FavoritesList:
             yield item._value
             walk = self._data.after(walk)
 
+    def clear(self):
+        """
+        returns the list to empty.
+        :return:
+        """
+        self._data = PositionalList()
+
+    def reset_counts(self):
+        """
+         resets all elements’ access counts to zero (while leaving the order of
+         he list unchanged).
+        :return:
+        """
+        cursor = self._data.first()
+        while cursor is not None:
+            cursor.element()._count = 0
+            cursor = self._data.after(cursor)
+
 
 # P 313
 class FavoritesListMTF(FavoritesList):

@@ -7,6 +7,7 @@ from LinkedStack import LinkedStack
 from CircularQueue import CircularQueue
 from LinkedDeque import LinkedDeque
 from PositionalList import PositionalList
+from ch7_linked_lists import FavoritesList
 import random
 
 
@@ -385,4 +386,59 @@ seq = 'abcdefacfbde'
 for i in seq:
     pp.move_to_front(pp.find(i))
     print("access: {}, list: {}".format(i, pp))
-    
+# access: a, list: {{ a b c d e f }}
+# access: b, list: {{ b a c d e f }}
+# access: c, list: {{ c b a d e f }}
+# access: d, list: {{ d c b a e f }}
+# access: e, list: {{ e d c b a f }}
+# access: f, list: {{ f e d c b a }}
+# access: a, list: {{ a f e d c b }}
+# access: c, list: {{ c a f e d b }}
+# access: f, list: {{ f c a e d b }}
+# access: b, list: {{ b f c a e d }}
+# access: d, list: {{ d b f c a e }}
+# access: e, list: {{ e d b f c a }}
+
+# R-7.20
+# Let L be a list of n items maintained according to the move-to-front heuris-
+# tic. Describe a series of O ( n ) accesses that will reverse L.
+s = 'abc'
+pp = PositionalList()
+for i in s:
+    pp.add_last(i)
+print(pp)
+# O(n)
+pp.move_to_front(pp.first())
+pp.move_to_front(pp.after(pp.first()))
+pp.move_to_front(pp.after(pp.after(pp.first())))
+print(pp)
+
+
+# R-7.21
+# Suppose we have an n-element list L maintained according to the move-
+# to-front heuristic. Describe a sequence of n*n accesses that is guaranteed
+# to take Ω( n*n*n) time to perform on L.
+ele = 'a'
+pp.move_to_front(pp.find(ele))
+# For this lower bound, assume that when an element is accessed
+# we search for it by traversing the list starting at the front.
+
+
+# R-7.22
+# Implement a clear() method for the FavoritesList class that returns the list
+# to empty.
+f = FavoritesList()
+f.access(50)
+print(f._data)
+f.clear()
+print(f._data)
+# R-7.23
+# Implement a reset counts() method for the FavoritesList class that resets
+# all elements’ access counts to zero (while leaving the order of the list
+# unchanged).
+#  adjust instances of the nested Item class.
+for i in range(9): f.access(i)
+for i in range(4): f.access(i)
+for i in f._data: print(i._value, i._count)
+f.reset_counts()
+for i in f._data: print(i._value, i._count)

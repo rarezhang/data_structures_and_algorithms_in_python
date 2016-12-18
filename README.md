@@ -165,6 +165,44 @@ P 292
        the header and trailer nodes never change  
        treat all insretions in a unified manner  
     
+    
+### general trees
+p 322  
+- nonlinear data structures: much faster than using linear data structures  
+    -- relationship in a tree: hierarchical  
+    -- parent, child, ancestor, descendant  
+    -- top element: root  
+    -- each element (except top element):  
+        --- one parent  
+        --- zero or more children elements  
+- provide nature organization for data  
+- tree __T__ definition:  
+    -- a set of nodes  
+    -- nodes storing elements  
+    -- nodes have a parent-child relationship  
+        --- if__T__ is nonempty, it has root that has no parent  
+        --- each node __v__ of __T__ different from the root has a unique parent node __w__  
+        --- every node with parent __w__ is a child of__w__  
+        --- two nodes that are children of the same parent are siblings  
+        --- __v__ is external if __v__ has no children (known as leaves)  
+        --- __v__ is internal if it has one or more children  
+        --- node __u__ is an ancestor of a node __v__ if __u = v__ or __u__ is an ancestor of the parent of __v__  
+        --- node __v__ is a descendant of a node __u__ if __u__ is an ancestor of __v__  
+    -- edges and paths  
+        --- an edge of tree __T__ is a pair of nodes ( u , v ) such that __u__ is the parent of __v__, or vice versa  
+        --- a path of __T__ is a sequence of nodes such that any two consecutive nodes in the sequence form an edge  
+    -- ordered trees  
+        there is a meaningful linear order among the children of each node  (e.g., arranging siblings left to right, according to their order)  
+    -- depth of a postion (p): the number of ancestors of p, excluding p itself  
+        -- if p is root, depth = 0  
+        -- o.w. depth of p = 1 + depth of p's parent  
+    -- height of a position (p): 
+        -- if p is leaf, height = 0  
+        -- o.w. depth of p = 1 + max(heights of p's children)  
+        -- height(T) == height(root)  
+        -- height(T) == max(depth(leaf))  
+        
+    
 
 
 

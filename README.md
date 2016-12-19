@@ -200,9 +200,39 @@ p 322
            + if p is leaf, height = 0  
            + o.w. depth of p = 1 + max(heights of p's children)  
            + height(T) == height(root)  
-           + height(T) == max(depth(leaf))  
-        
+           + height(T) == max(depth(leaf))
+           
+### recursive binary tree  
+    * either empty  
+    * or consists of  
+        + a ndoe __r__ , the root of T, stores an element  
+        + a binary tree, the left subtree of T  
+        + a binary tree, the right subtree of T  
+
+
+### binary trees  
+- a binary tree is an ordered tree  
+    * ever node has at most two children  
+    * each child node is labeled as either left child or right child  
+    * left child precedes a right child  
+- left/right subtree: the subtree rooted at a left/right child of an internal node __v__  
+- proper binary tree (full binary tree): each node has either zero or two children  
+    * every internal node has exactly node has exactly two children  
+- heights v.s. number of nodes  
+    * maximum number of nodes grows exponentially  
+    * depth d == level d  
+    * level d has __at most__ 2^d nodes  
+        + level 0: 2^0=1  
+        + level 1: 2^1=2  
+        + level 2: 2^2=4  
+        + ......  
+
+
+### linked structure for binary tree
+    * element | position | children | parent  
+    * position==root -> parent = None  
+    * no child -> left child / right child = None  
     
-
-
+    
+    
 

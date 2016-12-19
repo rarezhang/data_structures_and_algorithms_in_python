@@ -8,6 +8,8 @@ from CircularQueue import CircularQueue
 from LinkedDeque import LinkedDeque
 from PositionalList import PositionalList
 from ch7_linked_lists import FavoritesList
+from LinkedStackSentinel import LinkedStackSentinel
+from LinkedQueueSentinel import LinkedQueueSentinel
 import random
 
 
@@ -432,6 +434,8 @@ f.access(50)
 print(f._data)
 f.clear()
 print(f._data)
+
+
 # R-7.23
 # Implement a reset counts() method for the FavoritesList class that resets
 # all elements’ access counts to zero (while leaving the order of the list
@@ -442,3 +446,19 @@ for i in range(4): f.access(i)
 for i in f._data: print(i._value, i._count)
 f.reset_counts()
 for i in f._data: print(i._value, i._count)
+
+
+# C-7.24
+# Give a complete implementation of the stack ADT using a singly linked
+# list that includes a header sentinel.
+ls = LinkedStackSentinel()
+for i in range(5): ls.push(i); print(ls)
+for _ in range(5): ls.pop(); print(ls)
+
+
+# C-7.25
+# Give a complete implementation of the queue ADT using a singly linked
+# list that includes a header sentinel.
+qs = LinkedQueueSentinel()
+for i in range(5,9): qs.enqueue(i); print(qs)
+for _ in range(5,9): qs.dequeue(); print(qs)

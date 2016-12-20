@@ -11,7 +11,7 @@ from ch7_linked_lists import FavoritesList
 from LinkedStackSentinel import LinkedStackSentinel
 from LinkedQueueSentinel import LinkedQueueSentinel
 from SinglyLinkedBaseRecursive import _SinglyLinkedBaseRecursive
-import random
+import random, copy
 
 
 # R-7.1
@@ -498,3 +498,46 @@ rl = rl.map_link(f); print(rl)
 # test filter_link()
 f = lambda x: x > 5
 rl = rl.filter_link(f); print(rl)
+
+
+# C-7.28
+# Describe a fast recursive algorithm for reversing a
+# singly linked list.
+rl = _SinglyLinkedBaseRecursive(0)
+for i in range(1, 9): rl = rl.extend(i)
+print(rl)
+# test reverse()
+rl = rl.reverse(); print(rl)
+
+
+# C-7.29
+# Describe in detail an algorithm for reversing a singly linked list L using
+# only a constant amount of additional space and not using any recursion.
+#  Consider changing the orientation of links while making a single
+# pass through the list.
+def reverse(L):
+    """
+    reversing a singly linked list L using a constant amount of additional space
+    no recursion
+    :param L: singly linked list
+    :return:
+    """
+    assert isinstance(L, (LinkedQueue, LinkedStack))
+    if not L.is_empty():
+        new_head, new_tail = None, L._head
+        cursor = L._head
+        while cursor is not None:
+            temp = cursor  # temp: a reference to a node moving from one list to the other
+            cursor = temp._next
+            temp._next = new_head
+            new_head = temp
+        L._head, L._tail = new_head, new_tail
+    return L
+
+
+q = LinkedQueue()
+for i in range(9): q.enqueue(i)
+print(q)
+q = reverse(q)
+print(q)
+print(q._head._element, q._tail._element)

@@ -68,7 +68,7 @@ class _SinglyLinkedBaseRecursive:
         if L is self.empty:
             return _SinglyLinkedBaseRecursive(element)
         else:
-            return _SinglyLinkedBaseRecursive(self._head, self._extend(L._rest, element))
+            return _SinglyLinkedBaseRecursive(L._head, self._extend(L._rest, element))
 
     def extend(self, element):
         """
@@ -119,3 +119,21 @@ class _SinglyLinkedBaseRecursive:
         :return:
         """
         return self._filter_link(self, fun)
+
+    def _reverse(self, L):
+        """
+        helper function of reverse
+        :param L:
+        :return:
+        """
+        if L._rest is self.empty:
+            return L
+        else:
+            return _SinglyLinkedBaseRecursive(self._reverse(L._rest), _SinglyLinkedBaseRecursive(L._head))
+
+    def reverse(self):
+        """
+        recursive algorithm for reversing a singly linked list
+        :return:
+        """
+        return self._reverse(self)

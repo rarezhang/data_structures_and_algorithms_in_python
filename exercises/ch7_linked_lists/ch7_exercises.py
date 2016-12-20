@@ -11,7 +11,8 @@ from ch7_linked_lists import FavoritesList
 from LinkedStackSentinel import LinkedStackSentinel
 from LinkedQueueSentinel import LinkedQueueSentinel
 from SinglyLinkedBaseRecursive import _SinglyLinkedBaseRecursive
-import random, copy
+from ForwardList import ForwardList
+import random
 
 
 # R-7.1
@@ -541,3 +542,16 @@ print(q)
 q = reverse(q)
 print(q)
 print(q._head._element, q._tail._element)
+
+
+# C-7.31
+# Design a forward list ADT that abstracts the operations on a singly linked
+# list, much as the positional list ADT abstracts the use of a doubly linked
+# list. Implement a ForwardList class that supports such an ADT.
+fl = ForwardList(); print(fl)
+for i in range(4): fl.add_last(i); print(fl)
+for i in range(4): fl.add_first(i); print(fl)
+p = fl.first()  # position
+fl.delete_after(p); print(fl)
+fl.add_after(p, 2); print(fl)
+for _ in range(4): fl.delete_first(); print(fl)

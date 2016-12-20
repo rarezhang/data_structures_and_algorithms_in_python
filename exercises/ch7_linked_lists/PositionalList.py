@@ -50,7 +50,7 @@ class PositionalList(_DoublyLinkedBase):
     def _validate(self, position):
         """
         return position's node,
-        or raise appropriate error if invalide
+        or raise appropriate error if invalid
         :param position:
         :return:
         """
@@ -197,7 +197,7 @@ class PositionalList(_DoublyLinkedBase):
         :param element:
         :return:
         """
-        original = self._validate(position)
+        original = self._validate(position)  # return node at position
         return self._insert_between(element, original, original._next)
 
     def delete(self, position):

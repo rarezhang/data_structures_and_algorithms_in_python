@@ -10,6 +10,7 @@ from PositionalList import PositionalList
 from ch7_linked_lists import FavoritesList
 from LinkedStackSentinel import LinkedStackSentinel
 from LinkedQueueSentinel import LinkedQueueSentinel
+from SinglyLinkedBaseRecursive import _SinglyLinkedBaseRecursive
 import random
 
 
@@ -479,3 +480,21 @@ for i in range(5): q1.enqueue(i)
 q1.concatenate(q2)
 print(q1, q2)
 
+
+# C-7.27
+# Give a recursive implementation of a singly linked list class, such that an
+# instance of a nonempty list stores its first element and a reference to a list
+# of remaining elements.
+# View the chain of nodes following the head node as themselves
+# forming another list.
+rl = _SinglyLinkedBaseRecursive(1)
+print(rl); print(len(rl)); print(rl.is_empty())
+print(rl[0])  # test __getitem__
+# test extend()
+rl = rl.extend(6); print(rl)
+# test map_link()
+f = lambda x: x*x
+rl = rl.map_link(f); print(rl)
+# test filter_link()
+f = lambda x: x > 5
+rl = rl.filter_link(f); print(rl)

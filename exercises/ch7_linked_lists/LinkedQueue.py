@@ -62,3 +62,19 @@ class LinkedQueue(_SinglyLinkedBase):
             self._tail._next = head  # new tail node
             self._tail = head
 
+    def concatenate(self, Q):
+        """
+        takes all elements of LinkedQueue Q2 and appends them to the end of the
+        original queue.
+        run in O(1)
+        result in Q being an empty queue
+        :param Q:
+        :return:
+        """
+        assert isinstance(Q, LinkedQueue)
+        if self.is_empty():
+            self._head = Q._head
+        else:
+            self._tail._next = Q._head
+        Q._head = None  # Q will be an empty queue
+

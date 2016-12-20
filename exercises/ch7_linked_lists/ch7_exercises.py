@@ -462,3 +462,20 @@ for _ in range(5): ls.pop(); print(ls)
 qs = LinkedQueueSentinel()
 for i in range(5,9): qs.enqueue(i); print(qs)
 for _ in range(5,9): qs.dequeue(); print(qs)
+
+
+# C-7.26
+# Implement a method, concatenate(Q2) for the LinkedQueue class that
+# takes all elements of LinkedQueue Q2 and appends them to the end of the
+# original queue. The operation should run in O(1) time and should result
+# in Q2 being an empty queue.
+q1, q2, = LinkedQueue(), LinkedQueue()
+for i in range(3): q2.enqueue(i)
+# if q1 is empty
+q1.concatenate(q2)
+print(q1, q2)
+# if q2 is not empty
+for i in range(5): q1.enqueue(i)
+q1.concatenate(q2)
+print(q1, q2)
+

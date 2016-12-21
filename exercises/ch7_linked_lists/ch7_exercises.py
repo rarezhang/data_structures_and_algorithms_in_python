@@ -646,9 +646,45 @@ def bubble_sort(L):
                 L.swap(temp, cursor)
 
 
-
 p = PositionalList()
 a, b = 1, 100
 for _ in range(10): p.add_last(random.randint(a, b))
 print(p)
 bubble_sort(p); print(p)
+
+
+# C-7.43
+# Describe a method for performing a card shuffle of a list of 2n elements,
+# by converting it into two lists. A card shuffle is a permutation where a list
+# L is cut into two lists, L1 and L2, where L1 is the first half of L and L2 is the
+# second half of L, and then these two lists are merged into one by taking
+# the first element in L1, then the first element in L2, followed by the second
+# element in L1, the second element in L2, and so on.
+# C-7.43) Convert the two parts to two separate lists as sub-lists.
+def card_shuffle(L):
+    """
+
+    :param L: LinkedQueue
+    :return:
+    """
+    assert isinstance(L, LinkedQueue)
+    if not L.is_empty():
+        n = len(L)
+        n1 = n // 2
+        L1, L2 = LinkedQueue(), LinkedQueue()
+        for i in range(n):
+            if i < n1: L1.enqueue(L.dequeue())
+            else: L2.enqueue(L.dequeue())
+        while not L1.is_empty() and not L2.is_empty() :
+            L.enqueue(L1.dequeue())
+            L.enqueue(L2.dequeue())
+        if n - n1 > n1: L.enqueue(L2.dequeue())  # len(L) is an odd number, 1 left in L2
+        return L
+
+
+
+p = LinkedQueue()
+a, b = 1, 100
+for _ in range(9): p.enqueue(random.randint(a, b))
+print(p)
+pp = card_shuffle(p); print(p)

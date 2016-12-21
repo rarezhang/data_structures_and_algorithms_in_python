@@ -7,7 +7,7 @@ from LinkedStack import LinkedStack
 from CircularQueue import CircularQueue
 from LinkedDeque import LinkedDeque
 from PositionalList import PositionalList
-from ch7_linked_lists import FavoritesList
+from ch7_linked_lists import FavoritesList, insertion_sort
 from LinkedStackSentinel import LinkedStackSentinel
 from LinkedQueueSentinel import LinkedQueueSentinel
 from SinglyLinkedBaseRecursive import _SinglyLinkedBaseRecursive
@@ -557,6 +557,16 @@ fl.add_after(p, 2); print(fl)
 for _ in range(4): fl.delete_first(); print(fl)
 
 
+# C-7.33
+# Modify the DoublyLinkedBase class to include a reverse method that re-
+# verses the order of the list, yet without creating or destroying any nodes.
+p = PositionalList()
+for i in range(5): p.add_last(i)
+print(p)
+p.reverse()
+print(p)
+
+
 # C-7.34
 #  Modify the PositionalList class to support a method swap(p, q) that causes
 # the underlying nodes referenced by positions p and q to be exchanged for
@@ -570,11 +580,41 @@ p.swap(position_1, position_2)
 print(p)
 
 
-# C-7.33
-# Modify the DoublyLinkedBase class to include a reverse method that re-
-# verses the order of the list, yet without creating or destroying any nodes.
+# C-7.37
+# Implement a function that accepts a PositionalList L of n integers sorted
+# in non-decreasing order, and another value V, and determines in O ( n ) time
+# if there are two elements of L that sum precisely to V. The function should
+# return a pair of positions of such elements, if found, or None otherwise.
+def sum_to_v(P, v):
+    """
+    O(n)
+    :param P: Positional list
+    :param v: value v
+    :return:
+    """
+    assert isinstance(P, PositionalList)
+    if not P.is_empty():
+        front = P.first()
+        back = P.last()
+        # odd number of node: front._next != back._prev
+        # even number of node: front._next != back
+        while P.after(front)._node != P.before(back)._node and P.after(front)._node != back._node:
+            w = front.element() + back.element()
+            if w > v:
+                back = P.before(back)
+            elif w < v:
+                front= P.after(front)
+            else:  # w = v
+                return front, back   # return position else return None
+    return None, None
+
+
 p = PositionalList()
-for i in range(5): p.add_last(i)
+a, b = 1, 5
+for _ in range(10): p.add_last(random.randint(a, b))
 print(p)
-p.reverse()
-print(p)
+insertion_sort(p); print(p)
+position_1, position_2 = sum_to_v(p, 9)
+print(position_1, position_2)
+if position_1 is not None:
+    print(position_1.element(), position_2.element())

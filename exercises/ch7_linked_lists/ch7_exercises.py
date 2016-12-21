@@ -618,3 +618,37 @@ position_1, position_2 = sum_to_v(p, 9)
 print(position_1, position_2)
 if position_1 is not None:
     print(position_1.element(), position_2.element())
+
+
+# C-7.38
+# There is a simple, but inefficient, algorithm, called bubble-sort, for sorting
+# a list L of n comparable elements. This algorithm scans the list n − 1 times,
+# where, in each scan, the algorithm compares the current element with the
+# next one and swaps them if they are out of order. Implement a bubble sort
+# function that takes a positional list L as a parameter. What is the running
+# time of this algorithm, assuming the positional list is implemented with a
+# doubly linked list?
+def bubble_sort(L):
+    """
+    o(n^2)
+    :param L: positional list
+    :return:
+    """
+    assert isinstance(L, PositionalList)
+    n = len(L) - 1
+    while n > 0:
+        n -= 1
+        cursor = L.first()
+        while cursor != L.last():
+            temp = cursor
+            cursor = L.after(temp)
+            if temp.element() > cursor.element():
+                L.swap(temp, cursor)
+
+
+
+p = PositionalList()
+a, b = 1, 100
+for _ in range(10): p.add_last(random.randint(a, b))
+print(p)
+bubble_sort(p); print(p)

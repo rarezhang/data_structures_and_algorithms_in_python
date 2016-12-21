@@ -317,6 +317,29 @@ class PositionalList(_DoublyLinkedBase):
             head = self.first()
             return self._find_recursion(head, element)
 
+    def swap(self, position_p, position_q):
+        """
+        exchange the underlying nodes referenced by positions p and q
+        :param position_p:
+        :param position_q:
+        :return:
+        """
+        node_p = self._validate(position_p)
+        node_q = self._validate(position_q)
+        predecessor = node_p._prev
+        successor = node_q._next
+        # original: predecessor node_p node_q successor
+        # new: predecessor node_q node_p successor
+        node_q._prev = predecessor
+        predecessor._next = node_q
+        node_p._prev = node_q
+        node_q._next = node_p
+        successor._prev = node_p
+        node_p._next = successor
+
+
+
+
 
 
 

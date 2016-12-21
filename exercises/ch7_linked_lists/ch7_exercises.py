@@ -555,3 +555,26 @@ p = fl.first()  # position
 fl.delete_after(p); print(fl)
 fl.add_after(p, 2); print(fl)
 for _ in range(4): fl.delete_first(); print(fl)
+
+
+# C-7.34
+#  Modify the PositionalList class to support a method swap(p, q) that causes
+# the underlying nodes referenced by positions p and q to be exchanged for
+# each other. Relink the existing nodes; do not create any new nodes.
+p = PositionalList()
+for i in range(5): p.add_first(i)
+print(p)
+position_1 = p.first()
+position_2 = p.after(p.first())
+p.swap(position_1, position_2)
+print(p)
+
+
+# C-7.33
+# Modify the DoublyLinkedBase class to include a reverse method that re-
+# verses the order of the list, yet without creating or destroying any nodes.
+p = PositionalList()
+for i in range(5): p.add_last(i)
+print(p)
+p.reverse()
+print(p)

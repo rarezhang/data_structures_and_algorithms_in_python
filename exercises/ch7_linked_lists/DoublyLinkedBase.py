@@ -76,6 +76,22 @@ class _DoublyLinkedBase:
         node._prev = node._next = node._element = None  # deprecate node
         return element
 
+    def reverse(self):
+        """
+        reverses the order of the list
+        :return:
+        """
+        if not self.is_empty():
+            new_head, new_tail = self._trailer, self._header
+            cursor = self._header
+            while cursor is not None:
+                temp = cursor
+                cursor = temp._next
+                temp._next = new_head
+                new_head._prev = temp
+                new_head = temp
+            self._header, self._trailer = new_head, new_tail
+
     def __iter__(self):
         """
         generate a forward iteration of the element in the doubly linked list

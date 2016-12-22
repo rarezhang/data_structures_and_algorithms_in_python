@@ -54,3 +54,34 @@ class BinaryTree(Tree):
             yield self.left(position)
         if self.right(position) is not None:
             yield self.right(position)
+
+    # override inherited version to make inorder the default
+    def positions(self):
+        """
+        generate an iteration of the tree's positions
+        :return:
+        """
+        return self.inorder()  # make inorder the default
+
+    def _subtree_inorder(self, position):
+        """
+        generate an inorder iteration of positions in subtree rooted at p
+        :param position:
+        :return:
+        """
+        if self.left(position) is not None:  # if left child exists, traverse its subtree
+            for other in self._subtree_inorder(self.left(position)):
+                yield other
+        yield position  # visit position between its subtrees
+        if self.right(position) is not None:  # if right child exists, traverse its subtree
+            for other in self._subtree_inorder(self.right(position)):
+                yield other
+
+    def inorder(self):
+        """
+        generate an inorder iteration of positions in the ree
+        :return:
+        """
+        if not self.is_empty():
+            for p in self._subtree_inorder(self.root()):
+                yield p

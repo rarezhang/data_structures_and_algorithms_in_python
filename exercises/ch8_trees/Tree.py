@@ -1,6 +1,7 @@
 """
 Abstract base Tree class
 """
+from LinkedQueue import LinkedQueue
 
 
 class Tree:
@@ -131,3 +132,76 @@ class Tree:
         if position is None:
             position = self.root()
         return self._height(position)
+
+    def __iter__(self):
+        """
+        generate an iteration of the tree's elements
+        :return:
+        """
+        for p in self.positions():  # use same order as positions
+            yield p.element()  # yield each element
+
+    def positions(self):
+        """
+        generate an iteration of the tree's positions
+        :return:
+        """
+        return self.preorder()  # return entire pre-order iteration
+
+    # ----------------- pre-order traversal --------------------------------
+    def _subtree_preorder(self, position):
+        """
+        helper function for preorder
+        generate a pre-order iteration of positions in subtree rooted at position
+        :param position:
+        :return:
+        """
+        yield position  # visit p before its subtrees
+        for c in self.children(position):  # for each child
+            for other in self._subtree_preorder(c):  # do preorder of child's subtree
+                yield other
+
+    def preorder(self):
+        """
+        generate a preorder iteration fo positions in the tree
+        :return:
+        """
+        if not self.is_empty():
+            for p in self._subtree_preorder(self.root()):  # start recursion
+                yield p
+
+    # ----------------- post-order traversal --------------------------------
+    def _subtree_postorder(self, position):
+        """
+        generate a postorder iteration of positions in subtree rooted at position
+        :param position:
+        :return:
+        """
+        for c in self.children(position):  # for each child c
+            for other in self._subtree_postorder(c):  # postorder of child's subtree
+                yield other  # yielding each to our caller
+            yield position  # visit p after its subtrees
+
+    def posordre(self):
+        """
+        generate a postorder iteration of positions in the tree
+        :return:
+        """
+        if not self.is_empty():
+            for p in self._subtree_postorder(self.root()):  # start recursion
+                yield p
+
+    def breadthfirst(self):
+        """
+        generate a breadth-first iteration of the positions of the tree
+        :return:
+        """
+        if not self.is_empty():
+            fringe = LinkedQueue()  # known positions not yet yielded
+            fringe.enqueue(self.root())  # starting with the root
+            while not fringe.is_empty():
+                p = fringe.dequeue()  # remove from front of the queue
+                yield p  # report this position
+                for c in self.children(p):
+                    fringe.enqueue(c)  # add children to back of queue
+

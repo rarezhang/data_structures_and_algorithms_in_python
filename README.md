@@ -167,7 +167,7 @@ P 292
     
     
 ### general trees
-p 322  
+P 322  
 - nonlinear data structures: much faster than using linear data structures  
     * relationship in a tree: hierarchical  
     * parent, child, ancestor, descendant  
@@ -229,10 +229,50 @@ p 322
 
 
 ### linked structure for binary tree
-    * element | position | children | parent  
-    * position==root -> parent = None  
-    * no child -> left child / right child = None  
-    
-    
-    
+- element | position | children | parent  
+- `if` position==root `then` parent = None  
+- `if` no child `then` left child / right child = None  
 
+
+### linked structure for general tree  
+P 349  
+have each node store a single container of references to its children
+    
+    
+### array based representations of binary tree
+P 347  
+- level numbering of the position in a binary tree: `f(p)`  
+    * level numbering is based on potential position within the tree, not actural position of tree
+    * `if` p is the root of T, `then` f(p) = 0   
+    * `if` p is the left child of position q, `then` f(p)=2f(q)+1  
+    * `if` p is the right child of position q, `then` f(p)=2f(q)+2  
+- space usage: depends on the shape of the tree  
+    * number of nodes: n
+    * maxium value of f(p): fm
+    * required array length: N = 1 + fm
+    * worst case: N = 2^n - 1
+- advantage:  
+    * a position p can be reprensented by the single integer f(p)  
+    * position based methods (root, parent, left, right) can be implemented using simple arithmetic operation on the number f(p)  
+        + left child of p: 2f(p)+1  
+        + right child of p: 2f(p)+2  
+        + parent of p: floor[(f(p)−1)/2]  
+- disadvantage:  
+    * update operation are not efficient  
+        + delete / promoting child: O(n)  
+        
+
+### tree traversal
+P 350  P 352  P 354  
+a systematic way of accessing or visiting all the positions of T  
+    - preorder traversal: the root of T is visited first; the sub-trees rooted at its children are traversed recursively  
+    - postorder traversal: recursively traverses the subtrees rooted at the children of the root first; then visit the root  
+    - breadth-first travrsal: visit all the positions at depth d before visit the positions at depth d+1  
+    - inorder traversal (for binary tree): visit a position between the recursive traversals of its left and rigth subtrees (for every posiition p, visit p after all the position in the left subtree; before all the positions in the right subtree)  
+        * binary search tree (application of the inorder traversal)
+            + running time: proportional to the height (most efﬁcient when they have small height)  
+            + position p stores an element e(p)  
+            + elements stored in the left subtree of p are less than e(p)  
+            + elements stored in the right subtree of p are greater than e(p)  
+            
+    

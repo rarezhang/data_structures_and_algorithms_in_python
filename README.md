@@ -264,15 +264,15 @@ P 347
 
 ### tree traversal
 P 350  P 352  P 354  
-a systematic way of accessing or visiting all the positions of T  
-    - preorder traversal: the root of T is visited first; the sub-trees rooted at its children are traversed recursively  
-    - postorder traversal: recursively traverses the subtrees rooted at the children of the root first; then visit the root  
-    - breadth-first travrsal: visit all the positions at depth d before visit the positions at depth d+1  
-    - inorder traversal (for binary tree): visit a position between the recursive traversals of its left and rigth subtrees (for every posiition p, visit p after all the position in the left subtree; before all the positions in the right subtree)  
-        * binary search tree (application of the inorder traversal)
-            + running time: proportional to the height (most efﬁcient when they have small height)  
-            + position p stores an element e(p)  
-            + elements stored in the left subtree of p are less than e(p)  
-            + elements stored in the right subtree of p are greater than e(p)  
+- a systematic way of accessing or visiting all the positions of T  
+- preorder traversal: the root of T is visited first; the sub-trees rooted at its children are traversed recursively  
+- postorder traversal: recursively traverses the subtrees rooted at the children of the root first; then visit the root  
+- breadth-first travrsal: visit all the positions at depth d before visit the positions at depth d+1  
+- inorder traversal (for binary tree): visit a position between the recursive traversals of its left and rigth subtrees (for every posiition p, visit p after all the position in the left subtree; before all the positions in the right subtree)  
+    * binary search tree (application of the inorder traversal)
+        + running time: proportional to the height (most efﬁcient when they have small height)  
+        + position p stores an element e(p)  
+        + elements stored in the left subtree of p are less than e(p)  
+        + elements stored in the right subtree of p are greater than e(p)  
             
     

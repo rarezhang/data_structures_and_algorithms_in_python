@@ -152,7 +152,7 @@ class ParenthesizeTour(EulerTour):
 
 tour = ParenthesizeTour(T)
 tour.execute()
-
+print()
 
 class DiskSpaceTour(EulerTour):
     def _hook_postvisit(self, p, d, path, results):
@@ -182,3 +182,120 @@ class BinaryLayout(BinaryEulerTour):
         self._count += 1  # advance count of processed nodes
 
 bl = BinaryLayout(T)
+
+
+# P 371
+class ExpressionTree(LinkedBinaryTree):
+    """
+    an arithmetic expression tree
+    """
+    def __init__(self, token, left=None, right=None):
+        """
+        create an expression tree
+
+        in a single parameter form, token should be a leaf value (e.g., '42')
+        and the expression tree will have that value at an isolated node
+
+        in a three-parameter version, token should be an operator
+        and left and right should be existing ExpressionTree instances that
+        become the operands for the binary operator
+
+        :param token:
+        :param left:
+        :param right:
+        """
+        super().__init__()  # LinkedBinaryTree initialization
+        if not isinstance(token, str):
+            raise TypeError('Token must be a string')
+        self._add_root(token)   # use inherited, nonpublic method
+        if left is not None:   # presumably three-parameter form
+            if token not in '+-*x/':
+                raise ValueError('token must be valid operator')
+            self._attach(self.root(), left, right)  # use inherited, nonpublic method
+
+    def __str__(self):
+        """
+        return string re-presentation of the expression
+        :return:
+        """
+        pieces = []  # sequence of piecewise strings to compose
+        self._parenthesize_recur(self.root(), pieces)
+        return ''.join(pieces)
+
+    def _parenthesize_recur(self, p, result):
+        """
+        append piecewise representation of p's subtree to resulting list
+        :param p:
+        :param result:
+        :return:
+        """
+        if self.is_leaf(p):
+            result.append(str(p.element()))  # leaf value as a string
+        else:
+            result.append('(')  # opening parenthesis
+            self._parenthesize_recur(self.left(p), result)  # left subtree
+            result.append(p.element())  # operator
+            self._parenthesize_recur(self.right(p), result)  # right subtree
+            result.append(')')  # closing parenthesis
+
+    def evaluate(self):
+        """
+        return the numeric result of the expression
+        :return:
+        """
+        return self._evaluate_recur(self.root())
+
+    def _evaluate_recur(self, p):
+        """
+        return the numeric result of subtree rooted at p
+        :param p:
+        :return:
+        """
+        if self.is_leaf(p):
+            return float(p.element())  # assume element is numeric
+        else:
+            op = p.element()
+            left_val = self._evaluate_recur(self.left(p))
+            right_val = self._evaluate_recur(self.right(p))
+            if op == '+': return left_val + right_val
+            elif op == '-': return left_val - right_val
+            elif op == '/': return left_val / right_val
+            else: return left_val * right_val  # treat x or * as multiplication
+
+
+t1 = ExpressionTree(token='1')
+t2 = ExpressionTree(token='2')
+t3 = ExpressionTree(token='+', left=t1, right=t2)
+print(t3, t3.evaluate())
+t4 = ExpressionTree(token='4')
+t5 = ExpressionTree(token='5')
+t6 = ExpressionTree(token='-', left=t4, right=t5)
+print(t6, t6.evaluate())
+t = ExpressionTree(token='*', left=t3, right=t6)
+print(t, t.evaluate())
+
+
+# P 373
+def build_expression_tree(tokens):
+    """
+    returns an ExpressionTree based upon by a tokenized expression
+    :param tokens:
+    :return:
+    """
+    S = []  # use Python list as stack
+    for t in tokens:
+        if t in '+-*/x':  # t is an operator symbol
+            S.append(t)  # push the operator symbol
+        elif t not in '()':  # consider t to be a literal
+            S.append(ExpressionTree(t))  # push trivial tree storing value
+        elif t == ')':  # compose a new tree from three constituent parts
+            right = S.pop()  # right subtree as per LIFO
+            op = S.pop()  # operator symbol
+            left = S.pop()  # left subtree
+            S.append(ExpressionTree(op, left, right))  # re-push tree
+        # ignore a left parenthesis
+    return S.pop()
+
+s = '(((3+1)*4)/((9-5)+2))'  # string
+t = build_expression_tree(s)  # return a tree
+print(t, t.evaluate())

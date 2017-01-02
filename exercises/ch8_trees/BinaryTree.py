@@ -4,10 +4,12 @@ Abstract base Binary Tree class
 
 from Tree import Tree
 
+
 class BinaryTree(Tree):
     """
     abstract base class representing a binary tree structure
     """
+
     # -------------------- additional abstract methods ----------------------
     def left(self, position):
         """

@@ -30,7 +30,7 @@ class LinkedBinaryTree(BinaryTree):
             self._left = left
             self._right = right
 
-    class Position(BinaryTree.Positioin):
+    class Position(BinaryTree.Position):
         """
         an abstraction representing the location of a single element
         """

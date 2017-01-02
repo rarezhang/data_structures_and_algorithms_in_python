@@ -203,11 +203,11 @@ P 322
            + height(T) == max(depth(leaf))
            
 ### recursive binary tree  
-    * either empty  
-    * or consists of  
-        + a ndoe __r__ , the root of T, stores an element  
-        + a binary tree, the left subtree of T  
-        + a binary tree, the right subtree of T  
+* either empty  
+* or consists of  
+    + a ndoe __r__ , the root of T, stores an element  
+    + a binary tree, the left subtree of T  
+    + a binary tree, the right subtree of T  
 
 
 ### binary trees  

@@ -14,6 +14,12 @@ https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/11182902
     * potential __space savings__ in memory  
 - read more: http://stackoverflow.com/questions/472000/usage-of-slots  
 
+
+### template method pattern  
+P 364  
+- describe a generic computation mechanism that can be specialized for a particular application by redefining certain steps  
+
+
 ### copy
 P 210  
 - shallow copy: new list, it references the same elements as in the first list
@@ -274,5 +280,11 @@ P 350  P 352  P 354
         + position p stores an element e(p)  
         + elements stored in the left subtree of p are less than e(p)  
         + elements stored in the right subtree of p are greater than e(p)  
+- euler tour traversal: walk around T  
+    * start by going from the root toward its leftmost child, viewing the edges of T as being walks that we always keep to our left  
+    * O(n): progresses exactly two times along each of the n-1 edges of the tree  
+    * pre visit: when first reaching the position, that is, when the walk passes immediately left of the node in our visualization  
+    * post visit: when the walk later proceeds upward from that position, that is, when the walk passes to the right of the node  
+    
             
     

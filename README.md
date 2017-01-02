@@ -199,7 +199,7 @@ P 322
            + a path of __T__ is a sequence of nodes such that any two consecutive nodes in the sequence form an edge  
     * ordered trees  
         there is a meaningful linear order among the children of each node  (e.g., arranging siblings left to right, according to their order)  
-    * depth of a postion (p): the number of ancestors of p, excluding p itself  
+    * depth of a position (p): the number of ancestors of p, excluding p itself  
            + if p is root, depth = 0  
            + o.w. depth of p = 1 + depth of p's parent  
     * height of a position (p): 

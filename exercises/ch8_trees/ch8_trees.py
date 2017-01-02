@@ -2,7 +2,7 @@
 ch8 trees
 """
 from LinkedBinaryTree import LinkedBinaryTree
-
+from EulerTour import EulerTour
 
 # applications of tree traversals
 # create a tree
@@ -98,3 +98,70 @@ def parenthesize(T, position):
 
 parenthesize(T, T.root())
 # Electronics RUs (R&D, Sales (Domestic, International (Canada, America)))
+
+
+# P 362
+# disk space: postorder traversal
+# children returns information to the parent
+# Recursive computation of disk space for a tree. We assume
+# that a space() method of each tree element reports the local space used at that
+# position.
+def disk_space(T, p):
+    """
+    return total disk space for subtree of T rooted at p
+    :param T:
+    :param p:
+    :return:
+    """
+    subtotal = p.element().space()  # space used at position p
+    for c in T.children(p):
+        subtotal += disk_space(T, c)  # add child's space to subtotal
+    return subtotal
+
+
+# P 366 - P 367
+# using the Euler tour Framework
+class PreorderPrintIndentedTour(EulerTour):
+    def _hook_previsit(self, p, d, path):
+        print(2*d*' '+str(p.element))
+
+tour = PreorderPrintIndentedTour(T)
+tour.execute()
+
+
+class PreorderPrintIndentedLabeledTour(EulerTour):
+    def _hook_previsit(self, p, d, path):
+        label = '.'.join(str(j+1) for j in path)  # labels are one-indexed
+        print(2*d*' ' + label, p.element())
+
+tour = PreorderPrintIndentedLabeledTour(T)
+tour.execute()
+
+
+class ParenthesizeTour(EulerTour):
+    def _hook_previsit(self, p, d, path):
+        if path and path[-1] > 0:  # p follows a sibling
+            print(', ', end='')  # so preface with comma
+        print(p.element(), end='')  # then print element
+        if not self.tree().is_leaf(p):  # if p has children
+            print(' (', end='')  # print opening parenthesis
+
+    def _hook_postvisit(self, p, d, path, results):
+        if not self.tree().is_leaf(p):  # if p has children
+            print(')', end='')
+
+tour = ParenthesizeTour(T)
+tour.execute()
+
+
+class DiskSpaceTour(EulerTour):
+    def _hook_postvisit(self, p, d, path, results):
+        """
+        simply add space associated with p to that of its subtrees
+        :param p:
+        :param d:
+        :param path:
+        :param results:
+        :return:
+        """
+        return p.element().space() + sum(results)

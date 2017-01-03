@@ -2,6 +2,8 @@
 ch8 exercises
 """
 
+from BinaryTree import BinaryTree
+
 # R-8.1
 # The following questions refer to the tree of Figure 8.3.
 # Figure 8.3: P 324
@@ -33,3 +35,46 @@ ch8 exercises
 # h. What is the height of the tree?
 # height(T) == max(depth(leaf))
 # height of the tree: 4
+
+
+# R-8.5
+# Describe an algorithm, relying only on the BinaryTree operations, that
+# counts the number of leaves in a binary tree that are the left child of their
+# respective parent.
+def count_left_child(T):
+    """
+    relying only on the BinaryTree operations
+    :param T: binary tree
+    :return:
+    """
+    assert isinstance(T, BinaryTree)
+    count = 0
+    pos = T.positions()  # generate an iteration of the tree's positions
+    for p in pos:
+        if p.left() is not None:
+            # return a Position representing p's left child
+            # return None if p does not have left child
+            count += 1
+    return count
+
+# R-8.6
+# Let T be an n-node binary tree that may be improper. Describe how to
+# represent T by means of a proper binary tree T' with O(n) nodes.
+
+# proper binary tree (full binary tree): each node has either zero or two children
+# R-8.6) Consider using dummy nodes.
+def proper_tree(T):
+    """
+
+    :param T:
+    :return:
+    """
+    def add_dummy(position):
+        pass
+
+    assert isinstance(T, BinaryTree)
+    pos = T.positions()  # generate an iteration of the tree's positions
+    for p in pos:
+        if (p.left() is not None) and (p.right() is None):
+            add_dummy(p)  # add a dummy node as the right child
+            

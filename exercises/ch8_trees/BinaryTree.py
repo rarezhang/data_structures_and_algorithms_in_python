@@ -81,7 +81,7 @@ class BinaryTree(Tree):
 
     def inorder(self):
         """
-        generate an inorder iteration of positions in the ree
+        generate an inorder iteration of positions in the tree
         :return:
         """
         if not self.is_empty():

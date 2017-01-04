@@ -325,3 +325,13 @@ Question 7. Assuming each node in a BST takes 20 bytes of storage, how much memo
 Answer:  A perfect binary tree of height 3 has 23+1 – 1 = 15 nodes. Therefore it requires 300 bytes to store the tree. If the tree is full of height 3 and minimum number of nodes, the tree will have 7 nodes. So we need 140 bytes to store the tree.  
 
      
+### priority queue
+P 385 P 386
+- a collection of prioritized elements that allows:
+    * arbitrary element insertion
+    * the removal of the element that has first priority
+- key
+    * model an element and its priority as a key-value pair
+    * when an element is added to a priority queue, user designates its priority by providing an associated key
+    * element with the __minimum__ key will be the next to be removed from the queue (element with key 1 will be given priority over an element with key 2)
+     

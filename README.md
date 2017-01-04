@@ -286,5 +286,42 @@ P 350  P 352  P 354
     * pre visit: when first reaching the position, that is, when the walk passes immediately left of the node in our visualization  
     * post visit: when the walk later proceeds upward from that position, that is, when the walk passes to the right of the node  
     
-            
-    
+### binary tree review  
+T: a nonempty binary tree  
+n: number of nodes  
+nE: number of external nodes  
+nI: number of internal nodes  
+h: height of T  
+T has following properties  
+1. h + 1 ≤ n ≤ 2^(h + 1) − 1  
+2. 1 ≤ nE ≤ 2^h  
+3. h ≤ nI ≤ 2^h − 1  
+4. log(n+1)− 1 ≤ h ≤ n − 1  
+Also,if T is proper,then T has the following properties:  
+1. 2h + 1 ≤ n ≤ 2^(h+1) − 1  
+2. h + 1 ≤ nE ≤ 2^h  
+3. h ≤ nI ≤ 2^h − 1  
+4. log(n+1)− 1 ≤ h ≤ ( n − 1 )/ 2  
+  
+Question 1. What is the maximum height of a binary tree with n nodes?  
+Answer:  n-1  
+  
+Question 2. What is the minimum height of a binary tree with n nodes?  
+Answer:  floor(log2(n))  
+  
+Question 3.  Consider a tree in which each node contains a maximum of 4 children (a quad tree). What is the minimum height of a quad tree that contains 21 nodes, what is the maximum height of a quad tree that contains 21 nodes?  
+Answer:  The max number of nodes in level k is 4^k. Therefore we will have 1 + 4 + 16 + 64 + … total nodes in a tree.  So the min height is 2 and max height is 20  
+  
+Question 4. What is the maximum number of external nodes (or leaves) for a binary tree with height H?  
+Answer:  2^H  
+  
+Question 5. What is the maximum number of internal nodes (or leaves) for a binary tree with height H?  
+Answer:  2^H - 1  
+  
+Question 6. Discuss advantages of using hash tables versus binary search trees  
+Answer:  hash tables are great for applications that require quick search and updates, but do not require any order information. A “balanced” BST can maintains fairly quick search capability (log n) and order information  
+  
+Question 7. Assuming each node in a BST takes 20 bytes of storage, how much memory is necessary to store a “perfect” binary tree of height 3? What is the amount of memory necessary if the tree is a “Full” tree of height 3 with minimal number of nodes?  
+Answer:  A perfect binary tree of height 3 has 23+1 – 1 = 15 nodes. Therefore it requires 300 bytes to store the tree. If the tree is full of height 3 and minimum number of nodes, the tree will have 7 nodes. So we need 140 bytes to store the tree.  
+
+     

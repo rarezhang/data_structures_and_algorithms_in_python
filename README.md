@@ -101,7 +101,7 @@ P 261
 - fundamental operations: enqueue & dequeue
 
 
-### double ended queues (deque)
+### double ended queues (deque)  
 P 269
 - supports insertion and deletion at both the front and the back of the queue
 - fundamental operations: add_first, add_last, delete_first & delete_last
@@ -326,12 +326,29 @@ Answer:  A perfect binary tree of height 3 has 23+1 – 1 = 15 nodes. Therefore 
 
      
 ### priority queue
-P 385 P 386
-- a collection of prioritized elements that allows:
-    * arbitrary element insertion
-    * the removal of the element that has first priority
-- key
-    * model an element and its priority as a key-value pair
-    * when an element is added to a priority queue, user designates its priority by providing an associated key
-    * element with the __minimum__ key will be the next to be removed from the queue (element with key 1 will be given priority over an element with key 2)
-     
+P 385 P 386   
+- a collection of prioritized elements that allows:  
+    * arbitrary element insertion  
+    * the removal of the element that has first priority  
+- key  
+    * model an element and its priority as a key-value pair  
+    * when an element is added to a priority queue, user designates its priority by providing an associated key  
+    * element with the __minimum__ key will be the next to be removed from the queue (element with key 1 will be given priority over an element with key 2)  
+    
+    
+### binary heap
+P 392  
+- a binary tree T: stores a collection of items at its positions and that satisfies:
+    * a relational property defined in terms of the way keys are stored in T  
+        + __heap order property__ : in a heap T, for every position p other than the root, the key sorted at p is greater than or equal to the key stored at p's parent  
+        + minimum key is stored at the root of T  
+        + keys on a path from the root to a leat are in nondecreasing order  
+    * a structureal property defined in terms of the shape of T  
+        + __complete binary tree property__ : leves i has 2^i (0 ≤ i ≤ h−1) nodes; remaining nodes at level h reside in the left most possible positions  
+        + have as small a height as possible  
+- height of a heap  
+    * h: the height of T  
+    * a heap T storing n entries has height `h = floor[log(n)]`  
+    * implies: update operations on a heap ~ the height of T ~ O(log(n))  
+- use the structure of a binary tree to find a compromise between elements being entirely unsorted and perfectly sorted  
+- can perform both insertions and removals on __priority queue__ in logarithmic time  

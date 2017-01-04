@@ -68,4 +68,3 @@ class UnsortedPriorityQueue(PriorityQueueBase):
         item = self._data.delete(p)
         return (item._key, item._value)
 
-    

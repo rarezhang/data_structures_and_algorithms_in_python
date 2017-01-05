@@ -41,6 +41,9 @@ def pq_sort(C):
     assert isinstance(C, PositionalList)
     n = len(C)
     P = HeapPriorityQueue()  # could be any PriorityQueue
+    # HeapPriorityQueue: O(nlogn) or O(n)[bottom-up heap construction]
+    # UnsortedPriorityQueue: O(n^2) selection-sort
+    # sortedPriorityQueue: O(n^2) insertion-sort
     for j in range(n):
         element = C.delete(C.first())
         P.add(element, element)  # use element as key and value

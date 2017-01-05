@@ -103,12 +103,34 @@ class HeapPriorityQueue(PriorityQueueBase):
                 self._swap(j, small_child)
                 self._downheap(small_child)  # recursion at position of small child
 
+    def _heapify(self):
+        """
+        bottom up heap construction
+        :return:
+        """
+        start = self._parent(len(self)-1)  # start at parent of last leaf
+        for j in range(start, -1, -1):  # going to and including the root
+            self._downheap(j)
+
     # -------------------- public methods ------------------------------------
-    def __init__(self):
+
+    # def __init__(self):
+    #     """
+    #     create a new empty Priority Queue
+    #     """
+    #     self._data = []
+
+    def __init__(self, contents=()):
         """
-        create a new empty Priority Queue
+        create a new priority queue
+        by default queue will be empty, if contents is given, it should be as an iterable sequence of (k,v)
+        pairs specifying the initial contents.
+        :param contents:
         """
-        self._data = []
+        self._data = [self._Item(k, v) for k,v in contents]
+        if len(self._data) > 1:
+            self._heapify()
+
 
     def __len__(self):
         """

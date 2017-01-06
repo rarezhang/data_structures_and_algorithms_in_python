@@ -352,3 +352,12 @@ P 392
     * implies: update operations on a heap ~ the height of T ~ O(log(n))  
 - use the structure of a binary tree to find a compromise between elements being entirely unsorted and perfectly sorted  
 - can perform both insertions and removals on __priority queue__ in logarithmic time  
+
+
+### maps: associative arrays  
+P 424  
+- a search for a key and its associated value can be performed efficiently  
+- keys  
+    * unique  
+- values  
+    * not necessarily unique  

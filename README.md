@@ -357,7 +357,37 @@ P 392
 ### maps: associative arrays  
 P 424  
 - a search for a key and its associated value can be performed efficiently  
-- keys  
-    * unique  
-- values  
-    * not necessarily unique  
+- keys: unique  
+- values: not necessarily unique  
+
+### hash tables  
+P 432  P 433  P 438  
+- supports the abstraction of using __keys as indices__ with a syntax: M[k]  
+- hash function: 
+    * goal: map each key k to an integer in the range [0, N-1], N is the capacity of the bucket array A for a hash table  
+    * use the hash function value `h(k)` as an index into our bucket array  
+    * item (k,v) store in the bucket A[h(k)]  
+    * bucket array: 
+        + ideally: keys will be distributed in the range from 0 to N-1 by a hash function  
+        + practically: may be two or more distinct keys get mapped to the same index  
+    * collision: two different items be mapped to the same bucket in A -> avoid  
+    * collision-handling:
+        + separate chaining: have each bucket A[j] store its own secondary container  
+        + open addressing: linear probing  
+    * hash function = hash code + compression function  
+        + hash code for key: independent of a specific hash table size (can be used for a hash table of any size)； need not be in the range [0, N-1]  
+        + polynomial hash code: Xn-1 + a ( Xn−2 + a ( Xn−3 + ···+ a ( X2 + a ( X1 + a X0 ))···)); choice of a for English words: 33,37,39 and 41  
+        + cyclic-shift hash code: take the leftmost x bits and placing those on the rightmost side of the representation; bitwise operators << and >>  
+        + python: hash() -> return the hash value(integers) of the object; only immutable data type  
+        + compression function: mapping the hash code into the range [0, N-1]; minimize the number of collisions for a given set of distinct hash codes  
+        + division method: maps an integer i to (i mod N); N: prime->not engouth  
+        + MAD method (Multiply-Add-and-Divide): maps an integer i to [(ai+b) mod p] mod N  
+        
+        
+        
+    
+    
+    
+
+
+

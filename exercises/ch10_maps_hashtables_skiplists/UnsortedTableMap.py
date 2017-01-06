@@ -70,6 +70,6 @@ class UnsortedTableMap(MapBase):
         :return:
         """
         for item in self._table:
-            yield item._key  # yield the KEY 
+            yield item._key  # yield the KEY
 
 

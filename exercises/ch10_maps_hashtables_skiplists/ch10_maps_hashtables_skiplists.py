@@ -32,3 +32,24 @@ def word_count(file_path):
 
 path = '..\\..\\README.md'
 # word_count(path)
+
+
+# P 436
+# cyclic-shift hash code computation for character string
+def hash_code(s):
+    """
+    cyclic-shift hash code computation for character string
+    :param s: string
+    :return:
+    """
+    mask = (1 << 32) - 1  # limit to 32-bit integers
+    h = 0
+    for character in s:
+        h = (h << 5 & mask) | (h >> 27)  # 5-bit cyclic shift of running sum
+        h += ord(character)  # add in value of next character
+    return h
+
+s = 'apple'
+print(hash_code(s))
+print(hash(s))  # python built in hash function, return the hash value of the object
+print(hash(5), hash(5.0))

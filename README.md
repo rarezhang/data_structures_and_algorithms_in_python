@@ -401,16 +401,16 @@ P 459
 
     
         
-### set
+### set & multiset (bag) & multimap 
 - unordered collection of elements with duplicates  
 - supports efficient membership tests  
 - like keys of a map without any auxiliary values  
+- any data structure used to implement a map can be modified to implement the set with similar performance guarantees  
     
-    
-### multiset (bag)
+### 
 - a set like container that allows duplicates  
 
-### multimap 
+### 
 - associates values with keys  
 - same key can be mapped to multiple values  
 

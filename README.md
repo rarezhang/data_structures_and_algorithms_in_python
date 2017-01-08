@@ -385,7 +385,21 @@ P 432  P 433  P 438
         + MAD method (Multiply-Add-and-Divide): maps an integer i to [(ai+b) mod p] mod N  
         
         
-        
+### skip list  
+P 459  
+- provie a clever compromise to efficiently support search and update operations  
+    * skip list for a map: a series of lists {S0, S1, ... Sh}  
+    * Si: a subset of the itmes of M (sorted by increaing keys)  
+    * Si contains a randomly generated subset of the items in list Si-1; Si has n/2^i itmes  
+    * two sentinel keys: −∞ and +∞  
+    * h: the height of skip list S = log(n)  
+- two dimensional collection of positions arranged horizontally into __levels__ and vertically into __towers__  
+    * level: Si  
+    * tower: contains positions storing the same item across consecutive lists  
+- a collection of __h__ doubly linked lists aligned at towers, which are also doubly llinked lists  
+- search and update: O(log(n)) on average  
+
+    
         
     
     

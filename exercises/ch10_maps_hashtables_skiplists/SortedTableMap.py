@@ -177,4 +177,3 @@ class SortedTableMap(MapBase):
             yield (self._table[j]._key, self._table[j]._value)
             j += 1
 
-            

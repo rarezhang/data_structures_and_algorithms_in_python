@@ -371,9 +371,10 @@ P 432  P 433  P 438
         + ideally: keys will be distributed in the range from 0 to N-1 by a hash function  
         + practically: may be two or more distinct keys get mapped to the same index  
     * collision: two different items be mapped to the same bucket in A -> avoid  
-    * collision-handling:
+    * collision-handling:  
         + separate chaining: have each bucket A[j] store its own secondary container  
-        + open addressing: linear probing  
+        + open addressing: linear probing; quadratic probing  
+        + double hashing: choose a secondary hash function  
     * hash function = hash code + compression function  
         + hash code for key: independent of a specific hash table size (can be used for a hash table of any size)； need not be in the range [0, N-1]  
         + polynomial hash code: Xn-1 + a ( Xn−2 + a ( Xn−3 + ···+ a ( X2 + a ( X1 + a X0 ))···)); choice of a for English words: 33,37,39 and 41  
@@ -382,6 +383,7 @@ P 432  P 433  P 438
         + compression function: mapping the hash code into the range [0, N-1]; minimize the number of collisions for a given set of distinct hash codes  
         + division method: maps an integer i to (i mod N); N: prime->not engouth  
         + MAD method (Multiply-Add-and-Divide): maps an integer i to [(ai+b) mod p] mod N  
+        
         
         
         

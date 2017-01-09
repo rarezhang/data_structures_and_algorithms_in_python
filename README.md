@@ -402,15 +402,25 @@ P 459
     
         
 ### set & multiset (bag) & multimap 
-- unordered collection of elements with duplicates  
-- supports efficient membership tests  
-- like keys of a map without any auxiliary values  
-- any data structure used to implement a map can be modified to implement the set with similar performance guarantees  
-    
-### 
-- a set like container that allows duplicates  
+* set  
+    - unordered collection of elements with duplicates  
+    - supports efficient membership tests  
+    - like keys of a map without any auxiliary values  
+    - any data structure used to implement a map can be modified to implement the set with similar performance guarantees  
+* multiset (bag)  
+    - a set like container that allows duplicates  
+* multimap  
+    - associates values with keys  
+    - same key can be mapped to multiple values  
 
-### 
-- associates values with keys  
-- same key can be mapped to multiple values  
+
+### binary search tree  
+P 482 P 483  
+- a binary tree T: with each position p storing a key-value pair (k,v):
+    * keys stored in the left subtree of p are less than k  
+    * keys stored in the right subtree of p are greater than k  
+- inorder traversal: visits positions in increasing order of their keys    
+   
+    
+    
 

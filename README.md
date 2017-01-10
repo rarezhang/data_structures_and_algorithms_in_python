@@ -419,8 +419,19 @@ P 482 P 483
 - a binary tree T: with each position p storing a key-value pair (k,v):
     * keys stored in the left subtree of p are less than k  
     * keys stored in the right subtree of p are greater than k  
-- inorder traversal: visits positions in increasing order of their keys    
+- inorder traversal: visits positions in increasing order of their keys  
+- binary search tree is an efficient implementation of a map with n entries only if its height is small    
    
+### balanced search trees
+P 497  
+- rotation: operation to rebalance a binary search tree (maintain the binary search tree property)  
+    * rotate a child to be above its parent  
+    * transform the left formation into the right; or the right formation into the left  
+- tri-node restructuring  
+    * consider a position x; its parent y; and grandparent z  
+    * restructure the subtree rooted at z in order to reduce the overall path length to x and its subtree
     
+    
+
     
 

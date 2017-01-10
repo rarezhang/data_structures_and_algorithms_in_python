@@ -4,7 +4,7 @@ TreeMap class based on a binary search tree
 
 import sys, os
 sys.path.append(os.path.abspath("D:\\Projects\\data_structures_and_algorithms_in_python\\exercises\\ch8_trees"))
-from LinkedBinryTree import LinkedBinaryTree
+from LinkedBinaryTree import LinkedBinaryTree
 sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch10_maps_hashtables_skiplists"))
 from MapBase import MapBase
 sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch7_linked_lists"))
@@ -267,4 +267,9 @@ class TreeMap(LinkedBinaryTree, MapBase):
                 return  # successful deletion complete
             self._rebalance_access(p)   # hook for balanced tree subclasses
         raise KeyError('Key Error: ' + repr(k))
-    
+
+    # -------------- template method --------------------
+    # a subclass of TreeMap may override these methods
+    def _rebalance_insert(self, p): pass
+    def _rebalance_delete(self, p): pass
+    def _rebalance_access(self, p): pass

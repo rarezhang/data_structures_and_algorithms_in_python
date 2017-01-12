@@ -421,6 +421,7 @@ P 482 P 483
     * keys stored in the right subtree of p are greater than k  
 - inorder traversal: visits positions in increasing order of their keys  
 - binary search tree is an efficient implementation of a map with n entries only if its height is small    
+
    
 ### balanced search trees
 P 497  
@@ -429,9 +430,21 @@ P 497
     * transform the left formation into the right; or the right formation into the left  
 - tri-node restructuring  
     * consider a position x; its parent y; and grandparent z  
-    * restructure the subtree rooted at z in order to reduce the overall path length to x and its subtree
+    * restructure the subtree rooted at z in order to reduce the overall path length to x and its subtree  
+        + 1: Let (a, b, c) be a left-to-right (inorder) listing of the positions x, y, and z, and let (T1 ,T2 ,T3 ,T4) be a left-to-right (inorder) listing of the four subtrees of x, y, and z not rooted at x, y, or z.  
+        + 2: Replace the subtree rooted at z with a new subtree rooted at b.  
+        + 3: Let a be the left child of b and let T1 and T2 be the left and right subtrees of a, respectively.  
+        + 4: Let c be the right child of b and let T3 and T4 be the left and right subtrees of c, respectively.  
     
     
+### AVL trees
+P 503  P 505  
+- balancing strategy: guaantees worst-case logarithmic running time for all fundamental map operations  
+- height balance property:  for every position p of T, the heights of the children of p differ by at most 1  
+- any binary search tree that satisfies the __height balance property__ is an AVL tree  
+- a subtree of an AVL tree is itself an AVL tree  
+- the height of an AVL tree soring n entries is `log(n)`  
+- a position is __balanced__ if the absolute value of the differnce between the heights of its children is at most 1  
+- AVL tree == every position is balanced  
 
-    
 

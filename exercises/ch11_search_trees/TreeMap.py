@@ -327,4 +327,4 @@ class TreeMap(LinkedBinaryTree, MapBase):
         else:  # double rotation of x
             self._rotate(x)
             self._rotate(x)
-            return x  # x is new subtree root 
+            return x  # x is new subtree root

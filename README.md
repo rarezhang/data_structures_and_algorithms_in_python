@@ -448,3 +448,10 @@ P 503  P 505
 - AVL tree == every position is balanced  
 
 
+### splay trees 
+P 512  
+- splaying: a move-to-root operation 
+    * guarantee the efficiency of splay trees  
+    * more frequently accessed elements to remain to the root  
+- 
+

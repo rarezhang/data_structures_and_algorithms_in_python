@@ -90,5 +90,5 @@ class AVLTreeMap(TreeMap):
     # --------------- override balancing hooks --------------------------------
     def _rebalance_insert(self, p): self._rebalance(p)
     def _rebalance_delete(self, p): self._rebalance(p)
-    
+
 

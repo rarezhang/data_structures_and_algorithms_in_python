@@ -453,5 +453,28 @@ P 512
 - splaying: a move-to-root operation 
     * guarantee the efficiency of splay trees  
     * more frequently accessed elements to remain to the root  
-- 
+
+    
+### (2,4) trees
+P 524  
+- multiway search tree: internal nodes may have more than two children  
+    * has at least two children  
+    * stores a collection of items of the form (k, x), where k is a key and x is an element  
+    * contains d-1 items, where d is the number of children  
+    * contains 2 pseudo-items: k0=−∞, kd=∞  
+    * Children of each internal node are “between” items  
+        + all keys in the subtree rooted at the child fall between keys of those items  
+    * external nodes are just placeholders  
+    
+    
+### red-black trees
+P 534  
+- a binary search tree: with nodes colored read and black  
+- use O(1) structural changes after an update in order to stay balanced  
+    * root property: root is black  
+    * red property: the children of a red node are black  
+    * depth property: all nodes with zero or one children have the same black depth (defines as the number of black ancestors)  
+- can construct a corresponding (2,4) tree by merging every red node into its parent  
+
+
 

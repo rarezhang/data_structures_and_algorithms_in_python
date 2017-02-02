@@ -81,6 +81,8 @@ class RedBlackTreeMap(TreeMap):
         return None
 
     # ----------------- support for insertions -----------------------
+    # insert x: if x is the only node -> root -> black; else color x red
+    # double red at node x: violate "red property" -> red property: the children of a red node are black
     def _rebalance_insert(self, p):
         """
 
@@ -98,4 +100,17 @@ class RedBlackTreeMap(TreeMap):
         if self.is_root(p):
             self._set_black(p)   # make root black
         else:
-            pass
+            parent = self.parent(p)
+            if self._is_red(parent):  # double red problem
+                uncle = self.sibling(parent)
+                if not self._is_red(uncle):  # case 1: misshapen 4 nodes
+                    middle = self._restructure(p)  # do tri-node restructuring
+                    self._set_black(middle)
+                    self._set_red(self.left(middle))
+                    self._set_red(self.right(middle))
+                else:   # overfull 5 nodes
+                    grand = self.parent(parent)
+                    self._set_red(grand)  # grandparent becomes red
+                    self._set_black(self.left(grand))
+                    self._set_black(self.right(grand))
+                    self._resolve_red(grand)

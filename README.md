@@ -8,6 +8,11 @@ https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/11182902
 
 # Reading notes  
 
+### sort VS sorted  
+P 559  
+- sort: list class -> rearrange the contents of list  
+- sorted fun; produces a new list containing the elements of an arbitrary collection in sorted order  
+
 ### Python special attribute: __slots__
 - allows you to explicityly state in your code which attributes you expect your object instance to have, with the expected results:
     * __faster__ attribute access  
@@ -71,6 +76,13 @@ P 200
 ### recursion tips
 replace a recursive algorithm by an iterative algorithm by pushing the parameters that would normally be passed to the recursive function onto a stack.  
 In fact, you are replacing the program stack by one of your own.  
+
+
+### recursion design pattern: divide-and-conquer  
+- divide: If the input size is smaller than a certain threshold (say, one or two elements), solve the problem directly using a straightforward method and return the solution so obtained. Otherwise, divide the input data into two or more disjoint subsets  
+- conquer: Recursively solve the subproblems associated with the subsets  
+- combine: Take the solutions to the subproblems and merge them into a so-
+lution to the original problem  
 
 
 ### Python sequence types  
@@ -475,6 +487,17 @@ P 534
     * red property: the children of a red node are black  
     * depth property: all nodes with zero or one children have the same black depth (defines as the number of black ancestors)  
 - can construct a corresponding (2,4) tree by merging every red node into its parent  
+
+
+### sorting algorithms  
+- insertion sort  
+- selection sort  
+- bubble sort  
+- heap sort  
+- merge sort  
+- quick sort  
+- bucket sort  
+- radix sort  
 
 
 

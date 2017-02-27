@@ -146,3 +146,48 @@ def merge_sort_bottom_up(S):
 l = [1,4,9,6,3,7,8]
 merge_sort_bottom_up(l)
 print(l)
+
+
+# quick sort
+# quick sort for a sequence S implemented as a queue
+# O(n**2) worst case; O(nlogn) average  
+# P 577
+def quick_sort(S):
+    """
+    sort the elements of queue S using the quick-sort algorithm
+    :param S:
+    :return:
+    """
+    n = len(S)
+    if n < 2:
+        return  # list is already sorted
+    # divide
+    pivot = S.first()  # using first as arbitrary pivot
+    L = LinkedQueue()
+    E = LinkedQueue()
+    G = LinkedQueue()
+    while not S.is_empty():  # divide S into L, E and G
+        if S.first() < pivot:
+            L.enqueue(S.dequeue())
+        elif S.first() > pivot:
+            G.enqueue(S.dequeue())
+        else:  # S.first() must equal pivot
+            E.enqueue(S.dequeue())
+    # conquer with recursion
+    quick_sort(L)  # sort elements less than pivot
+    quick_sort(G)  # sort elements greater than pivot
+    # concatenate results
+    while not L.is_empty():
+        S.enqueue(L.dequeue())
+    while not E.is_empty():
+        S.enqueue(E.dequeue())
+    while not G.is_empty():
+        S.enqueue(G.dequeue())
+
+l = [1,4,9,6,3,7,8]
+S = LinkedQueue()
+for x in l:
+    S.enqueue(x)
+print(S)
+quick_sort(S)
+print(S)

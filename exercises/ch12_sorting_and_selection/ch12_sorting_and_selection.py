@@ -150,7 +150,7 @@ print(l)
 
 # quick sort
 # quick sort for a sequence S implemented as a queue
-# O(n**2) worst case; O(nlogn) average  
+# O(n**2) worst case; O(nlogn) average
 # P 577
 def quick_sort(S):
     """
@@ -191,3 +191,49 @@ for x in l:
 print(S)
 quick_sort(S)
 print(S)
+
+
+# inplace quick sort
+# a sub-sequence of the input sequence is implicitly represented by a range of positions specified by a leftmost index A
+# and a right most index B
+# use the input sequence itself to store the sub-sequences for all the recursive calls
+# stack depth can be O(n-1), expected stack depth is O(logn)
+# -> design a non-recursive version of in-place quick-sort using an explicit stack to iteratively process sub-problem
+# P 581
+def inplace_quick_sort(S, a, b):
+    """
+    sort the list from S[a] to S[b] inclusive using the quick-sort algorithm
+    :param S:
+    :param a:
+    :param b:
+    :return:
+    """
+    if a >= b:
+        return  # range is trivially sorted
+    pivot = S[b]  # last element of range if pivot
+    left, right = a, b-1
+    while left <= right:
+        # scan until reaching value equal or larger than pivot (or right marker)
+        while left <= right and S[left]<pivot:
+            left += 1
+        # scan until reaching value equal or smaller than pivot (or left marker)
+        while left <= right and pivot < S[right]:
+            right -= 1
+        if left <= right:  # scans did not strictly cross
+            S[left], S[right] = S[right], S[left]  # swap values
+            left, right = left+1, right-1  # shrink range
+
+    # put pivot into its final place (currently marked by left index)
+    S[left], S[b] = S[b], S[left]
+    # make recursive calls
+    # There is no explicit “combine” step, because the
+    # concatenation of the two sublists is implicit to the in-place use of the original list
+    inplace_quick_sort(S, a, left-1)
+    inplace_quick_sort(S, left+1, b)
+
+l = [1,4,9,6,3,7,8]
+print(l)
+inplace_quick_sort(l, 0, len(l)-1)
+print(l)
+
+

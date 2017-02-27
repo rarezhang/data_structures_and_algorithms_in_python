@@ -85,6 +85,10 @@ In fact, you are replacing the program stack by one of your own.
 lution to the original problem  
 
 
+### in-place  
+P 581  
+- an algorithm is __in-place__ if it uses only a small amount of memory in addition to that needed for the original input.  
+
 ### Python sequence types  
 P 206  P 214 P 224  
 - list: dynamic array, allows to add elements to the list, with no apparent limit on the overall capacity of the list  
@@ -490,6 +494,7 @@ P 534
 
 
 ### sorting algorithms  
+[read the summary here](https://github.com/rarezhang/sorting_algorithms)
 - insertion sort  
 - selection sort  
 - bubble sort  

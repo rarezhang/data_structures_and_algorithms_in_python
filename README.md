@@ -495,14 +495,29 @@ P 534
 
 ### sorting algorithms  
 [read the summary here](https://github.com/rarezhang/sorting_algorithms)
-- insertion sort  
+- insertion sort: an excellent algorithm for sorting small sequences; quite effective for sorting sequences that are already almost sorted     
 - selection sort  
 - bubble sort  
-- heap sort  
-- merge sort  
-- quick sort  
-- bucket sort  
-- radix sort  
+- heap sort: inplace; natural choice on small and medium sized sequences; not stable      
+- merge sort: not inplace; excellent algorithm for situations where the input is stratiﬁed across various levels of the computer’s memory hierarchy
+    + Tim-sort: bottom-up merge sort (takes advantage of some initial runs in the data while using insertion-sort to build additional runs): python/Java(7)  
+- quick sort: inplace; C/Java(6) sorting algorithm  
+- bucket sort: excellent choice for sorting entries with small integer keys   
+- radix sort: excellent choice for sorting entries with small integer keys  
+
+P 584  
+- comparison-based sorting has an O(n*logn) worst-case lower bound  
+- can represent a comparison-based sorting algorithm with a decision tree  
+- the running time of a comparison-based sorting algorithm must be greater than or equal to the height of the decision tree  
+
+### stable sorting  
+P 587  
+- a sorting algorithm is stable if, for any two entries ( ki , vi ) and ( kj , vj ) of S such that ki = kj
+and ( ki , vi ) precedes ( kj , vj ) in S before sorting (that is, i < j), entry ( ki , vi ) also
+precedes entry ( kj , vj ) after sorting  
+- stability is important for a sorting algorithm
+because applications may want to preserve the initial order of elements with the same key  
+
 
 
 

@@ -5,6 +5,9 @@ sorting and selection
 import sys, os, math
 sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch7_linked_lists"))
 from LinkedQueue import LinkedQueue
+sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch9_priority_queues"))
+from PriorityQueueBase import PriorityQueueBase
+Item = PriorityQueueBase._Item
 
 # P 565
 # array based implementation of merge sort
@@ -237,3 +240,21 @@ inplace_quick_sort(l, 0, len(l)-1)
 print(l)
 
 
+# an implementing the decorate-sort-undecorate pattern based on the array-based mege-sort 
+# P 592
+def decorated_merge_sort(data, key=None):
+    """
+    demonstration of the decorate-sort-undecorate pattern 
+    """
+    if key is not None:
+        for j in range(len(data)):
+            data[j] = Item(key(data[j]), data[j])  # decorate each element
+    merge_sort(data)  # sort with existing algorithm 
+    if key is not None:
+        for j in range(len(data)):
+            data[j] = data[j]._value  # undecorate each element 
+            
+alist = ['yellow', 'blue', 'cyan', 'green', 'red']
+print(alist)
+decorated_merge_sort(alist, key=len)
+print(alist)

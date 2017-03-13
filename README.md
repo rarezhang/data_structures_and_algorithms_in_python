@@ -519,5 +519,28 @@ precedes entry ( kj , vj ) after sorting
 because applications may want to preserve the initial order of elements with the same key  
 
 
+### python's built-in sorting function
+- ```list.sort()```: in-place  
+- ```sorted(any iterable object)```: produce a new ordered object  
+- sorting according to a key function:  
+    + decorate-sort-undecorate design pattern  
+        * each element of the list is temporarily replaced with a "decorated" version that includes the result of the key function applied to the element  
+        * list is sorted based upon the natural order of the keys  
+        * decorated elements are replaced by the original elements  
+    + key function: one-parameter function (accepts an element as a parameter and returns a key)  
+        * e.g., len() -->  
+        ```
+        alist = ['yellow', 'blue', 'cyan', 'green', 'red']
+        alist.sort(key=len)
+        # ['red', 'blue', 'cyan', 'green', 'yellow']
+        ```
+    + reverse keyword parameter: can be set to True to cause the sort order to be from largest to smallest  
+        * reverse=True -->  
+        ```
+        alist = ['red', 'blue', 'cyan', 'green', 'yellow']
+        alist.sort(key=len, reverse=True)
+        # ['yellow', 'green', 'blue', 'cyan', 'red']
+        ```
+            
 
 

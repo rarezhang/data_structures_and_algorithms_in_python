@@ -541,6 +541,20 @@ because applications may want to preserve the initial order of elements with the
         alist.sort(key=len, reverse=True)
         # ['yellow', 'green', 'blue', 'cyan', 'red']
         ```
-            
+
+# brute force  
+P 604 P 606
+- when we have something we wish to search for or when we wish to optimize
+some function  
+- enumerate all possible configurations of the inputs involved and pick the best of all
+these enumerated conﬁgurations  
+     
+        
+### dynamic programming  
+P 604  
+- can be applied in certain settings to solve a problem in polynomial time that appears at first to require exponential time to solve  
 
 
+### greedy method  
+P 604  
+- allows us to approximate solutions to hard problems, gives rise to optimal algorithms  

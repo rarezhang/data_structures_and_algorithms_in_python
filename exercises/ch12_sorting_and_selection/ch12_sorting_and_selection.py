@@ -258,3 +258,31 @@ alist = ['yellow', 'blue', 'cyan', 'green', 'red']
 print(alist)
 decorated_merge_sort(alist, key=len)
 print(alist)
+
+
+# prune-and-search || decrease-and-conquer  
+# select first k (find median) --> O(n)  [if sort O(nlogn)]
+# randomized quick-select: O(n) expected time; O(n**2) worst case 
+# P 594 
+import random
+
+def quick_select(S, k):
+    """
+    return the kth smallest element of list S, for k from 1 to len(S)
+    """
+    if len(S) == 1:
+        return S[0]
+    pivot = random.choice(S)  # pick random pivot element from S
+    L = [x for x in S if x < pivot]  # elements less than pivot 
+    E = [x for x in S if x == pivot]  # elements equal to pivot
+    G = [x for x in S if x > pivot]  # elements greater than pivot
+    if k <= len(L):
+        return quick_select(L, k)  # kth smallest lies in L 
+    elif k <= len(L) + len(E):  # kth smallest equal to pivot 
+        return pivot
+    else:
+        j = k - len(L) - len(E)  # new k: new selection parameter j
+        return quick_select(G, j)  # kth smallest is is jth in G
+
+alist = [random.randint(1,10) for _ in range(10)]
+print([x for x in alist], 'median:', quick_select(alist, len(alist)//2))

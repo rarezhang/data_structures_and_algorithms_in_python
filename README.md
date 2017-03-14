@@ -557,9 +557,10 @@ P 604 P 616
 - components of a dynamic programming solution:  
     + Simple Subproblems: There has to be some way of repeatedly breaking the global optimization problem into subproblems. Moreover, there should be a way to parameterize subproblems with just a few indices, like i, j, k, and so on  
     + Subproblem Optimization: An optimal solution to the global problem must be a composition of optimal subproblem solutions  
-    + Subproblem Overlap: Optimal solutions to unrelated subproblems can contain subproblems in common
+    + Subproblem Overlap: Optimal solutions to unrelated subproblems can contain subproblems in common  
 
     
 ### greedy method  
-P 604  
+P 604 p 623  
 - allows us to approximate solutions to hard problems, gives rise to optimal algorithms  
+- applied to optimization problems, where we are trying to construct some structure while minimizing or maximizing some property of that structure  

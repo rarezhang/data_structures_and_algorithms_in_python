@@ -566,7 +566,8 @@ P 604 p 623
 - applied to optimization problems, where we are trying to construct some structure while minimizing or maximizing some property of that structure  
 
 
-### trie: (comes from the word re __trie__ val)  
+### trie: 
+(comes from the word re```trie```val)  
 P 621 P 630 
 - tree-based data structure for storing strings in order to support fast pattern matching  
 - standard trie T for S:  

@@ -125,4 +125,95 @@ def find_kmp(T, P):
     
 t = 'xxamalgamationxxx'
 print(find_kmp(t, p))      
-        
+
+
+
+# P 616
+# matrix chain-product 
+# determine the parenthesization of the expression defining the product A that minimizes the total number of scalar multiplications performed  
+# dynamic programming algorithm for the matrix chain-product problem 
+def matrix_chain(d):
+    """
+    O(n**3)
+    :para d: a list of n+1 numbers such that size of k-th matrix is d[k]*d[k+1]
+    :return: n-by-n table such that N[i][j] represents the minimum number of multiplications needed to compute the product of Ai through Aj inclusive   
+    """
+    n = len(d) - 1  # number of matrices 
+    N = [[0] * n for i in range(n)]  # initialize n-by-n result to 0
+    for b in range(1, n):
+        for i in range(n-b):
+            j = i + b
+            N[i][j] = min(N[i][k] + N[k+1][j] + d[i]*d[k+1]*d[j+1] for k in range(i, j))
+    return N 
+
+# test 
+# matrix chain: (2,5)(5,3)(3,8)(8,4) --> (2,4)
+# d: a list of n+1 numbers such that size of k-th matrix is d[k]*d[k+1]
+d = [2, 5, 3, 8, 4] 
+N = matrix_chain(d)
+for n in N:
+    print(n)
+'''
+[0, 30, 78, 142]
+[0, 0, 120, 156]
+[0, 0, 0, 96]
+[0, 0, 0, 0]
+'''
+
+
+
+# P 620    
+# longest common subsequence 
+# given X and Y, find a longest string S that is a subsequence of both X and Y  
+# dynamic programming algorithm for the LCS problem
+# O(n*m)
+def LCS(X, Y):
+    """
+    return table such that L[j][k] is length of LCS for X[0:j] and Y[0:k]
+    """
+    n, m = len(X), len(Y)  # introduce convenient notations 
+    L = [[0] * (m+1) for k in range(n+1)]  # n+1 (X) rows; m+1 (Y) columns 
+    for j in range(n):  # for X
+        for k in range(m):  # for Y 
+            if X[j] == Y[k]:  # align this match 
+                L[j+1][k+1] = L[j][k] + 1
+            else:  # choose to ignore one character
+                L[j+1][k+1] = max(L[j][k+1], L[j+1][k])
+    return L             
+
+x = 'GTTCC'  # n = 5
+y = 'ATTC'  # m = 4
+l = LCS(x, y)
+print()
+for ll in l:
+    print(ll)
+    
+'''
+L: (n+1)*(m+1) --> (5+1)*(4+1)
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+[0, 0, 1, 1, 1]
+[0, 0, 1, 2, 2]
+[0, 0, 1, 2, 3]
+[0, 0, 1, 2, 3]
+'''
+
+
+def LCS_solution(X, Y, L):
+    """
+    return the longest common substring of X and Y, given LCS table L 
+    """
+    solution = []
+    j, k = len(X), len(Y)
+    while L[j][k] > 0:  # common characters remain 
+        if X[j-1] == Y[k-1]:
+            solution.append(X[j-1])
+            j -= 1
+            k -= 1
+        elif L[j-1][k] >= L[j][k-1]:
+            j -= 1
+        else:
+            k -= 1
+    return ''.join(reversed(solution))  # return left-to-right version 
+
+print(LCS_solution(x, y, l))

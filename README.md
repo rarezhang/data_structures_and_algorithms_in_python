@@ -564,3 +564,27 @@ P 604 P 616
 P 604 p 623  
 - allows us to approximate solutions to hard problems, gives rise to optimal algorithms  
 - applied to optimization problems, where we are trying to construct some structure while minimizing or maximizing some property of that structure  
+
+
+### trie: (comes from the word re__trie__val)  
+P 621 P 630 
+- tree-based data structure for storing strings in order to support fast pattern matching  
+- standard trie T for S:  
+    + each node of T, except the root, is labeled with a character of Σ  
+    + the children of an internal node of T have distinct labels  
+    + T has s leaves, each associated with a string of S, such that the concatenation of the labels of the nodes on the path from the root to a leaf v of T yields the string of S associated with v  
+    + an internal node in a standard trie T can have anywhere between 1 and |Σ| children  
+    + perform a search in T for a string X: tracing down from the root the path indicated by the characters in X  
+- compressed trie (Patricia trie)  
+    + ensures each internal node in the trie has at least two children  
+    + compressing chains of single-child nodes into individual edges  
+    + an internal node v of T is redundant if v has one child and is not the root  
+    + nodes in a compressed trie are labeled with strings  
+    + searching in a compressed trie is not necessarily faster than in a standard tree  
+- suffix trie (suffix tree | position tree)  
+    + save space over a standard trie by using several space compression techniques: uses O(n) space  
+    + can construct the suffix trie for a string of length n with an incremental algorithm: O(|Σ|*(n**2))  
+    
+    
+  
+    

@@ -217,3 +217,12 @@ def LCS_solution(X, Y, L):
     return ''.join(reversed(solution))  # return left-to-right version 
 
 print(LCS_solution(x, y, l))
+
+
+# P 623 
+# text compression & greedy method 
+# reduce the space usage by allowing common groups of characters (e.g., those from the ASCII, with fewer bits)
+# Huffman code: uses a variable-length encoding specifically optimized for a given string X over any alphabet 
+# saves space over a fixed-length encoding by using short code-word strings to encode high-frequency characters and long code-word strings to encode low-frequency characters
+# Huffman coding: takes two binary trees with the smallest frequencies and merges them into a single binary tree; repeats the process until only one tree is left
+# constructs an optimal prefix code for a string of length n with d distinct characters in O(n+d*log(d)) time.    

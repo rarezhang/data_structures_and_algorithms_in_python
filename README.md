@@ -14,7 +14,7 @@ P 559
 - sorted fun; produces a new list containing the elements of an arbitrary collection in sorted order  
 
 ### Python special attribute: __slots__
-- allows you to explicityly state in your code which attributes you expect your object instance to have, with the expected results:
+- allows you to explicitly state in your code which attributes you expect your object instance to have, with the expected results:
     * __faster__ attribute access  
     * potential __space savings__ in memory  
 - read more: http://stackoverflow.com/questions/472000/usage-of-slots  
@@ -57,7 +57,7 @@ letters += c  # do not use this
 P 199  
 1. __test for base cases__: at least one; every recursive calls will eventually reach a base case; handling of each base case should not use recursion  
 2. __recur__: if not a base case, perform one or more recursive calls; makes progress towards a base case  
-3. __parameterization__: public use -> cleaner interface; nopublic function -> having the desired recursive parameters
+3. __parameterization__: public use -> cleaner interface; nonpublic function -> having the desired recursive parameters
 
 ### why recursion  
 P 200  
@@ -66,12 +66,12 @@ advantage:
 2. more readable algorithm descriptions  
 disadvantage:  
 1. keep track of nested call (memory issue)  
-2. stack data structure: convert a recursive algorithm into a nonrecursive algorithm (memory: storing only minimal information)  
+2. stack data structure: convert a recursive algorithm into a non-recursive algorithm (memory: storing only minimal information)  
 
 ### tail recursion  == linear recursion  
 P 200  
 - any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion  
-- any tail recursion can be reimplemented nonrecursively by enclosing the body in a loop for repetition, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values  
+- any tail recursion can be reimplemented non-recursively by enclosing the body in a loop for repetition, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values  
 
 ### recursion tips
 replace a recursive algorithm by an iterative algorithm by pushing the parameters that would normally be passed to the recursive function onto a stack.  
@@ -81,8 +81,7 @@ In fact, you are replacing the program stack by one of your own.
 ### recursion design pattern: divide-and-conquer  
 - divide: If the input size is smaller than a certain threshold (say, one or two elements), solve the problem directly using a straightforward method and return the solution so obtained. Otherwise, divide the input data into two or more disjoint subsets  
 - conquer: Recursively solve the subproblems associated with the subsets  
-- combine: Take the solutions to the subproblems and merge them into a so-
-lution to the original problem  
+- combine: Take the solutions to the subproblems and merge them into a solution to the original problem  
 
 
 ### in-place  
@@ -135,29 +134,29 @@ d.extend('de')  # extend the left side
 ### linked list
 P 278  
 - an alternative to array based sequence  
-- keep elements in a certain order; a node is allocated for each elment  
+- keep elements in a certain order; a node is allocated for each element  
 - node(element, neighboring nodes)  
-- advantage  (avoid disadvatage of array)  
+- advantage  (avoid disadvantage of array)  
     * The length of a dynamic array might be longer than the actual number of elements that it stores  
     * Amortized bounds for operations may be unacceptable in real-time systems  
     * Insertions and deletions at interior positions of an array are expensive  
 - disadvantage  
-    * elements of a linked list cannot be efﬁciently accessed by a numeric index k  
+    * elements of a linked list cannot be efficiently accessed by a numeric index k  
     
     
 ### link-based v.s. array-based sequences  
 P 314  
 - advantages of array-based sequence  
     * O(1) time access to an element based on an integer index  
-    * operations with equivalent asymptotic bounds typically run a constant factor more efﬁciently with an array-based structure versus a linked   
+    * operations with equivalent asymptotic bounds typically run a constant factor more efficiently with an array-based structure versus a linked   
     * array-based representations typically use proportionally less memory than linked structures  
 - advantages of link-based sequence  
     * provide worst-case time bounds for operations  
-    * support O(1) time insertions and deletions at arbitrary positions (most siginificant advantage)  
+    * support O(1) time insertions and deletions at arbitrary positions (most significant advantage)  
 - disadvantages of array-based sequence  
     * insert or pop with index k uses O(n-k+1)  
 - disadvantages of link-based sequence  
-    * locating the kth element requires O(k) time traverse the list from the beginning <or O(n-k) if traversing backward from the end of a doubly linked list  
+    * locating the k-th element requires O(k) time traverse the list from the beginning <or O(n-k) if traversing backward from the end of a doubly linked list  
     * with linked lists, memory must be devoted not only to store a reference to each contained object, but also explicit references that link the nodes  
     
     
@@ -167,13 +166,13 @@ P 279  P 280
 - no predetermined fixed size  
 - node(element, next)  
 - must keep a reference to the ```head``` of the list  
-- traversing (link hopping / pointer hopping): starting at the head and moving from one node to another by follwing each nodes's next reference  
+- traversing (link hopping / pointer hopping): starting at the head and moving from one node to another by following each node's next reference  
 
 
 ### circularly linked lists
 P 288  
 - have the tail of the list use its next reference to point back to the head of the list  
-- has no beginning or end; must maintain a cufrrent node  
+- has no beginning or end; must maintain a current node  
 
 
 ### doubly linked list
@@ -185,7 +184,7 @@ P 292
        eliminate the special case  
        simplifies the logic of operations  
        the header and trailer nodes never change  
-       treat all insretions in a unified manner  
+       treat all insertions in a unified manner  
     
     
 ### general trees
@@ -270,11 +269,11 @@ P 347
     * `if` p is the right child of position q, `then` f(p)=2f(q)+2  
 - space usage: depends on the shape of the tree  
     * number of nodes: n
-    * maxium value of f(p): fm
+    * maximum value of f(p): fm
     * required array length: N = 1 + fm
     * worst case: N = 2^n - 1
 - advantage:  
-    * a position p can be reprensented by the single integer f(p)  
+    * a position p can be represented by the single integer f(p)  
     * position based methods (root, parent, left, right) can be implemented using simple arithmetic operation on the number f(p)  
         + left child of p: 2f(p)+1  
         + right child of p: 2f(p)+2  
@@ -289,10 +288,10 @@ P 350  P 352  P 354
 - a systematic way of accessing or visiting all the positions of T  
 - preorder traversal: the root of T is visited first; the sub-trees rooted at its children are traversed recursively  
 - postorder traversal: recursively traverses the subtrees rooted at the children of the root first; then visit the root  
-- breadth-first travrsal: visit all the positions at depth d before visit the positions at depth d+1  
-- inorder traversal (for binary tree): visit a position between the recursive traversals of its left and rigth subtrees (for every posiition p, visit p after all the position in the left subtree; before all the positions in the right subtree)  
+- breadth-first traversal: visit all the positions at depth d before visit the positions at depth d+1  
+- inorder traversal (for binary tree): visit a position between the recursive traversals of its left and right subtrees (for every position p, visit p after all the position in the left subtree; before all the positions in the right subtree)  
     * binary search tree (application of the inorder traversal)
-        + running time: proportional to the height (most efﬁcient when they have small height)  
+        + running time: proportional to the height (most efficient when they have small height)  
         + position p stores an element e(p)  
         + elements stored in the left subtree of p are less than e(p)  
         + elements stored in the right subtree of p are greater than e(p)  
@@ -358,9 +357,9 @@ P 392
     * a relational property defined in terms of the way keys are stored in T  
         + __heap order property__ : in a heap T, for every position p other than the root, the key sorted at p is greater than or equal to the key stored at p's parent  
         + minimum key is stored at the root of T  
-        + keys on a path from the root to a leat are in nondecreasing order  
-    * a structureal property defined in terms of the shape of T  
-        + __complete binary tree property__ : leves i has 2^i (0 ≤ i ≤ h−1) nodes; remaining nodes at level h reside in the left most possible positions  
+        + keys on a path from the root to a leaft are in nondecreasing order  
+    * a structural property defined in terms of the shape of T  
+        + __complete binary tree property__ : leaf i has 2^i (0 ≤ i ≤ h−1) nodes; remaining nodes at level h reside in the left most possible positions  
         + have as small a height as possible  
 - height of a heap  
     * h: the height of T  
@@ -403,29 +402,29 @@ P 432  P 433  P 438
         
 ### skip list  
 P 459  
-- provie a clever compromise to efficiently support search and update operations  
+- provide a clever compromise to efficiently support search and update operations  
     * skip list for a map: a series of lists {S0, S1, ... Sh}  
-    * Si: a subset of the itmes of M (sorted by increaing keys)  
-    * Si contains a randomly generated subset of the items in list Si-1; Si has n/2^i itmes  
+    * Si: a subset of the items of M (sorted by increasing keys)  
+    * Si contains a randomly generated subset of the items in list Si-1; Si has n/2^i items  
     * two sentinel keys: −∞ and +∞  
     * h: the height of skip list S = log(n)  
 - two dimensional collection of positions arranged horizontally into __levels__ and vertically into __towers__  
     * level: Si  
     * tower: contains positions storing the same item across consecutive lists  
-- a collection of __h__ doubly linked lists aligned at towers, which are also doubly llinked lists  
+- a collection of __h__ doubly linked lists aligned at towers, which are also doubly linked lists  
 - search and update: O(log(n)) on average  
 
     
         
-### set & multiset (bag) & multimap 
+### set & multi-set (bag) & multi-map 
 * set  
     - unordered collection of elements with duplicates  
     - supports efficient membership tests  
     - like keys of a map without any auxiliary values  
     - any data structure used to implement a map can be modified to implement the set with similar performance guarantees  
-* multiset (bag)  
+* multi-set (bag)  
     - a set like container that allows duplicates  
-* multimap  
+* multi-map  
     - associates values with keys  
     - same key can be mapped to multiple values  
 
@@ -441,7 +440,7 @@ P 482 P 483
    
 ### balanced search trees
 P 497  
-- rotation: operation to rebalance a binary search tree (maintain the binary search tree property)  
+- rotation: operation to re-balance a binary search tree (maintain the binary search tree property)  
     * rotate a child to be above its parent  
     * transform the left formation into the right; or the right formation into the left  
 - tri-node restructuring  
@@ -455,12 +454,12 @@ P 497
     
 ### AVL trees
 P 503  P 505  
-- balancing strategy: guaantees worst-case logarithmic running time for all fundamental map operations  
+- balancing strategy: guarantee worst-case logarithmic running time for all fundamental map operations  
 - height balance property:  for every position p of T, the heights of the children of p differ by at most 1  
 - any binary search tree that satisfies the __height balance property__ is an AVL tree  
 - a subtree of an AVL tree is itself an AVL tree  
 - the height of an AVL tree soring n entries is `log(n)`  
-- a position is __balanced__ if the absolute value of the differnce between the heights of its children is at most 1  
+- a position is __balanced__ if the absolute value of the difference between the heights of its children is at most 1  
 - AVL tree == every position is balanced  
 
 
@@ -473,7 +472,7 @@ P 512
     
 ### (2,4) trees
 P 524  
-- multiway search tree: internal nodes may have more than two children  
+- multi-way search tree: internal nodes may have more than two children  
     * has at least two children  
     * stores a collection of items of the form (k, x), where k is a key and x is an element  
     * contains d-1 items, where d is the number of children  
@@ -498,10 +497,10 @@ P 534
 - insertion sort: an excellent algorithm for sorting small sequences; quite effective for sorting sequences that are already almost sorted     
 - selection sort  
 - bubble sort  
-- heap sort: inplace; natural choice on small and medium sized sequences; not stable      
-- merge sort: not inplace; excellent algorithm for situations where the input is stratiﬁed across various levels of the computer’s memory hierarchy
+- heap sort: in place; natural choice on small and medium sized sequences; not stable      
+- merge sort: not in place; excellent algorithm for situations where the input is stratified across various levels of the computer’s memory hierarchy
     + Tim-sort: bottom-up merge sort (takes advantage of some initial runs in the data while using insertion-sort to build additional runs): python/Java(7)  
-- quick sort: inplace; C/Java(6) sorting algorithm  
+- quick sort: in place; C/Java(6) sorting algorithm  
 - bucket sort: excellent choice for sorting entries with small integer keys   
 - radix sort: excellent choice for sorting entries with small integer keys  
 
@@ -547,14 +546,20 @@ P 604 P 606
 - when we have something we wish to search for or when we wish to optimize
 some function  
 - enumerate all possible configurations of the inputs involved and pick the best of all
-these enumerated conﬁgurations  
+these enumerated configurations  
      
         
 ### dynamic programming  
-P 604  
+P 604 P 616  
 - can be applied in certain settings to solve a problem in polynomial time that appears at first to require exponential time to solve  
+- can be used to take problems that seem to require exponential time and produce polynomial-time algorithms to solve them  
+- used for optimization problems:  
+- components of a dynamic programming solution:  
+    + Simple Subproblems: There has to be some way of repeatedly breaking the global optimization problem into subproblems. Moreover, there should be a way to parameterize subproblems with just a few indices, like i, j, k, and so on  
+    + Subproblem Optimization: An optimal solution to the global problem must be a composition of optimal subproblem solutions  
+    + Subproblem Overlap: Optimal solutions to unrelated subproblems can contain subproblems in common
 
-
+    
 ### greedy method  
 P 604  
 - allows us to approximate solutions to hard problems, gives rise to optimal algorithms  

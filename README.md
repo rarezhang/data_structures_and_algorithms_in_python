@@ -612,10 +612,33 @@ vertex
 
     
 ### data structures for graphs 
-- edge list: simplest; not the most efficient   
+- edge list:  
+    + simplest; not the most efficient   
+    + e.g., 
+        * (u)-e-(v); (u)-g-(w); (v)-f-(w); (w)-h-(z)  
+        * V: [u, v, w, z]  
+        * E: [e, f, g, h]  
 - adjacency list  
+    + group the edges of a graph by storing them in smaller, secondary containers that are associated with each individual vertex  
+    + e.g., 
+        * (u) --> e, g  
+        * (v) --> e, f  
+        * (w) --> g, g, h  
+        * (z) --> h  
 - adjacency map  
+    + let the opposite endpoint of each incident edge serve as a key in the map, with the edge structure serving as the value  
+    + e.g., 
+        * (u) --> (v)->e, (w)->g  
+        * (v) --> (u)->e, (w)->f  
+        * (w) --> (u)->g, (v)->f, (z)->h  
+        * (z) --> (w)->h  
 - adjacency matrix  
+    + e.g., 
+        *             0 1 2 3  
+        * (u) --> 0 |   e g  |  
+        * (v) --> 1 | e   f  |  
+        * (w) --> 2 | g f   h|  
+        * (z) --> 3 |     h  |  
 
 | Operation | Edge List | Adj. List | Adj. Map | Adj. Matrix|
 |----------|----------|----------|---------|-----------|

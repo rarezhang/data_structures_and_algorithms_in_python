@@ -566,9 +566,9 @@ P 604 p 623
 - applied to optimization problems, where we are trying to construct some structure while minimizing or maximizing some property of that structure  
 
 
-### trie: 
+### trie:  
 (comes from the word re```trie```val)  
-P 621 P 630 
+P 621 P 630  
 - tree-based data structure for storing strings in order to support fast pattern matching  
 - standard trie T for S:  
     + each node of T, except the root, is labeled with a character of Σ  
@@ -584,8 +584,49 @@ P 621 P 630
     + searching in a compressed trie is not necessarily faster than in a standard tree  
 - suffix trie (suffix tree | position tree)  
     + save space over a standard trie by using several space compression techniques: uses O(n) space  
-    + can construct the suffix trie for a string of length n with an incremental algorithm: O(|Σ|*(n**2))  
+    + can construct the suffix trie for a string of length n with an incremental algorithm: O(|Σ|*(n^2))  
     
     
-  
+### graphs  
+P 642  
+- a way of representing relationships that exist between pairs of objects  
+    + a set of objects (vertex | nodes)  
+    + a collection of pairwise connections between objects (edges | arcs)  
+- directed | undirected edge  
+    + directed: edge (u,v) is said to be **directed** from u to v if the pair (u,v) is ordered, with u preceding v  
+    + undirected: edge (u,v) is said to be undirected if the pair (u,v) is not ordered  
+- directed | undirected graph  
+    + directed: all the edges in a graph are directed  
+    + undirected: all the edges in a graph are undirected  
+- adjacent: (u,v) are adjacent if there is an edge whose end vertices are u and v  
+- self-loop: if two endpoints coincide  
+- simple graph: no parallel edges or self-loop  
+- path: a sequence of alternating vertices and edges that starts at a vertex and ends at a vertex such that each edge is incident to its predecessor and successor
+vertex  
+- cycle: path that starts and ends at the same vertex, and that includes at least one edge  
+- an undirected graph with n vertices and m edges:  
+    + if graph is connected, then m ≥ n − 1  
+    + if graph is a tree, then m = n − 1  
+    + if graph is a forest, then m ≤ n − 1  
     
+
+    
+### data structures for graphs 
+- edge list: simplest; not the most efficient   
+- adjacency list  
+- adjacency map  
+- adjacency matrix  
+
+| Operation | Edge List | Adj. List | Adj. Map | Adj. Matrix|
+|----------|----------|----------|---------|-----------|
+| vertex_count() | O(1) | O(1) | O(1) | O(1) |
+| edge_count() | O(1) | O(1) | O(1) | O(1) |
+| vertices() | O(n) | O(n) | O(n) | O(n) |
+| edges() | O(m) | O(m) | O(m) | O(m) |
+| get_edge(u,v) | O(m) | O(min(dv,du)) | O(1) exp. | O(1) |
+| degree(v) | O(m) | O(1) | O(1) | O(n) |
+| incident_edges(v) | O(m) | O(dv) | O(dv) | O(n) |
+| insert_vertex(x) | O(1) | O(1) | O(1) | O(1) | O(n^2) |
+| remove_vertex(v) | O(m) | O(dv) | O(dv) | O(n^2) |
+| insert_edge(u,v,x) | O(1) | O(1) | O(1) exp. | O(1) |
+| remove_edge(e) | O(1) | O(1) | O(1) exp. | O(1) |  

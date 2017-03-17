@@ -136,3 +136,32 @@ print('-'*20)
 f = DFS_complete(g)
 print(f'forest: {[ver._element for ver in f]}')    
     
+# P 670
+# breadth-first search 
+# implementation of breadth-first search on a graph, starting at a designated vertex s 
+def BFS(g, s, discovered):
+    """
+    perform BFS of the undiscovered portion of Graph g starting at Vertex s 
+    
+    discovered is a dictionary mapping each vertex to the edge that was used to discover it during the BFS (s should be mapped None prior to the call)
+    Newly discovered vertices will be added to the dictionary as a result 
+    """
+    level = [s]  # first level includes only s 
+    while len(level) > 0:
+        next_level = []  # prepare to gather newly found vertices 
+        for u in level:
+            for e in g.incident_edges(u):  # for every outgoing edge from u 
+                v = e.opposite(u)
+                if v not in discovered:  # v is an unvisited vertex 
+                    discovered[v] = e  # e is the tree edge that discovered v 
+                    next_level.append(v)  # v will be further considered in next pass 
+        level = next_level  # relabel 'next' level to become current  
+        
+print('-'*20)        
+result_bfs = {v_obj: None}  # a new dictionary, with v trivially discovered
+BFS(g, v_obj, result_bfs)
+print('breadth-first search: ')
+for v in result_bfs:
+    n = v._element
+    e = result[v]._element if result[v] is not None else None 
+    print(f'vertex: {n} edges: {e}')

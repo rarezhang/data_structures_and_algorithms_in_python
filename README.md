@@ -653,3 +653,21 @@ vertex
 | remove_vertex(v) | O(m) | O(dv) | O(dv) | O(n^2) |
 | insert_edge(u,v,x) | O(1) | O(1) | O(1) exp. | O(1) |
 | remove_edge(e) | O(1) | O(1) | O(1) exp. | O(1) |  
+
+
+### graph traversals 
+P 660  
+- a systematic procedure for exploring a graph by examining all of its vertices and edges  
+- a traversal is efficient if it visits all the vertices and edges in time proportional to their number --> in linear time  
+    * reachability: determine how to travel from one vertex to another  
+    * undirected:      
+        + testing whether G is connected  
+        + computing a spanning tree of G, if G is connected  
+        + computing the connected components of G  
+        + computing a cycle in G, or reporting that G has no cycles  
+    * directed:  
+        + Computing a directed path from vertex u to vertex v, or reporting that no such path exists  
+        + finding all the vertices of G that are reachable from a given vertex s  
+        + determine whether G is acyclic  
+        + determine whether G is strongly connected  
+

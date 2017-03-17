@@ -14,7 +14,7 @@ def find_brute(T, P):
     # try every potential starting index within T
     for i in range(n-m+1):  # worst case: O(n-m+1)
         k = 0  # an index into pattern P
-        # kth character of P matches
+        # k-th character of P matches
         while k < m and T[i+k] == P[k]:  # worst cast: O(m) 
             k += 1  # an index into pattern P 
         if k == m:  # if we reached the end of pattern 

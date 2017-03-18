@@ -165,3 +165,40 @@ for v in result_bfs:
     n = v._element
     e = result[v]._element if result[v] is not None else None 
     print(f'vertex: {n} edges: {e}')
+    
+    
+# P 676 
+# transitive closure 
+# transitive closure of a directed graph G is itself a directed graph G'
+# such that the vertices of G are the same as the vertices of G'
+# G' has an edge (u,v), whenever G has a directed path from u to v (including the case where (u,v) is an edge of the original G  
+
+# Transitive closure of a graph. Given a directed graph, find out if a vertex j is reachable from another vertex i for all vertex pairs (i, j) in the given graph. Here reachable mean that there is a path from vertex i to j. The reach-ability matrix is called transitive closure of a graph.
+from copy import deepcopy
+
+def floyd_warshall(g):
+    """
+    return a new graph that is the transitive closure of g 
+    """
+    closure = deepcopy(g)  # import from copy module 
+    verts = list(closure.vertices())  # make indexable list 
+    n = len(verts)
+    for k in range(n):
+        for i in range(n):
+            # verify that edge (i, k) exists in the partial closure 
+            if i != k and closure.get_edge(verts[i], verts[k]) is not None:
+                for j in range(n):
+                    # verify that edge (k,j) exists in the partial closure 
+                    if i != j != k and closure.get_edge(verts[k], verts[j]) is not None:
+                        # if (i,j) not yet included, add it the closure 
+                        if closure.get_edge(verts[i], verts[j]) is None:
+                            closure.insert_edge(verts[i], verts[j])
+    return closure 
+
+print('-' * 20)
+c = floyd_warshall(g)
+cv = c.vertices()
+ce = c.edges()
+print('transitive closure of g:')
+print(f'vertices: {[v._element for v in cv]}')  
+print(f'edges: {[e._element for e in ce]}')  

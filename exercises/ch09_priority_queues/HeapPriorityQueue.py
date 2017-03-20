@@ -6,7 +6,7 @@ using an array-based heap
 from PriorityQueueBase import PriorityQueueBase
 
 import sys, os
-sys.path.append(os.path.abspath("D:\\Projects\\data_structures_and_algorithms_in_python\\exercises\\ch7_linked_lists"))
+sys.path.append(os.path.abspath("D:\\Projects\\data_structures_and_algorithms_in_python\\exercises\\ch07_linked_lists"))
 from Excep import Empty
 
 

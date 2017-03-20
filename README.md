@@ -689,4 +689,14 @@ minimum-length path (shortest path) from u to v, if such a path exists ( d(u, v)
 
 # shortest path tree  
 P 691  
-- all shortest paths form a rooted tree  
+- all shortest paths can form a rooted tree  
+
+
+# minimum spanning trees  
+P 692  
+- in an undirected and weighted graph G  
+- spanning tree: a tree that contains every vertex of a connected graph G  
+- minimum spanning trees: finding tree T that contains all the vertices in G and minimizes the sum: w(T) = sum(w(u, v)) --> smallest total weight  
+- greedy method to find minimum spanning tree: choosing objects to join a growing collection by iteratively picking an object that minimizes the cost function  
+ 
+

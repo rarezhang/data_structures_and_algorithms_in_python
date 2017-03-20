@@ -1,6 +1,14 @@
 """
 chapter 14: graph algorithms 
 """
+from Partition import Partition
+
+import sys, os
+sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch09_priority_queues"))
+
+from AdaptableHeapPriorityQueue import AdaptableHeapPriorityQueue
+from HeapPriorityQueue import HeapPriorityQueue
+
 
 # P 659
 # test Graph class 
@@ -249,10 +257,7 @@ print(topological_sort(g))  # g has cycle, return []
 - D[s]=0 and D[v]=∞ for each v!=s  
 - relaxation: add a new vertex, update the label D[v] of each vertex v  
 """
-import sys, os
-sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch09_priority_queues"))
 
-from AdaptableHeapPriorityQueue import AdaptableHeapPriorityQueue
 
 # Python implementation of Dijkstra’s algorithm for computing the shortest-path distances from a single source. We assume that e.element() for edge e represents the weight of that edge
 
@@ -324,3 +329,83 @@ print('shortest path tree: ')
 tree = shortest_path_tree(g, src, short)
 for v in tree:
     print(f'vertex: {v._element}, edge: {tree[v]._element}')
+    
+# P 694    
+# Prim-Jarnik algorithm
+# grow a minimum spanning tree from a single cluster starting from root vertex s
+def MST_PrimJarnik(g):
+    """
+    compute a minimum spanning tree of weighted graph g 
+    
+    return a list of edges that comprise the MST in arbitrary order 
+    """
+    d = {}  # d[v] is bound on distance to tree 
+    tree = []  # list of edges in spanning tree 
+    pq = AdaptableHeapPriorityQueue()  # d[v] maps to value (v, e=(u,v))
+    pqlocator = {}  # map from vertex to its pq locator 
+    
+    # for each vertex v of the graph add an entry to the priority queue with the source having distance 0 and all other s have infinite distance  
+    for v in g.vertices():
+        if len(d) == 0:  # this is the first node 
+            d[v] = 0  # make it the root 
+        else:
+            d[v] = float('inf')  # positive infinity 
+        pqlocator[v] = pq.add(d[v], (v, None))
+        
+    while not pq.is_empty():
+        key, value = pq.remove_min()
+        u, edge = value  # unpack tuple from pq 
+        del pqlocator[u]  # u is no longer in pq 
+        if edge is not None:
+            tree.append(edge)  # add edge to tree 
+        for link in g.incident_edges(u):
+            v = link.opposite(u)
+            if v in pqlocator:
+                # see if edge (u,v) better connects v to the growing tree 
+                wgt = link.element()
+                if wgt < d[v]:  # better edge to v ?
+                    d[v] = wgt  # update the distance 
+                    pq.update(pqlocator[v], d[v], (v, link))  # update the pq entry 
+    return tree 
+    
+print('-'*20)
+t = MST_PrimJarnik(g)
+print(f'MST_PrimJarnik: {[e._element for e in t]}')  
+
+
+# P 698
+# Kruskal's algorithm 
+# growing a single tree until it spans the graph --> maintains a forest of clusters, repeatedly merging pairs of clusters until a single cluster spans the graph 
+def MST_Kruskal(g):
+    """
+    compute a minimum spanning tree of a graph using Kruskal's algorithm 
+    return a list of edges that comprise the MST 
+    the elements of the graph's edges are assumed to be weights 
+    """
+    tree = []  # list of edges in spanning tree 
+    pq = HeapPriorityQueue()  # entries are edges in G with weights as key 
+    forest = Partition() # keeps track o forest clusters 
+    position = {}  # map each node to its Partition entry 
+    
+    for v in g.vertices():
+        position[v] = forest.make_group(v)
+        
+    for e in g.edges():
+        pq.add(e.element(), e)  # edge's element is assumed to be its weight 
+        
+    size = g.vertex_count()
+    while len(tree) != size - 1 and not pq.is_empty():
+        # tree not spanning and unprocessed edges remain 
+        weight, edge = pq.remove_min()
+        u, v = edge.endpoints()
+        a = forest.find(position[u])
+        b = forest.find(position[v])
+        if a != b:
+            tree.append(edge)
+            forest.union(a, b)
+    return tree         
+            
+    
+print('-'*20)
+t = MST_Kruskal(g)
+print(f'MST_Kruskal: {[e._element for e in t]}')

@@ -676,4 +676,17 @@ P 677
 - direct graphs without directed cycles  
 - topological ordering of G is an ordering v1 ,..., vn of the vertices of G such that for every edge (vi, vj) of G, it is the case that i < j  
 - G has a topological ordering if and only if it is acyclic  
-- topological sorting: computing a topological ordering of a directed gra
+- topological sorting: computing a topological ordering of a directed graph  
+
+
+# weighted graphs 
+P 681  
+- weighted graphs: a graph that has a numeric label associated with each edge --> the weight of edge  
+- length of a path: the sum of the weights of the edges  
+- distance from a vertex *u* to a vertex *v* in G --> d(u, v), is the length of a
+minimum-length path (shortest path) from u to v, if such a path exists ( d(u, v) = ∞ if there is no path)  
+
+
+# shortest path tree  
+P 691  
+- all shortest paths form a rooted tree  

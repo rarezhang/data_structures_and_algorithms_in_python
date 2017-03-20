@@ -31,11 +31,18 @@ print(f'number of vertices: {g.vertex_count()}')
 # all vertices of the graph
 print([v._element for v in g.vertices()])
 
+# edge = [('u','v','e'), ('u','w','g'), ('v','w','f'), ('w','z','h')]
+# for u,v,x in edge:
+    # u_obj = vertex_obj[u]
+    # v_obj = vertex_obj[v]
+    # g.insert_edge(u_obj, v_obj, x)
+
+# weighted graph     
 edge = [('u','v','e'), ('u','w','g'), ('v','w','f'), ('w','z','h')]
 for u,v,x in edge:
     u_obj = vertex_obj[u]
     v_obj = vertex_obj[v]
-    g.insert_edge(u_obj, v_obj, x)
+    g.insert_edge(u_obj, v_obj, ord(x))    
     
 # number of edges 
 print(f'number of edges: {g.edge_count()}')
@@ -232,3 +239,88 @@ def topological_sort(g):
 print('-'*20)
 print(topological_sort(g))  # g has cycle, return []
     
+    
+# P 683 
+# Dijkstra's algorithm: greedy method  
+"""
+- single-source  
+- define a label D[v] for each vertex v --> approximate the distance from s to v  
+- the length of the best path from s to v so far  
+- D[s]=0 and D[v]=∞ for each v!=s  
+- relaxation: add a new vertex, update the label D[v] of each vertex v  
+"""
+import sys, os
+sys.path.append(os.path.abspath("D:\Projects\data_structures_and_algorithms_in_python\exercises\ch09_priority_queues"))
+
+from AdaptableHeapPriorityQueue import AdaptableHeapPriorityQueue
+
+# Python implementation of Dijkstra’s algorithm for computing the shortest-path distances from a single source. We assume that e.element() for edge e represents the weight of that edge
+
+def shortes_path_lengths(g, src):
+    """
+    compute shortest path distances from src to reachable vertices of g 
+    
+    graph g can be undirected or directed, but must be weighted such that e.element() returns a numeric weight for each edge e 
+    
+    return dictionary mapping each reachable vertex to its distance from src 
+    """
+    d = {}  # d[v] is upper bound from s to v 
+    cloud = {}  # map reachable v to its d[v] value 
+    pq = AdaptableHeapPriorityQueue()  # vertex v will have key d[v]  
+    pqlocator = {}  # map from vertex to its pq locator 
+    
+    # for each vertex v of the graph add an entry to the priority queue with the source having distance 0 and all others having infinite distance 
+    for v in g.vertices():
+        if v is src:
+            d[v] = 0
+        else:
+            d[v] = float('inf')  # syntax for positive infinity 
+        pqlocator[v] = pq.add(d[v], v)  # save locator for future updates 
+    
+    while not pq.is_empty():
+        key, u = pq.remove_min()
+        cloud[u] = key  # correct d[u] value 
+        del pqlocator[u]  # u is no longer in pq  
+        for e in g.incident_edges(u):
+            v = e.opposite(u)
+            if v not in cloud:
+                # perform relaxation step on edge (u, v)
+                wgt = e.element()
+                if d[u] + wgt < d[v]:  # better path to v 
+                    d[v] = d[u] + wgt  # update the distance 
+                    pq.update(pqlocator[v], d[v], v)  # update the pq entry 
+    return cloud  # only includes reachable vertices 
+    
+print('-'*20)  
+src = vertex_obj['v']  # source node 
+# shortest path for each node in the graph 
+short = shortes_path_lengths(g, src)
+print('shortest path for each node:')
+for v in short: 
+    print(f'{v._element}: {short[v]}')
+
+    
+    
+# P 691  
+# function that reconstructs the shortest paths based on knowledge of the single-source distances 
+def shortest_path_tree(g, s, d):
+    """
+    reconstruct shortest-path tree rooted at vertex s, given distance map d 
+    
+    return tree as a map from each reachable vertex v (other than s) to the edge e=(u,v) that is used to each v from its parent u in the tree 
+    """
+    tree = {}
+    for v in d:
+        if v is not s:
+            for e in g.incident_edges(v, False):  # consider incoming edges 
+                u = e.opposite(v)
+                wgt = e.element()
+                if d[v] == d[u] + wgt:
+                    tree[v] = e  # edge e is used to reach v 
+    return tree 
+    
+print('-'*20)
+print('shortest path tree: ')
+tree = shortest_path_tree(g, src, short)
+for v in tree:
+    print(f'vertex: {v._element}, edge: {tree[v]._element}')

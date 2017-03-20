@@ -53,6 +53,51 @@ the series of concatenations take O(n^2) time
 letters += c  # do not use this
 ```
 
+
+### memory allocation in python 
+P 721 
+- all objects are stored in a pool of memory --> memory heap | python heap  
+- chunks: storage available in the memory heap is divided into blocks  
+- fragmentation: separation of unused memory into separate holes (need to minimize fragmentation as much as possible)  
+    + internal fragmentation: when a portion of an allocated memory block is unused  
+    + external fragmentation: significant amount of unused memory between several contiguous blocks of allocated memory --> can be controlled by run-time environment  
+        * best-fit algorithm: searches the entire free list to find the hole whose size is closest to the amount of memory being requested --> produce the worst external fragmentation, since the leftover parts of the chosen holes tend to be small  
+        * first-fit algorithm: searches from the beginning of the free list for the first hole that is large enough --> produce a lot of external fragmentation at the front of the free list  
+        * the next-fit algorithm: also searches the free list for the first hole that is large enough, but it begins its search from where it left off previously, viewing the free list as a circularly linked list -->  spreads fragmentation more evenly throughout the memory heap, thus keeping search times low  
+        * worst-fit algorithm: searches the free list to find the largest hole of available memory, which might be done faster than a search of the entire free list if this list were maintained as a priority queue --> keeping contiguous sections of free memory as large as possible    
+    + the requested amount of memory is subtracted from the chosen memory hole and the leftover part of that hole is returned to the free list  
+
+    
+### Additional Memory Used by the Python Interpreter  
+- call stack (Python interpreter stack): used to keep track of the nested sequence of currently active invocations of functions  
+    + running call: at the top of the call stack is the activation record  
+    + suspended calls: remaining elements of the stack are activation records of the  
+    + implementing recursion  
+- operand stack: evaluate arithmetic expressions     
+
+    
+    
+### garbage collection  
+- by python interpreter  
+- detecting stale objects, deallocating the space devoted to those objects, and returning the reclaimed space to the free list  
+- live object: have a direct or indirect reference to that object  
+    + direct reference: direct reference to an object is in the form of an identifier in an active name-space --> root objects  
+    + indirect reference: indirect reference to a live object is a reference that occurs within the state of some other live object  
+- strategies for determining which objects are live
+    + reference counts  
+        * if an object's count is ever decremented to zero, that object cannot possibly be a live object and therefore the system can immediately deallocate the object  
+        * within the state of every Python object there is an integer known as its reference count --> how many references to the object exist anywhere in the system              
+        * Python interpreter allows a running program to examine an object’s reference count --> returns an integer equal to the reference count for the object sent as a parameter  
+        ```
+        import sys 
+        a = 0 
+        sys.getrefcount(a)  # 183
+        ```
+    + cycle detection  
+        * may exist a group of objects that have references to each other, even though none of those objects are reachable from a root object
+        * mark-sweep algorithm  
+
+    
 ### designing recursive algorithms  
 P 199  
 1. __test for base cases__: at least one; every recursive calls will eventually reach a base case; handling of each base case should not use recursion  
